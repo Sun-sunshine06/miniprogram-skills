@@ -1,5 +1,8 @@
 # Miniprogram Skills
 
+[![Validate](https://github.com/Sun-sunshine06/miniprogram-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/Sun-sunshine06/miniprogram-skills/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/github/license/Sun-sunshine06/miniprogram-skills)](https://github.com/Sun-sunshine06/miniprogram-skills/blob/main/LICENSE)
+
 Reusable Codex skills and playbooks for WeChat Mini Program development, DevTools diagnosis, and scaffold validation.
 
 ## Status
