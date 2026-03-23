@@ -4,7 +4,7 @@ Config-driven WeChat DevTools GUI smoke harness for runtime and interaction chec
 
 ## Current Status
 
-Public beta extraction. The harness now ships with a bundled fixture miniapp and keeps its default repo-owned dependency surface small by loading `miniprogram-automator` only from an explicit runtime install, but it still needs forward-testing on more than one real miniapp repository.
+Public beta extraction. The harness now ships with a bundled fixture miniapp, keeps its default repo-owned dependency surface small by loading `miniprogram-automator` only from an explicit runtime install, and now supports automated dry-run checks against a copied project root outside the repository. Full forward-testing on an independent public miniapp repository is still pending.
 
 ## What It Does
 
@@ -71,6 +71,15 @@ cd tools/wechat-gui-check
 npm run check -- --project-path <project-root> --automator-module-path C:\path\to\miniprogram-automator
 ```
 
+Validate an external miniapp path without launching DevTools:
+
+```powershell
+cd tools/wechat-gui-check
+npm run check -- --project-path <project-root> --route home --dry-run
+```
+
+`--dry-run` confirms that the route config, selected routes, and resolved miniapp root are valid. It also reports whether the local machine can see a usable DevTools CLI path and a `miniprogram-automator` runtime install, but it does not launch automation.
+
 ## Route Config Shape
 
 Each route spec can include:
@@ -111,16 +120,19 @@ This keeps the sample config reproducible and gives contributors a safe baseline
 `-- *.png
 ```
 
+`--dry-run` prints a JSON preflight summary to stdout instead of creating a run directory.
+
 ## Notes
 
 - screenshots are best-effort and may fail without invalidating the full run
 - backend-dependent routes should be documented in the route config, not hidden in code
 - start with one route before expanding to multiple routes
 - the default repo install no longer carries `miniprogram-automator`'s transitive image stack; that runtime dependency is now user-supplied at execution time
+- a Windows host run against a copied fixture project outside the repository completed successfully for the `home` route, but screenshot capture still timed out in that live run
 - this package is intentionally beta until that upstream dependency story is cleaner
 
 ## Remaining Work
 
-- forward-test on additional miniapp repos
+- forward-test the full automation flow on an independent public miniapp repo
 - add sample config for a real public demo repo
 - decide whether to keep the current user-supplied runtime model or replace `miniprogram-automator` with a cleaner long-term adapter

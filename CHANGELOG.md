@@ -5,6 +5,9 @@ All notable changes to this repository will be documented in this file.
 ## Unreleased
 
 - moved `tools/wechat-gui-check` to a user-supplied `miniprogram-automator` runtime model so the default repo install and lockfile no longer carry the upstream image-stack dependency chain
+- added a `--dry-run` preflight mode and CI coverage for exercising `wechat-gui-check` against a copied miniapp project outside the repository
+- fixed the default Windows DevTools CLI path probe for common Chinese-language install directories
+- recorded one successful Windows host run against a copied external fixture project, with screenshot capture still treated as best-effort
 
 ## v0.1.0-public-beta
 
@@ -19,6 +22,6 @@ Highlights:
 
 Known limitations:
 
-- `tools/wechat-gui-check` still inherits a small remaining set of moderate audit findings through the upstream `miniprogram-automator` image stack
-- the GUI harness still needs forward-testing on more than one non-source miniapp repository
+- live GUI automation still depends on a user-supplied `miniprogram-automator` runtime install, and that host-side dependency may continue to inherit upstream audit findings
+- the full GUI harness still needs forward-testing on more than one non-source miniapp repository
 - the repository is documentation-first and is not yet a full GUI automation product or full miniapp boilerplate

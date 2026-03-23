@@ -59,3 +59,10 @@ jobs:
           test -f tools/wechat-gui-check/examples/fixture-miniapp/app.json
           test -f tools/wechat-gui-check/examples/fixture-miniapp/pages/home/index.wxml
           test -f tools/wechat-gui-check/examples/fixture-miniapp/pages/tasks/index.wxml
+
+      - name: Check external-project dry run
+        run: |
+          temp_dir="$(mktemp -d)"
+          cp -R tools/wechat-gui-check/examples/fixture-miniapp "$temp_dir/fixture-miniapp"
+          node tools/wechat-gui-check/check.js --config tools/wechat-gui-check/examples/sample.route-config.json --project-path "$temp_dir/fixture-miniapp" --route home --dry-run > "$temp_dir/preflight.json"
+          node -e "const fs=require('fs'); const report=JSON.parse(fs.readFileSync(process.argv[1],'utf8')); if (!report.ok || report.mode !== 'dry-run') throw new Error('unexpected dry-run result'); if (!report.project || !String(report.project.projectConfigPath).endsWith('project.config.json')) throw new Error('missing project info'); if (!Array.isArray(report.selectedRoutes) || report.selectedRoutes.length !== 1 || report.selectedRoutes[0].key !== 'home') throw new Error('wrong route selection'); if (report.automator.available !== false || !String(report.automator.error).includes('miniprogram-automator')) throw new Error('expected missing automator guidance');" "$temp_dir/preflight.json"
