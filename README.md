@@ -54,7 +54,7 @@ This repository is suitable for a public docs-first release. The four core skill
 - A complete GUI automation product.
 - A full miniapp boilerplate repo.
 - A generic home for every business-flow skill from the source project.
-- A zero-risk dependency surface; the remaining audit findings are currently isolated to the optional `tools/wechat-gui-check` beta utility and its upstream `miniprogram-automator` chain.
+- A fully self-contained GUI automation stack; the optional GUI automation flow still depends on a user-supplied `miniprogram-automator` install when you actually run it.
 
 ## Release Direction
 
@@ -68,6 +68,6 @@ This repository is suitable for a public docs-first release. The four core skill
 - Generalize repo-specific route names, storage keys, and file paths into placeholders or examples.
 - Validate each skill through realistic Codex prompts.
 - Forward-test the GUI harness on more than one non-source miniapp repo.
-- Decide whether to replace or isolate the current `miniprogram-automator` image stack to fully remove the remaining moderate audit findings.
+- Decide whether to keep the current user-supplied `miniprogram-automator` runtime model or replace it with a cleaner long-term adapter.
 
 See [CHANGELOG.md](./CHANGELOG.md), [docs/release-v0.1.0-public-beta.md](./docs/release-v0.1.0-public-beta.md), [docs/releasing.md](./docs/releasing.md), [docs/skill-map.md](./docs/skill-map.md), [docs/public-roadmap.md](./docs/public-roadmap.md), [docs/extraction-checklist.md](./docs/extraction-checklist.md), [docs/license-decision.md](./docs/license-decision.md), and [CONTRIBUTING.md](./CONTRIBUTING.md) for the detailed draft plan.

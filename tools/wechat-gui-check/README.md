@@ -4,7 +4,7 @@ Config-driven WeChat DevTools GUI smoke harness for runtime and interaction chec
 
 ## Current Status
 
-Public beta extraction. The harness now ships with a bundled fixture miniapp so the sample config is runnable without access to a private source repository, but it still needs forward-testing on more than one real miniapp repository.
+Public beta extraction. The harness now ships with a bundled fixture miniapp and keeps its default repo-owned dependency surface small by loading `miniprogram-automator` only from an explicit runtime install, but it still needs forward-testing on more than one real miniapp repository.
 
 ## What It Does
 
@@ -30,6 +30,20 @@ cd tools/wechat-gui-check
 npm ci
 ```
 
+Install the runtime automation dependency in one of these places before running GUI checks:
+
+```powershell
+cd <project-root>
+npm install --no-save miniprogram-automator
+```
+
+Or:
+
+```powershell
+cd tools/wechat-gui-check
+npm install --no-save miniprogram-automator
+```
+
 ## Run
 
 Use the bundled fixture and sample config:
@@ -48,7 +62,14 @@ cd tools/wechat-gui-check
 npm run check -- --config .\my-routes.json --project-path <project-root> --route home --route tasks
 ```
 
-`<project-root>` must point to a WeChat Mini Program project root that contains `project.config.json`. The checker now validates that root before it launches DevTools automation.
+`<project-root>` must point to a WeChat Mini Program project root that contains `project.config.json`. The checker validates that root before it launches DevTools automation and, by default, tries to load `miniprogram-automator` from that project first.
+
+If your automator install lives elsewhere, pass it explicitly:
+
+```powershell
+cd tools/wechat-gui-check
+npm run check -- --project-path <project-root> --automator-module-path C:\path\to\miniprogram-automator
+```
 
 ## Route Config Shape
 
@@ -95,11 +116,11 @@ This keeps the sample config reproducible and gives contributors a safe baseline
 - screenshots are best-effort and may fail without invalidating the full run
 - backend-dependent routes should be documented in the route config, not hidden in code
 - start with one route before expanding to multiple routes
-- the current audit findings are isolated to `miniprogram-automator`'s transitive image stack, not to the direct `pngjs` integration in this repo
+- the default repo install no longer carries `miniprogram-automator`'s transitive image stack; that runtime dependency is now user-supplied at execution time
 - this package is intentionally beta until that upstream dependency story is cleaner
 
 ## Remaining Work
 
 - forward-test on additional miniapp repos
 - add sample config for a real public demo repo
-- replace or isolate the current `miniprogram-automator` image stack so the remaining moderate audit findings disappear
+- decide whether to keep the current user-supplied runtime model or replace `miniprogram-automator` with a cleaner long-term adapter

@@ -17,6 +17,6 @@ For anything that may expose credentials, compromise a local machine, or enable 
 
 ## Known Dependency Note
 
-Most of the current dependency audit surface is isolated to the optional `tools/wechat-gui-check` beta package, which still inherits a small number of moderate findings through `miniprogram-automator` and its transitive `jimp` / `file-type` chain.
+The default repository install no longer carries `miniprogram-automator` or its transitive `jimp` / `file-type` chain as a locked dependency of `tools/wechat-gui-check`.
 
-This repository already reduces the direct dependency surface on its own side, but it does not fully remove those upstream package risks yet. Keep the public security note phrased in terms of a small remaining upstream moderate surface rather than a hardcoded count, because GitHub alerts and local `npm audit` summaries may not age in lockstep.
+If contributors or users opt into live GUI automation, they still need a local `miniprogram-automator` install at runtime, and that separately installed runtime may continue to inherit upstream audit findings. Treat that runtime dependency as a host-side prerequisite rather than a guaranteed-clean dependency managed by this repository, and keep the public note phrased in terms of a small remaining upstream moderate surface rather than a hardcoded count.
