@@ -1,11 +1,13 @@
 const fs = require('fs')
 
+const WECHAT_DEVTOOLS_CN_DIR = '\u5fae\u4fe1web\u5f00\u53d1\u8005\u5de5\u5177'
+
 const DEFAULT_CLI_CANDIDATES = [
   process.env.WECHAT_DEVTOOLS_CLI_PATH || '',
-  'D:\\微信web开发者工具\\cli.bat',
-  'D:\\develop\\微信web开发者工具\\cli.bat',
-  'C:\\Program Files (x86)\\Tencent\\微信web开发者工具\\cli.bat',
-  'C:\\Program Files\\Tencent\\微信web开发者工具\\cli.bat',
+  `D:\\${WECHAT_DEVTOOLS_CN_DIR}\\cli.bat`,
+  `D:\\develop\\${WECHAT_DEVTOOLS_CN_DIR}\\cli.bat`,
+  `C:\\Program Files (x86)\\Tencent\\${WECHAT_DEVTOOLS_CN_DIR}\\cli.bat`,
+  `C:\\Program Files\\Tencent\\${WECHAT_DEVTOOLS_CN_DIR}\\cli.bat`,
   'C:\\Program Files (x86)\\Tencent\\Wechatwebdevtools\\cli.bat',
   'C:\\Program Files\\Tencent\\Wechatwebdevtools\\cli.bat',
 ].filter(Boolean)

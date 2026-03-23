@@ -6,7 +6,8 @@
   "description": "Config-driven GUI smoke checks for WeChat Mini Program repositories.",
   "scripts": {
     "check": "node check.js",
-    "check:fixture": "node check.js --config examples/sample.route-config.json --route home"
+    "check:fixture": "node check.js --config examples/sample.route-config.json --route home",
+    "check:fixture:dry-run": "node check.js --config examples/sample.route-config.json --route home --dry-run"
   },
   "dependencies": {
     "pngjs": "^7.0.0"

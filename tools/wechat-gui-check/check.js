@@ -110,6 +110,7 @@ function normalizeAction(action) {
 
 function parseArgs(argv) {
   const options = {
+    dryRun: false,
     automatorModulePath: process.env.WECHAT_GUI_CHECK_AUTOMATOR_PATH || '',
     cliPath: resolveDefaultCliPath(),
     configPath: DEFAULT_CONFIG_PATH,
@@ -168,6 +169,11 @@ function parseArgs(argv) {
 
     if (arg === '--keep-open') {
       options.keepOpen = true
+      continue
+    }
+
+    if (arg === '--dry-run') {
+      options.dryRun = true
       continue
     }
 
@@ -231,6 +237,60 @@ function validateProjectPath(projectPath) {
     miniappRoot,
     miniprogramRoot,
     projectConfigPath,
+  }
+}
+
+function probeCliPath(cliPath) {
+  const resolvedPath = typeof cliPath === 'string' ? cliPath.trim() : ''
+
+  if (!resolvedPath) {
+    return {
+      available: false,
+      error: 'WeChat DevTools cli.bat path is empty. Pass --cli-path or set WECHAT_DEVTOOLS_CLI_PATH.',
+      path: '',
+    }
+  }
+
+  if (!fs.existsSync(resolvedPath)) {
+    return {
+      available: false,
+      error: `WeChat DevTools CLI not found at: ${resolvedPath}`,
+      path: resolvedPath,
+    }
+  }
+
+  return {
+    available: true,
+    error: '',
+    path: resolvedPath,
+  }
+}
+
+function probeAutomator(options) {
+  try {
+    const { source } = loadAutomator(options)
+    return {
+      available: true,
+      error: '',
+      source,
+    }
+  } catch (error) {
+    return {
+      available: false,
+      error: error && error.message ? error.message : String(error),
+      source: '',
+    }
+  }
+}
+
+function summarizeSpec(spec) {
+  return {
+    actionCount: Array.isArray(spec.actions) ? spec.actions.length : 0,
+    expectedPath: spec.expectedPath,
+    key: spec.key,
+    primarySelector: spec.primarySelector,
+    route: spec.route,
+    titleSelector: spec.titleSelector,
   }
 }
 
@@ -668,16 +728,47 @@ async function main() {
   const config = loadConfig(options.configPath, options.projectPath, options.outputRoot)
   const selectedSpecs = selectSpecs(options.routes, config.routes)
   const projectInfo = validateProjectPath(config.projectPath)
-
-  if (!options.cliPath) {
-    throw new Error('WeChat DevTools cli.bat path is empty. Pass --cli-path or set WECHAT_DEVTOOLS_CLI_PATH.')
-  }
+  const cli = probeCliPath(options.cliPath)
+  const automator = probeAutomator({
+    automatorModulePath: options.automatorModulePath,
+    projectPath: config.projectPath,
+  })
 
   if (!selectedSpecs.length) {
     throw new Error('No routes selected')
   }
 
-  const { automator, source: automatorSource } = loadAutomator({
+  if (options.dryRun) {
+    console.log(
+      JSON.stringify(
+        {
+          automator,
+          cli,
+          configPath: config.configPath,
+          mode: 'dry-run',
+          ok: true,
+          outputRoot: config.outputRoot,
+          project: projectInfo,
+          projectPath: config.projectPath,
+          readyForAutomation: Boolean(cli.available && automator.available),
+          selectedRoutes: selectedSpecs.map((spec) => summarizeSpec(spec)),
+        },
+        null,
+        2
+      )
+    )
+    return
+  }
+
+  if (!cli.available) {
+    throw new Error(cli.error)
+  }
+
+  if (!automator.available) {
+    throw new Error(automator.error)
+  }
+
+  const { automator: automatorModule, source: automatorSource } = loadAutomator({
     automatorModulePath: options.automatorModulePath,
     projectPath: config.projectPath,
   })
@@ -691,14 +782,14 @@ async function main() {
 
   try {
     await startAutomationCli({
-      cliPath: options.cliPath,
+      cliPath: cli.path,
       port: options.port,
       projectPath: config.projectPath,
       trustProject: options.trustProject,
     })
 
     await sleep(1500)
-    miniProgram = await connectWithRetry(automator, options.port, 30000)
+    miniProgram = await connectWithRetry(automatorModule, options.port, 30000)
     await waitForAppReady(miniProgram, 45000)
 
     miniProgram.on('console', (payload) => {
