@@ -3,6 +3,7 @@
   "projectPath": "<fixture-project>",
   "project": {
     "projectConfigPath": "<fixture-project>/project.config.json",
+    "automatorSource": "explicit module path <local-automator-install>",
     "miniprogramRoot": ".",
     "miniappRoot": "<fixture-project>",
     "appJsonPath": "<fixture-project>/app.json"

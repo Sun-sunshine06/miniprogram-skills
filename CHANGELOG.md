@@ -2,6 +2,10 @@
 
 All notable changes to this repository will be documented in this file.
 
+## Unreleased
+
+- moved `tools/wechat-gui-check` to a user-supplied `miniprogram-automator` runtime model so the default repo install and lockfile no longer carry the upstream image-stack dependency chain
+
 ## v0.1.0-public-beta
 
 Initial public release for the reusable WeChat Mini Program skills set and the first beta extraction of `tools/wechat-gui-check`.

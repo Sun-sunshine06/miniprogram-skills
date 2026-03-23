@@ -2,7 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const childProcess = require('child_process')
 
-const automator = require('miniprogram-automator')
 const { PNG } = require('pngjs')
 
 const {
@@ -10,6 +9,7 @@ const {
   pickDataFields,
   resolveDefaultCliPath,
 } = require('./lib/check-helpers')
+const { loadAutomator } = require('./lib/load-automator')
 
 const DEFAULT_PROJECT_PATH = path.resolve(__dirname, 'examples', 'fixture-miniapp')
 const DEFAULT_OUTPUT_ROOT = path.resolve(DEFAULT_PROJECT_PATH, '.tmp', 'gui-check')
@@ -110,6 +110,7 @@ function normalizeAction(action) {
 
 function parseArgs(argv) {
   const options = {
+    automatorModulePath: process.env.WECHAT_GUI_CHECK_AUTOMATOR_PATH || '',
     cliPath: resolveDefaultCliPath(),
     configPath: DEFAULT_CONFIG_PATH,
     outputRoot: DEFAULT_OUTPUT_ROOT,
@@ -125,6 +126,12 @@ function parseArgs(argv) {
 
     if (arg === '--cli-path') {
       options.cliPath = argv[i + 1]
+      i += 1
+      continue
+    }
+
+    if (arg === '--automator-module-path') {
+      options.automatorModulePath = argv[i + 1]
       i += 1
       continue
     }
@@ -376,7 +383,7 @@ async function startAutomationCli(options) {
   })
 }
 
-async function connectWithRetry(port, timeoutMs) {
+async function connectWithRetry(automator, port, timeoutMs) {
   const wsEndpoint = `ws://127.0.0.1:${port}`
   const deadline = Date.now() + timeoutMs
   let lastError = null
@@ -670,6 +677,11 @@ async function main() {
     throw new Error('No routes selected')
   }
 
+  const { automator, source: automatorSource } = loadAutomator({
+    automatorModulePath: options.automatorModulePath,
+    projectPath: config.projectPath,
+  })
+
   const runDir = path.join(config.outputRoot, timestampSlug())
   ensureDir(runDir)
 
@@ -686,7 +698,7 @@ async function main() {
     })
 
     await sleep(1500)
-    miniProgram = await connectWithRetry(options.port, 30000)
+    miniProgram = await connectWithRetry(automator, options.port, 30000)
     await waitForAppReady(miniProgram, 45000)
 
     miniProgram.on('console', (payload) => {
@@ -703,6 +715,7 @@ async function main() {
       pages: [],
       project: {
         appJsonPath: projectInfo.appJsonPath,
+        automatorSource,
         miniappRoot: projectInfo.miniappRoot,
         miniprogramRoot: projectInfo.miniprogramRoot,
         projectConfigPath: projectInfo.projectConfigPath,

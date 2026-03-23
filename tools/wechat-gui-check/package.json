@@ -8,13 +8,7 @@
     "check": "node check.js",
     "check:fixture": "node check.js --config examples/sample.route-config.json --route home"
   },
-  "overrides": {
-    "miniprogram-automator": {
-      "jimp": "0.22.12"
-    }
-  },
   "dependencies": {
-    "miniprogram-automator": "^0.12.1",
     "pngjs": "^7.0.0"
   }
 }

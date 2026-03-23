@@ -32,10 +32,15 @@ jobs:
         working-directory: tools/wechat-gui-check
         run: npm ci --ignore-scripts
 
+      - name: Audit default tool dependency surface
+        working-directory: tools/wechat-gui-check
+        run: npm audit --omit=dev --package-lock-only
+
       - name: Check tool syntax
         run: |
           node --check tools/wechat-gui-check/check.js
           node --check tools/wechat-gui-check/lib/check-helpers.js
+          node --check tools/wechat-gui-check/lib/load-automator.js
 
       - name: Check sample JSON
         run: |
@@ -46,7 +51,7 @@ jobs:
         working-directory: tools/wechat-gui-check
         run: |
           node -e "const {PNG}=require('pngjs'); console.log(typeof PNG.sync.read)"
-          node -e "const util=require('miniprogram-automator/out/util'); console.log(typeof util.decodeQrCode)"
+          node -e "const {loadAutomator}=require('./lib/load-automator'); try { loadAutomator({projectPath: process.cwd()}); process.exitCode = 1; } catch (error) { console.log(String(error.message).includes('miniprogram-automator')); }"
 
       - name: Check bundled fixture files
         run: |
