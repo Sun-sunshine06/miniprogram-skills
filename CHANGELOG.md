@@ -15,6 +15,6 @@ Highlights:
 
 Known limitations:
 
-- `tools/wechat-gui-check` still inherits five moderate audit findings through the upstream `miniprogram-automator` image stack
+- `tools/wechat-gui-check` still inherits a small remaining set of moderate audit findings through the upstream `miniprogram-automator` image stack
 - the GUI harness still needs forward-testing on more than one non-source miniapp repository
 - the repository is documentation-first and is not yet a full GUI automation product or full miniapp boilerplate

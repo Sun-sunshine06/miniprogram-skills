@@ -1,13 +1,13 @@
 # Skill Map
 
-## Active Draft Skills
+## Active Public Skills
 
 | Skill | Purpose | Current Shape | Public Readiness |
 | --- | --- | --- | --- |
 | `miniapp-official-scaffold-alignment` | Validate scaffold correctness before feature work begins. | `SKILL.md` + baseline reference | medium |
 | `miniapp-devtools-recovery` | Recover repos after wrong-root imports or DevTools template drift. | `SKILL.md` + recovery checklist | medium |
 | `miniapp-devtools-cli-repair` | Use the official DevTools CLI as the primary diagnostic path. | `SKILL.md` + CLI playbook | high |
-| `miniapp-devtools-gui-check` | Catch runtime and interaction failures that do not surface in `preview`. | `SKILL.md` + GUI playbook + tool draft | high |
+| `miniapp-devtools-gui-check` | Catch runtime and interaction failures that do not surface in `preview`. | `SKILL.md` + GUI playbook + public beta tool | high |
 
 ## Planned Skills
 

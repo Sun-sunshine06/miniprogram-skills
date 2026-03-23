@@ -24,7 +24,7 @@ The repository starts as a docs-first extraction of reusable WeChat Mini Program
 ## Known Limitations
 
 - the GUI harness remains beta
-- `tools/wechat-gui-check` still inherits five moderate audit findings through `miniprogram-automator` and its transitive image stack
+- `tools/wechat-gui-check` still inherits a small remaining set of moderate audit findings through `miniprogram-automator` and its transitive image stack
 - the harness still needs broader forward-testing outside the source environment
 
 ## Recommended Release Notes Copy

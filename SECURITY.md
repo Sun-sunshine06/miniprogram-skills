@@ -19,4 +19,4 @@ For anything that may expose credentials, compromise a local machine, or enable 
 
 Most of the current dependency audit surface is isolated to the optional `tools/wechat-gui-check` beta package, which still inherits a small number of moderate findings through `miniprogram-automator` and its transitive `jimp` / `file-type` chain.
 
-This repository already reduces the direct dependency surface on its own side, but it does not fully remove those upstream package risks yet. At the time of this draft, the remaining audit surface is five moderate findings rather than the larger set from the original dependency layout.
+This repository already reduces the direct dependency surface on its own side, but it does not fully remove those upstream package risks yet. Keep the public security note phrased in terms of a small remaining upstream moderate surface rather than a hardcoded count, because GitHub alerts and local `npm audit` summaries may not age in lockstep.
