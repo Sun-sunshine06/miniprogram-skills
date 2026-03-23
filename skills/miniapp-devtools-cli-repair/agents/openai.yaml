@@ -1,0 +1,4 @@
+interface:
+  display_name: "Miniapp DevTools CLI Repair"
+  short_description: "Diagnose WeChat DevTools problems through the official CLI."
+  default_prompt: "Use $miniapp-devtools-cli-repair to inspect WeChat DevTools through the official CLI, classify the failure, and suggest or apply safe repo-level fixes."

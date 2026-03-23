@@ -1,0 +1,4 @@
+interface:
+  display_name: "Official Scaffold Alignment"
+  short_description: "Validate or design an officially valid WeChat miniapp scaffold."
+  default_prompt: "Use $miniapp-official-scaffold-alignment to validate a WeChat Mini Program scaffold, repository layout, or TypeScript setup against official rules."

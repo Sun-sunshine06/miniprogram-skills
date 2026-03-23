@@ -1,0 +1,5 @@
+<view class="page-shell">
+  <view class="page-title">{{title}}</view>
+  <view class="page-copy">Last action: {{lastAction}}</view>
+  <button class="btn-primary" bindtap="handlePrimaryTap">Run primary action</button>
+</view>

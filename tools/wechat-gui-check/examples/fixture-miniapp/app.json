@@ -1,0 +1,10 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/tasks/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "Fixture Miniapp",
+    "navigationStyle": "default"
+  }
+}

@@ -1,0 +1,56 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate skills
+        run: python scripts/validate_skills.py skills
+
+      - name: Ensure vendored dependencies are not committed
+        run: test ! -d tools/wechat-gui-check/node_modules
+
+      - name: Install tool dependencies
+        working-directory: tools/wechat-gui-check
+        run: npm ci --ignore-scripts
+
+      - name: Check tool syntax
+        run: |
+          node --check tools/wechat-gui-check/check.js
+          node --check tools/wechat-gui-check/lib/check-helpers.js
+
+      - name: Check sample JSON
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/sample.route-config.json','utf8')); JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/sample-report.json','utf8'));"
+          node -e "JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/fixture-miniapp/project.config.json','utf8')); JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/fixture-miniapp/app.json','utf8')); JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/fixture-miniapp/pages/home/index.json','utf8')); JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/fixture-miniapp/pages/tasks/index.json','utf8'));"
+
+      - name: Check runtime imports
+        working-directory: tools/wechat-gui-check
+        run: |
+          node -e "const {PNG}=require('pngjs'); console.log(typeof PNG.sync.read)"
+          node -e "const util=require('miniprogram-automator/out/util'); console.log(typeof util.decodeQrCode)"
+
+      - name: Check bundled fixture files
+        run: |
+          test -f tools/wechat-gui-check/examples/fixture-miniapp/project.config.json
+          test -f tools/wechat-gui-check/examples/fixture-miniapp/app.json
+          test -f tools/wechat-gui-check/examples/fixture-miniapp/pages/home/index.wxml
+          test -f tools/wechat-gui-check/examples/fixture-miniapp/pages/tasks/index.wxml

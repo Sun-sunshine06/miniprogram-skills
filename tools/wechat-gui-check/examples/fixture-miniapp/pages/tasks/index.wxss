@@ -1,0 +1,3 @@
+.filter-tab {
+  min-width: 160rpx;
+}

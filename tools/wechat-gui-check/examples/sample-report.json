@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-03-23T13:20:00.000Z",
+  "projectPath": "<fixture-project>",
+  "project": {
+    "projectConfigPath": "<fixture-project>/project.config.json",
+    "miniprogramRoot": ".",
+    "miniappRoot": "<fixture-project>",
+    "appJsonPath": "<fixture-project>/app.json"
+  },
+  "runDir": "<fixture-project>/.tmp/gui-check/2026-03-23T13-20-00-000Z",
+  "configPath": "examples/sample.route-config.json",
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "warningPages": 0
+  },
+  "pages": [
+    {
+      "key": "home",
+      "route": "/pages/home/index",
+      "expectedPath": "pages/home/index",
+      "finalPath": "pages/home/index",
+      "ok": true,
+      "details": {
+        "path": "pages/home/index",
+        "hasPrimarySelector": true,
+        "titleText": "Fixture Home",
+        "selectedData": {
+          "loading": false,
+          "errorMessage": ""
+        }
+      },
+      "actionResults": [
+        {
+          "type": "tap",
+          "selector": ".btn-primary",
+          "ok": true
+        }
+      ],
+      "failures": [],
+      "warnings": [],
+      "consoleEvents": [],
+      "exceptionEvents": []
+    },
+    {
+      "key": "tasks",
+      "route": "/pages/tasks/index",
+      "expectedPath": "pages/tasks/index",
+      "finalPath": "pages/tasks/index",
+      "ok": true,
+      "details": {
+        "path": "pages/tasks/index",
+        "hasPrimarySelector": true,
+        "titleText": "Fixture Tasks",
+        "selectedData": {
+          "loading": false,
+          "errorMessage": "",
+          "activeScope": "week"
+        }
+      },
+      "actionResults": [
+        {
+          "type": "tap",
+          "selector": ".filter-tab",
+          "index": 1,
+          "ok": true,
+          "required": false
+        }
+      ],
+      "failures": [],
+      "warnings": [],
+      "consoleEvents": [],
+      "exceptionEvents": []
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Miniapp DevTools Recovery"
+  short_description: "Recover a WeChat miniapp after import or template drift."
+  default_prompt: "Use $miniapp-devtools-recovery to repair WeChat DevTools wrong-root imports, template residue, and stale compile settings in a miniapp repo."

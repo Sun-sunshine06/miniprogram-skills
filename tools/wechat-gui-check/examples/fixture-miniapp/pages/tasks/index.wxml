@@ -1,0 +1,15 @@
+<view class="page-shell">
+  <view class="page-title">{{title}}</view>
+  <view class="page-copy">Active scope: {{activeScope}}</view>
+  <view class="tab-row">
+    <button
+      wx:for="{{scopes}}"
+      wx:key="*this"
+      class="filter-tab"
+      data-scope="{{item}}"
+      bindtap="handleScopeTap"
+    >
+      {{item}}
+    </button>
+  </view>
+</view>

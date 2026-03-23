@@ -1,0 +1,70 @@
+# Miniprogram Skills
+
+Reusable Codex skills and playbooks for WeChat Mini Program development, DevTools diagnosis, and scaffold validation.
+
+## Status
+
+This repository is suitable for a public docs-first release. The four core skills are reusable today, and the GUI checker ships as a beta utility with a bundled demo miniapp instead of assuming access to a private source repo.
+
+## Why This Exists
+
+- WeChat Mini Program setup and DevTools failures repeat across projects.
+- CLI-visible failures and GUI-only failures need different workflows.
+- Wrong-root imports, stale compile settings, and TypeScript recognition drift are common.
+- These patterns are more reusable than any one product repo.
+
+## Initial Public Scope
+
+| Skill | Purpose | Status |
+| --- | --- | --- |
+| `miniapp-official-scaffold-alignment` | Validate or design an officially valid miniapp scaffold. | public draft |
+| `miniapp-devtools-recovery` | Recover a repo after wrong-root import, template residue, or compile drift. | public draft |
+| `miniapp-devtools-cli-repair` | Diagnose DevTools through the official CLI and classify safe repo-level fixes. | public draft |
+| `miniapp-devtools-gui-check` | Run or design host-side GUI smoke checks for runtime-only failures. | public beta tool |
+
+## Repository Layout
+
+```text
+.
+|-- docs/
+|   |-- conventions.md
+|   |-- extraction-checklist.md
+|   |-- public-roadmap.md
+|   `-- skill-map.md
+|-- skills/
+|   |-- miniapp-devtools-cli-repair/
+|   |-- miniapp-devtools-gui-check/
+|   |-- miniapp-devtools-recovery/
+|   `-- miniapp-official-scaffold-alignment/
+`-- tools/
+    `-- wechat-gui-check/
+```
+
+## What This Repo Is
+
+- A reusable skill and playbook repo.
+- A public extraction target for high-value miniapp workflows.
+- A home for patterns that should survive beyond one product codebase.
+
+## What This Repo Is Not Yet
+
+- A complete GUI automation product.
+- A full miniapp boilerplate repo.
+- A generic home for every business-flow skill from the source project.
+- A zero-risk dependency surface; the remaining audit findings are currently isolated to the optional `tools/wechat-gui-check` beta utility and its upstream `miniprogram-automator` chain.
+
+## Release Direction
+
+1. Keep `v0` documentation-first and easy to review.
+2. Harden the extracted GUI smoke harness in `tools/wechat-gui-check`.
+3. Add one or more sample repos or fixtures for forward-testing.
+4. Expand from DevTools skills into broader miniapp workflow skills only after the public boundary is clean.
+
+## Immediate Next Steps
+
+- Generalize repo-specific route names, storage keys, and file paths into placeholders or examples.
+- Validate each skill through realistic Codex prompts.
+- Forward-test the GUI harness on more than one non-source miniapp repo.
+- Decide whether to replace or isolate the current `miniprogram-automator` image stack to fully remove the remaining moderate audit findings.
+
+See [CHANGELOG.md](./CHANGELOG.md), [docs/release-v0.1.0-public-beta.md](./docs/release-v0.1.0-public-beta.md), [docs/releasing.md](./docs/releasing.md), [docs/skill-map.md](./docs/skill-map.md), [docs/public-roadmap.md](./docs/public-roadmap.md), [docs/extraction-checklist.md](./docs/extraction-checklist.md), [docs/license-decision.md](./docs/license-decision.md), and [CONTRIBUTING.md](./CONTRIBUTING.md) for the detailed draft plan.
