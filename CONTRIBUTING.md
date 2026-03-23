@@ -11,6 +11,13 @@ Keep this repository focused on reusable WeChat Mini Program skills and supporti
 - remove product-specific storage keys from core instructions
 - keep source-repo baselines out of `SKILL.md`
 
+## Collaboration Workflow
+
+- keep `validate` green before merging into `main`
+- use a pull request when the change would benefit from review history or discussion
+- small maintainer-only updates may be pushed directly when they stay within the current branch protection rules
+- keep pull-request branches up to date with `main` when GitHub reports them as behind
+
 ## Skill Changes
 
 For changes under `skills/`:
@@ -36,3 +43,4 @@ Accept changes only when:
 - the public boundary is cleaner, not dirtier
 - the repo becomes easier to reuse
 - the docs and tool behavior still match
+- the documented collaboration flow still matches the current repository rules
