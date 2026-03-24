@@ -24,9 +24,9 @@ The repository starts as a docs-first extraction of reusable WeChat Mini Program
 ## Known Limitations
 
 - the GUI harness remains beta
-- `tools/wechat-gui-check` still inherits a small remaining set of moderate audit findings through `miniprogram-automator` and its transitive image stack
+- live GUI automation still depends on a user-supplied `miniprogram-automator` runtime install, even though the default repository lockfile no longer carries that upstream image stack
 - the harness still needs broader forward-testing outside the source environment
 
 ## Recommended Release Notes Copy
 
-Public beta release for reusable WeChat Mini Program Codex skills and an initial GUI smoke harness. This version focuses on scaffold validation, DevTools recovery, CLI-first diagnosis, and GUI-only runtime checks. The repository is ready for public collaboration, while the optional GUI harness remains beta because of known upstream dependency findings and limited forward-testing coverage.
+Public beta release for reusable WeChat Mini Program Codex skills and an initial GUI smoke harness. This version focuses on scaffold validation, DevTools recovery, CLI-first diagnosis, and GUI-only runtime checks. The repository is ready for public collaboration, while the optional GUI harness remains beta because live automation still depends on a user-supplied runtime install and forward-testing coverage is still limited.
