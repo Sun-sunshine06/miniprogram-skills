@@ -5,7 +5,6 @@ All notable changes to this repository will be documented in this file.
 ## Unreleased
 
 - added a Chinese entry README and a Chinese skill map to improve first-run usability for Chinese-speaking miniapp developers
-- added bilingual skill descriptions in frontmatter and agent metadata so the public skills are easier to discover and understand in Chinese contexts
 - added `references/example-prompts.md` for all four public skills and linked them from each `SKILL.md`
 - upgraded `scripts/validate_skills.py` to check required sections, `references/`, `agents/openai.yaml` interface fields, meaningful descriptions, and optional example-prompt presence
 - updated CI and release checks to enforce `python scripts/validate_skills.py skills --require-example-prompts`
