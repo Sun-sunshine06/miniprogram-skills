@@ -4,6 +4,11 @@ All notable changes to this repository will be documented in this file.
 
 ## Unreleased
 
+- added `references/example-prompts.md` for all four public skills and linked them from each `SKILL.md`
+- upgraded `scripts/validate_skills.py` to check required sections, `references/`, `agents/openai.yaml` interface fields, meaningful descriptions, and optional example-prompt presence
+- updated CI and release checks to enforce `python scripts/validate_skills.py skills --require-example-prompts`
+- added `docs/skill-validation-log.md` with recorded validation passes for all four active skills
+- recorded real host-side validation runs for `miniapp-devtools-gui-check`, `miniapp-devtools-cli-repair`, and `miniapp-devtools-recovery`, plus a scaffold validation pass for `miniapp-official-scaffold-alignment`
 - moved `tools/wechat-gui-check` to a user-supplied `miniprogram-automator` runtime model so the default repo install and lockfile no longer carry the upstream image-stack dependency chain
 - added a `--dry-run` preflight mode and CI coverage for exercising `wechat-gui-check` against a copied miniapp project outside the repository
 - fixed the default Windows DevTools CLI path probe for common Chinese-language install directories

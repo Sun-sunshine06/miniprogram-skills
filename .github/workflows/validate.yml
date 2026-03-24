@@ -23,7 +23,7 @@ jobs:
           node-version: "20"
 
       - name: Validate skills
-        run: python scripts/validate_skills.py skills
+        run: python scripts/validate_skills.py skills --require-example-prompts
 
       - name: Ensure vendored dependencies are not committed
         run: test ! -d tools/wechat-gui-check/node_modules

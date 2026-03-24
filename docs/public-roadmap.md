@@ -34,6 +34,20 @@ Goal:
 
 - harden the extracted host-side GUI smoke harness in `tools/wechat-gui-check`
 
+Current status on 2026-03-24:
+
+- completed:
+  - example prompts for all four public skills
+  - recorded validation passes for all four active skills
+  - upgraded skill validator with stronger content checks
+- in progress:
+  - repository-level contributor workflow improvements
+  - CI alignment around the stronger validator expectations
+- next:
+  - add a single local validation entry point
+  - document forward-testing on an external public miniapp repo
+  - standardize GUI checker failure classification and docs
+
 Exit criteria:
 
 - runnable local harness exists
@@ -47,6 +61,11 @@ Exit criteria:
 Goal:
 
 - confirm that the skills generalize across more than one repo
+
+Entry conditions from current progress:
+
+- internal fixture-based validation evidence now exists for all active skills
+- the next gating step is an external public repo forward-test rather than more docs-only evidence
 
 Exit criteria:
 

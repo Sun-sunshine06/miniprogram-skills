@@ -40,3 +40,4 @@ When answering, keep the result operational:
 
 - `references/gui-check-playbook.md`: host prerequisites, failure classification, and reporting guidance
 - `../../tools/wechat-gui-check/README.md`: current extraction target for the public harness
+- `references/example-prompts.md`: reusable trigger examples and evaluation notes

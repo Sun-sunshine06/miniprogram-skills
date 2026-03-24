@@ -17,7 +17,7 @@ Use this skill when DevTools has polluted the repository or started compiling th
 4. Restore tracked files first, then delete only the generated residue.
 5. Tell the user exactly which directory to import and which compile mode to use.
 
-## Recovery Rules
+## Core Rules
 
 - Treat repository root and miniapp code root as separate concerns.
 - Prefer restoring tracked files from version control before deleting generated clutter.
@@ -38,3 +38,4 @@ When answering, keep the result short and operational:
 ## Resources
 
 - `references/devtools-recovery-checklist.md`: cleanup rules and error-to-cause mapping
+- `references/example-prompts.md`: reusable trigger examples and evaluation notes

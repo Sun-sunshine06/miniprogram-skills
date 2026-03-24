@@ -51,3 +51,4 @@ When answering, keep the result operational:
 ## Resources
 
 - `references/cli-repair-playbook.md`: command ladder, timeout handling, and fix boundaries
+- `references/example-prompts.md`: reusable trigger examples and evaluation notes

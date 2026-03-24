@@ -46,3 +46,4 @@ When answering, keep the result short and action-oriented:
 ## Resources
 
 - `references/official-scaffold-baseline.md`: official rule summary and practical implications
+- `references/example-prompts.md`: reusable trigger examples and evaluation notes

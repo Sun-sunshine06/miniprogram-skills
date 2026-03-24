@@ -4,7 +4,7 @@ Use this short checklist before publishing a tag or first public repository rele
 
 ## Pre-Release Checks
 
-1. run `python scripts/validate_skills.py skills`
+1. run `python scripts/validate_skills.py skills --require-example-prompts`
 2. run `node --check tools/wechat-gui-check/check.js`
 3. run `node --check tools/wechat-gui-check/lib/check-helpers.js`
 4. run `node --check tools/wechat-gui-check/lib/load-automator.js`
