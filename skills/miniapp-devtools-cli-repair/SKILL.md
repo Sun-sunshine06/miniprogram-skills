@@ -1,6 +1,6 @@
 ---
 name: miniapp-devtools-cli-repair
-description: Diagnose WeChat DevTools failures through the official CLI instead of relying only on GUI screenshots. Use when Codex needs to run `open`, `preview`, or related commands, discover the live service port, classify whether a failure is CLI-visible, and apply or suggest safe repo-level fixes.
+description: Diagnose WeChat DevTools failures through the official CLI instead of relying only on GUI screenshots. Use when Codex needs to run `open`, `preview`, or related commands, discover the live service port, classify whether a failure is CLI-visible, and apply or suggest safe repo-level fixes. 中文：当你需要通过微信开发者工具官方 CLI 运行 `open`、`preview` 等命令，确定 live port、判断问题是否可在 CLI 中复现，并执行或建议安全的仓库级修复时使用。
 ---
 
 # Miniapp Devtools Cli Repair
