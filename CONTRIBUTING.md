@@ -1,5 +1,7 @@
 # Contributing
 
+English | [中文](./CONTRIBUTING.zh-CN.md)
+
 ## Goal
 
 Keep this repository focused on reusable WeChat Mini Program skills and supporting tooling, not on one product repo's private implementation details.

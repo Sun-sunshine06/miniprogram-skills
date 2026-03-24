@@ -347,6 +347,115 @@ function normalizeExceptionEvent(payload) {
   }
 }
 
+function createIssue(code, message) {
+  return {
+    code,
+    message,
+  }
+}
+
+function issueMessages(issues) {
+  return issues.map((issue) => issue.message)
+}
+
+function uniqueIssueCodes(issues) {
+  return Array.from(new Set(issues.map((issue) => issue.code)))
+}
+
+function countIssuesByCode(issues) {
+  const counts = {}
+
+  for (const issue of issues) {
+    counts[issue.code] = (counts[issue.code] || 0) + 1
+  }
+
+  return counts
+}
+
+function classifyCliProbe(cli) {
+  return cli && cli.available ? 'ok' : 'environment_error'
+}
+
+function classifyAutomatorProbe(automator) {
+  return automator && automator.available ? 'ok' : 'automation_dependency_missing'
+}
+
+function classifyScreenshotWarning(message) {
+  const normalized = String(message || '').toLowerCase()
+
+  if (normalized.includes('timed out')) {
+    return 'screenshot_timeout'
+  }
+
+  return 'devtools_session_error'
+}
+
+function classifyActionFailure(result) {
+  const reason = String(result && result.reason ? result.reason : '').toLowerCase()
+
+  if (reason.includes('missing selector') || result.type === 'tap') {
+    return 'selector_assertion_error'
+  }
+
+  return 'repo_runtime_error'
+}
+
+function classifyFatalErrorMessage(message) {
+  const normalized = String(message || '').toLowerCase()
+
+  if (normalized.includes('miniprogram-automator')) {
+    return 'automation_dependency_missing'
+  }
+
+  if (
+    normalized.includes('cli.bat path is empty') ||
+    normalized.includes('devtools cli not found') ||
+    normalized.includes('projectpath must point') ||
+    normalized.includes('missing app.json') ||
+    normalized.includes('failed parsing') ||
+    normalized.includes('config must define at least one route') ||
+    normalized.includes('no routes selected')
+  ) {
+    return 'environment_error'
+  }
+
+  if (
+    normalized.includes('cli auto exited') ||
+    normalized.includes('failed connecting to ws://') ||
+    normalized.includes('blocking dialog') ||
+    normalized.includes('did not become ready')
+  ) {
+    return 'devtools_session_error'
+  }
+
+  return 'environment_error'
+}
+
+function classifyRunSpecErrorMessage(message) {
+  const normalized = String(message || '').toLowerCase()
+
+  if (normalized.includes('missing selector')) {
+    return 'selector_assertion_error'
+  }
+
+  if (
+    normalized.includes('failed to open route') ||
+    normalized.includes('capture basics') ||
+    normalized.includes('actions ') ||
+    normalized.includes('call ')
+  ) {
+    return 'repo_runtime_error'
+  }
+
+  const topLevelCode = classifyFatalErrorMessage(message)
+
+  if (topLevelCode === 'environment_error') {
+    return 'devtools_session_error'
+  }
+
+  return topLevelCode
+}
+
 async function inspectImage(imagePath) {
   const image = PNG.sync.read(fs.readFileSync(imagePath))
   const { width, height, data } = image
@@ -656,8 +765,8 @@ async function runSpec({ miniProgram, spec, runDir, consoleEvents, exceptionEven
   const newConsoleEvents = consoleEvents.slice(consoleStart)
   const newExceptionEvents = exceptionEvents.slice(exceptionStart)
   const severeConsoleEvents = newConsoleEvents.filter(isSevereConsoleEvent)
-  const failures = []
-  const warnings = []
+  const failureDetails = []
+  const warningDetails = []
   let imageMetrics = null
   let screenshotSaved = false
 
@@ -666,41 +775,44 @@ async function runSpec({ miniProgram, spec, runDir, consoleEvents, exceptionEven
     screenshotSaved = true
     imageMetrics = await withTimeout(`inspect image ${spec.key}`, 15000, () => inspectImage(screenshotPath))
   } catch (error) {
-    warnings.push(`screenshot unavailable: ${error && error.message ? error.message : String(error)}`)
+    const message = `screenshot unavailable: ${error && error.message ? error.message : String(error)}`
+    warningDetails.push(createIssue(classifyScreenshotWarning(message), message))
   }
 
   if (spec.expectedPath && finalPath !== spec.expectedPath) {
-    failures.push(`final path mismatch: ${finalPath || '<empty>'}`)
+    failureDetails.push(createIssue('repo_runtime_error', `final path mismatch: ${finalPath || '<empty>'}`))
   }
 
   if (spec.primarySelector && !details.hasPrimarySelector) {
-    failures.push(`missing selector ${spec.primarySelector}`)
+    failureDetails.push(createIssue('selector_assertion_error', `missing selector ${spec.primarySelector}`))
   }
 
   if (details.errorMessage) {
-    failures.push(`page data errorMessage: ${details.errorMessage}`)
+    failureDetails.push(createIssue('repo_runtime_error', `page data errorMessage: ${details.errorMessage}`))
   }
 
   if (newExceptionEvents.length) {
-    failures.push(`runtime exceptions: ${newExceptionEvents.length}`)
+    failureDetails.push(createIssue('repo_runtime_error', `runtime exceptions: ${newExceptionEvents.length}`))
   }
 
   if (severeConsoleEvents.length) {
-    failures.push(`severe console events: ${severeConsoleEvents.length}`)
+    failureDetails.push(createIssue('repo_runtime_error', `severe console events: ${severeConsoleEvents.length}`))
   }
 
   for (const result of actionResults) {
     if (result.ok === false && result.required !== false) {
-      failures.push(result.reason || `${result.type} failed`)
+      failureDetails.push(createIssue(classifyActionFailure(result), result.reason || `${result.type} failed`))
     }
 
     if (result.ok === false && result.required === false) {
-      warnings.push(`non-required action failed: ${result.reason || result.type}`)
+      warningDetails.push(
+        createIssue(classifyActionFailure(result), `non-required action failed: ${result.reason || result.type}`)
+      )
     }
   }
 
   if (imageMetrics && imageMetrics.possibleBlank) {
-    warnings.push('possible blank or nearly blank screenshot')
+    warningDetails.push(createIssue('repo_runtime_error', 'possible blank or nearly blank screenshot'))
   }
 
   const result = {
@@ -708,13 +820,17 @@ async function runSpec({ miniProgram, spec, runDir, consoleEvents, exceptionEven
     route: spec.route,
     expectedPath: spec.expectedPath,
     finalPath,
-    ok: failures.length === 0,
+    ok: failureDetails.length === 0,
     details,
     actionResults,
     screenshotPath: screenshotSaved ? screenshotPath : '',
     imageMetrics,
-    failures,
-    warnings,
+    failureCodes: uniqueIssueCodes(failureDetails),
+    warningCodes: uniqueIssueCodes(warningDetails),
+    failureDetails,
+    warningDetails,
+    failures: issueMessages(failureDetails),
+    warnings: issueMessages(warningDetails),
     consoleEvents: newConsoleEvents,
     exceptionEvents: newExceptionEvents,
   }
@@ -739,11 +855,20 @@ async function main() {
   }
 
   if (options.dryRun) {
+    const classifiedCli = {
+      ...cli,
+      classification: classifyCliProbe(cli),
+    }
+    const classifiedAutomator = {
+      ...automator,
+      classification: classifyAutomatorProbe(automator),
+    }
+
     console.log(
       JSON.stringify(
         {
-          automator,
-          cli,
+          automator: classifiedAutomator,
+          cli: classifiedCli,
           configPath: config.configPath,
           mode: 'dry-run',
           ok: true,
@@ -803,6 +928,7 @@ async function main() {
     const report = {
       configPath: config.configPath,
       generatedAt: new Date().toISOString(),
+      reportSchemaVersion: 2,
       pages: [],
       project: {
         appJsonPath: projectInfo.appJsonPath,
@@ -818,6 +944,8 @@ async function main() {
         passed: 0,
         failed: 0,
         warningPages: 0,
+        failureClassCounts: {},
+        warningClassCounts: {},
       },
     }
 
@@ -834,6 +962,9 @@ async function main() {
             exceptionEvents,
           })
         } catch (error) {
+          const message = error && error.message ? error.message : String(error)
+          const failureDetails = [createIssue(classifyRunSpecErrorMessage(message), message)]
+
           pageReport = {
             key: spec.key,
             route: spec.route,
@@ -844,7 +975,11 @@ async function main() {
             actionResults: [],
             screenshotPath: '',
             imageMetrics: null,
-            failures: [error && error.message ? error.message : String(error)],
+            failureCodes: uniqueIssueCodes(failureDetails),
+            warningCodes: [],
+            failureDetails,
+            warningDetails: [],
+            failures: issueMessages(failureDetails),
             warnings: [],
             consoleEvents: consoleEvents.slice(),
             exceptionEvents: exceptionEvents.slice(),
@@ -864,6 +999,12 @@ async function main() {
     report.summary.passed = report.pages.filter((page) => page.ok).length
     report.summary.failed = report.summary.total - report.summary.passed
     report.summary.warningPages = report.pages.filter((page) => page.warnings.length > 0).length
+    report.summary.failureClassCounts = countIssuesByCode(
+      report.pages.flatMap((page) => page.failureDetails || [])
+    )
+    report.summary.warningClassCounts = countIssuesByCode(
+      report.pages.flatMap((page) => page.warningDetails || [])
+    )
 
     const reportPath = path.join(runDir, 'report.json')
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2))
@@ -880,11 +1021,14 @@ async function main() {
 }
 
 main().catch((error) => {
+  const message = error && error.message ? error.message : String(error)
+
   console.error(
     JSON.stringify(
       {
         ok: false,
-        error: error && error.message ? error.message : String(error),
+        classification: classifyFatalErrorMessage(message),
+        error: message,
         stack: error && error.stack ? error.stack : null,
       },
       null,

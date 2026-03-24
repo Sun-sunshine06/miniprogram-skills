@@ -1,5 +1,7 @@
 # WeChat GUI Check
 
+English | [中文](./README.zh-CN.md)
+
 Config-driven WeChat DevTools GUI smoke harness for runtime and interaction checks that do not show up in CLI `preview`.
 
 ## Current Status
@@ -121,6 +123,14 @@ This keeps the sample config reproducible and gives contributors a safe baseline
 ```
 
 `--dry-run` prints a JSON preflight summary to stdout instead of creating a run directory.
+
+Current report schema highlights:
+
+- `reportSchemaVersion`: current report shape version
+- `summary.failureClassCounts`: failure counts grouped by classification code
+- `summary.warningClassCounts`: warning counts grouped by classification code
+- `pages[].failureCodes` / `pages[].warningCodes`: unique classification codes for a route
+- `pages[].failureDetails` / `pages[].warningDetails`: structured issue entries with `code` and `message`
 
 ## Notes
 

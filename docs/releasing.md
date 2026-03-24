@@ -1,5 +1,7 @@
 # Releasing
 
+English | [中文](./releasing.zh-CN.md)
+
 Use this short checklist before publishing a tag or first public repository release.
 
 ## Pre-Release Checks

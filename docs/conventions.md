@@ -1,5 +1,7 @@
 # Conventions
 
+English | [中文](./conventions.zh-CN.md)
+
 ## Repository Goal
 
 Write skills that can be used across multiple WeChat Mini Program repositories, not just one source project.

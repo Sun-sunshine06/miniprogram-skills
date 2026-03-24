@@ -1,5 +1,6 @@
 {
   "generatedAt": "2026-03-23T13:20:00.000Z",
+  "reportSchemaVersion": 2,
   "projectPath": "<fixture-project>",
   "project": {
     "projectConfigPath": "<fixture-project>/project.config.json",
@@ -14,7 +15,9 @@
     "total": 2,
     "passed": 2,
     "failed": 0,
-    "warningPages": 0
+    "warningPages": 0,
+    "failureClassCounts": {},
+    "warningClassCounts": {}
   },
   "pages": [
     {
@@ -39,6 +42,10 @@
           "ok": true
         }
       ],
+      "failureCodes": [],
+      "warningCodes": [],
+      "failureDetails": [],
+      "warningDetails": [],
       "failures": [],
       "warnings": [],
       "consoleEvents": [],
@@ -69,6 +76,10 @@
           "required": false
         }
       ],
+      "failureCodes": [],
+      "warningCodes": [],
+      "failureDetails": [],
+      "warningDetails": [],
       "failures": [],
       "warnings": [],
       "consoleEvents": [],

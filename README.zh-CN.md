@@ -73,6 +73,10 @@
 
 - [README.md](./README.md): 英文总览
 - [docs/skill-map.zh-CN.md](./docs/skill-map.zh-CN.md): 中文 skill 总览
+- [CONTRIBUTING.zh-CN.md](./CONTRIBUTING.zh-CN.md): 中文贡献说明
+- [docs/conventions.zh-CN.md](./docs/conventions.zh-CN.md): 中文编写约定
+- [docs/releasing.zh-CN.md](./docs/releasing.zh-CN.md): 中文发布清单
+- [tools/wechat-gui-check/README.zh-CN.md](./tools/wechat-gui-check/README.zh-CN.md): GUI 工具中文使用说明
 - [docs/public-roadmap.md](./docs/public-roadmap.md): 公开路线图
 - [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md): v0.2 执行清单
 - [docs/skill-validation-log.md](./docs/skill-validation-log.md): 当前验证记录
