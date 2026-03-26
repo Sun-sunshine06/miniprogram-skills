@@ -1,0 +1,52 @@
+name: Sync To Gitee
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Validate required secret
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          if [ -z "$GITEE_TOKEN" ]; then
+            echo "Missing required secret: GITEE_TOKEN"
+            exit 1
+          fi
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Push branch to Gitee
+        if: github.ref_type == 'branch'
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          git remote add gitee "https://sun-qihan0109:${GITEE_TOKEN}@gitee.com/buptscs/miniprogram-skills.git"
+          git push gitee "HEAD:refs/heads/${GITHUB_REF_NAME}" --force
+
+      - name: Push tag to Gitee
+        if: github.ref_type == 'tag'
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          git remote add gitee "https://sun-qihan0109:${GITEE_TOKEN}@gitee.com/buptscs/miniprogram-skills.git"
+          git push gitee "refs/tags/${GITHUB_REF_NAME}:refs/tags/${GITHUB_REF_NAME}" --force
