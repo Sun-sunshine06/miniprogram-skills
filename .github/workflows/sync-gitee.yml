@@ -39,14 +39,16 @@ jobs:
         if: github.ref_type == 'branch'
         env:
           GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+          GIT_TERMINAL_PROMPT: "0"
         run: |
           git remote add gitee "https://sun-qihan0109:${GITEE_TOKEN}@gitee.com/buptscs/miniprogram-skills.git"
-          git push gitee "HEAD:refs/heads/${GITHUB_REF_NAME}" --force
+          git push --verbose gitee "HEAD:refs/heads/${GITHUB_REF_NAME}"
 
       - name: Push tag to Gitee
         if: github.ref_type == 'tag'
         env:
           GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+          GIT_TERMINAL_PROMPT: "0"
         run: |
           git remote add gitee "https://sun-qihan0109:${GITEE_TOKEN}@gitee.com/buptscs/miniprogram-skills.git"
-          git push gitee "refs/tags/${GITHUB_REF_NAME}:refs/tags/${GITHUB_REF_NAME}" --force
+          git push --verbose gitee "refs/tags/${GITHUB_REF_NAME}:refs/tags/${GITHUB_REF_NAME}"
