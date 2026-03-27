@@ -144,6 +144,18 @@ try {
 }
 '@
 
+$classificationScript = @'
+const { classifyScreenshotWarning } = require('./lib/classification');
+
+if (classifyScreenshotWarning('screenshot unavailable: miniProgram.screenshot is not a function') !== 'screenshot_capability_missing') {
+  throw new Error('expected screenshot capability classification');
+}
+
+if (classifyScreenshotWarning('screenshot unavailable: screenshot timed out after 30000ms') !== 'screenshot_timeout') {
+  throw new Error('expected screenshot timeout classification');
+}
+'@
+
 $dryRunValidationScript = @'
 const fs = require('fs');
 
@@ -189,6 +201,7 @@ Invoke-Step 'Install tool dependencies' {
 Invoke-Step 'Check tool syntax' {
     Invoke-Native 'node' @('--check', (Join-Path $ToolRoot 'check.js'))
     Invoke-Native 'node' @('--check', (Join-Path $ToolRoot 'lib\check-helpers.js'))
+    Invoke-Native 'node' @('--check', (Join-Path $ToolRoot 'lib\classification.js'))
     Invoke-Native 'node' @('--check', (Join-Path $ToolRoot 'lib\load-automator.js'))
 }
 
@@ -210,6 +223,7 @@ Invoke-Step 'Validate repository JSON' {
 Invoke-Step 'Check runtime imports' {
     Invoke-Native 'node' @('-e', $runtimeImportScript) $ToolRoot
     Invoke-Native 'node' @('-e', $automatorGuidanceScript) $ToolRoot
+    Invoke-Native 'node' @('-e', $classificationScript) $ToolRoot
 }
 
 Invoke-Step 'Check bundled fixture files' {

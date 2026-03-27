@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-目前是 public beta 抽离版本。仓库自带一个 fixture 小程序示例，默认依赖面也尽量保持轻量：`miniprogram-automator` 不再随仓库默认安装，而是从显式指定的运行时安装位置加载。现在已经支持对仓库外复制出来的小程序根目录做 dry-run 预检，但在独立公开小程序仓库上的完整 forward test 还没做完。
+目前是 public beta 抽离版本。仓库自带一个 fixture 小程序示例，默认依赖面也尽量保持轻量：`miniprogram-automator` 不再随仓库默认安装，而是从显式指定的运行时安装位置加载。现在已经支持对仓库外复制出来的小程序根目录做 dry-run 预检，也已经补了一次面向公开小程序仓库的外部 forward-test 记录；更广泛的跨仓库验证仍在继续。详见 `../../docs/gui-check-forward-test.md`。
 
 ## 它能做什么
 
@@ -124,6 +124,13 @@ npm run check -- --project-path <project-root> --route home --dry-run
 
 `--dry-run` 不会创建运行目录，而是把 JSON 形式的预检摘要直接输出到 stdout。
 
+## 排障提示
+
+- `Unable to load miniprogram-automator`：在目标小程序项目里或 `tools/wechat-gui-check` 目录里运行 `npm install --no-save miniprogram-automator`，或者用 `--automator-module-path` 显式指向一个现成安装。
+- `登录用户不是该小程序的开发者`：这是 WeChat DevTools 的宿主机账号 / AppID 授权阻塞，不是仓库运行时错误。做公开仓库 forward-test 时，建议先复制一个一次性本地副本，再把真实上游 `appid` 换成 `touristappid` 或你自己可控的测试 `appid`，之后再运行 `cli auto`。
+- `screenshot unavailable: miniProgram.screenshot is not a function`：不同 `miniprogram-automator` 版本暴露的截图能力并不完全一致。报告里现在会把这类情况归类为 `screenshot_capability_missing`。当前应把截图视为 best-effort 证据；如果路由、路径和 selector 检查都通过，优先以这些结果为准。
+- 截图超时：报告里会归类为 `screenshot_timeout`；除非截图本身就是你要核验的重点，否则不要默认把它当成仓库失败。
+
 ## 说明
 
 - 截图是 best-effort 的，失败不一定代表整次检查失败
@@ -131,10 +138,12 @@ npm run check -- --project-path <project-root> --route home --dry-run
 - 先从单一路由开始，稳定后再扩展到多路由
 - 仓库默认安装现在不再携带 `miniprogram-automator` 的上游图像依赖链；这个依赖改成由用户在执行时自行提供
 - 已经有一次在 Windows 宿主机上针对仓库外复制 fixture 项目的成功运行记录；截图在那次运行中曾发生超时，因此目前仍应把截图视为辅助证据
+- 现在也已经记录了一次面向公开仓库的 external forward-test，详见 `../../docs/gui-check-forward-test.md`
+- 如果第二个公开仓库样本准备交给协作者宿主机执行，直接使用 `../../docs/gui-check-collaborator-forward-test.md`
 - 在上游依赖方案更稳定之前，这个包会继续保持 beta 状态
 
 ## 剩余工作
 
-- 在独立公开小程序仓库上完成完整 forward test
+- 把 forward-test 从首个公开小程序仓库扩展到更多仓库样本
 - 补一个真实公开 demo repo 的 sample config
 - 决定是否继续保留当前用户自带 `miniprogram-automator` 的运行时模式，还是改成更干净的长期适配方案

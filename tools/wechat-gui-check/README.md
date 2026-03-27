@@ -6,7 +6,7 @@ Config-driven WeChat DevTools GUI smoke harness for runtime and interaction chec
 
 ## Current Status
 
-Public beta extraction. The harness now ships with a bundled fixture miniapp, keeps its default repo-owned dependency surface small by loading `miniprogram-automator` only from an explicit runtime install, and now supports automated dry-run checks against a copied project root outside the repository. Full forward-testing on an independent public miniapp repository is still pending.
+Public beta extraction. The harness now ships with a bundled fixture miniapp, keeps its default repo-owned dependency surface small by loading `miniprogram-automator` only from an explicit runtime install, supports automated dry-run checks against a copied project root outside the repository, and now has one documented external forward-test on a public miniapp repo. Broader cross-repo validation is still pending. See `../../docs/gui-check-forward-test.md`.
 
 ## What It Does
 
@@ -132,6 +132,13 @@ Current report schema highlights:
 - `pages[].failureCodes` / `pages[].warningCodes`: unique classification codes for a route
 - `pages[].failureDetails` / `pages[].warningDetails`: structured issue entries with `code` and `message`
 
+## Troubleshooting
+
+- `Unable to load miniprogram-automator`: install it with `npm install --no-save miniprogram-automator` in the target miniapp project or in `tools/wechat-gui-check`, or pass `--automator-module-path` to an existing install.
+- `登录用户不是该小程序的开发者`: this is a host/account AppID authorization blocker from WeChat DevTools. For public forward-tests, use a disposable local copy and swap the real upstream AppID for `touristappid` or another testing AppID you control before running `cli auto`.
+- `screenshot unavailable: miniProgram.screenshot is not a function`: screenshot support varies across `miniprogram-automator` builds. The report classifies this as `screenshot_capability_missing`. Treat screenshot capture as best-effort evidence and rely on route/path/selector data when the rest of the run succeeds.
+- screenshot capture timeout: the report classifies this as `screenshot_timeout`; rerun only if the screenshot itself matters, not as a default sign of repo failure.
+
 ## Notes
 
 - screenshots are best-effort and may fail without invalidating the full run
@@ -139,10 +146,12 @@ Current report schema highlights:
 - start with one route before expanding to multiple routes
 - the default repo install no longer carries `miniprogram-automator`'s transitive image stack; that runtime dependency is now user-supplied at execution time
 - a Windows host run against a copied fixture project outside the repository completed successfully for the `home` route, but screenshot capture still timed out in that live run
+- one external public-repo forward-test is now documented in `../../docs/gui-check-forward-test.md`
+- for a second public-repo sample on a collaborator machine, use `../../docs/gui-check-collaborator-forward-test.md`
 - this package is intentionally beta until that upstream dependency story is cleaner
 
 ## Remaining Work
 
-- forward-test the full automation flow on an independent public miniapp repo
+- expand forward-testing beyond the first documented public miniapp repo
 - add sample config for a real public demo repo
 - decide whether to keep the current user-supplied runtime model or replace `miniprogram-automator` with a cleaner long-term adapter
