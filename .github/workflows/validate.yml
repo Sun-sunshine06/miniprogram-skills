@@ -22,47 +22,9 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Validate skills
-        run: python scripts/validate_skills.py skills --require-example-prompts
-
       - name: Ensure vendored dependencies are not committed
         run: test ! -d tools/wechat-gui-check/node_modules
 
-      - name: Install tool dependencies
-        working-directory: tools/wechat-gui-check
-        run: npm ci --ignore-scripts
-
-      - name: Audit default tool dependency surface
-        working-directory: tools/wechat-gui-check
-        run: npm audit --omit=dev --package-lock-only
-
-      - name: Check tool syntax
-        run: |
-          node --check tools/wechat-gui-check/check.js
-          node --check tools/wechat-gui-check/lib/check-helpers.js
-          node --check tools/wechat-gui-check/lib/load-automator.js
-
-      - name: Check sample JSON
-        run: |
-          node -e "JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/sample.route-config.json','utf8')); JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/sample-report.json','utf8'));"
-          node -e "JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/fixture-miniapp/project.config.json','utf8')); JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/fixture-miniapp/app.json','utf8')); JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/fixture-miniapp/pages/home/index.json','utf8')); JSON.parse(require('fs').readFileSync('tools/wechat-gui-check/examples/fixture-miniapp/pages/tasks/index.json','utf8'));"
-
-      - name: Check runtime imports
-        working-directory: tools/wechat-gui-check
-        run: |
-          node -e "const {PNG}=require('pngjs'); console.log(typeof PNG.sync.read)"
-          node -e "const {loadAutomator}=require('./lib/load-automator'); try { loadAutomator({projectPath: process.cwd()}); process.exitCode = 1; } catch (error) { console.log(String(error.message).includes('miniprogram-automator')); }"
-
-      - name: Check bundled fixture files
-        run: |
-          test -f tools/wechat-gui-check/examples/fixture-miniapp/project.config.json
-          test -f tools/wechat-gui-check/examples/fixture-miniapp/app.json
-          test -f tools/wechat-gui-check/examples/fixture-miniapp/pages/home/index.wxml
-          test -f tools/wechat-gui-check/examples/fixture-miniapp/pages/tasks/index.wxml
-
-      - name: Check external-project dry run
-        run: |
-          temp_dir="$(mktemp -d)"
-          cp -R tools/wechat-gui-check/examples/fixture-miniapp "$temp_dir/fixture-miniapp"
-          node tools/wechat-gui-check/check.js --config tools/wechat-gui-check/examples/sample.route-config.json --project-path "$temp_dir/fixture-miniapp" --route home --dry-run > "$temp_dir/preflight.json"
-          node -e "const fs=require('fs'); const report=JSON.parse(fs.readFileSync(process.argv[1],'utf8')); if (!report.ok || report.mode !== 'dry-run') throw new Error('unexpected dry-run result'); if (!report.project || !String(report.project.projectConfigPath).endsWith('project.config.json')) throw new Error('missing project info'); if (!Array.isArray(report.selectedRoutes) || report.selectedRoutes.length !== 1 || report.selectedRoutes[0].key !== 'home') throw new Error('wrong route selection'); if (report.automator.available !== false || !String(report.automator.error).includes('miniprogram-automator')) throw new Error('expected missing automator guidance');" "$temp_dir/preflight.json"
+      - name: Run shared validation workflow (docs + dry-run-only GUI coverage)
+        shell: pwsh
+        run: ./scripts/check.ps1 -IncludeAudit

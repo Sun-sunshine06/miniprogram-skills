@@ -19,6 +19,29 @@ REQUIRED_INTERFACE_FIELDS = (
     "default_prompt",
 )
 
+PORTABILITY_PATTERNS = (
+    (
+        "Windows user-home path",
+        re.compile(r"[A-Za-z]:\\Users\\[^\\\s`]+(?:\\[^\\\s`]+)*"),
+    ),
+    (
+        "macOS user-home path",
+        re.compile(r"/Users/[^/\s`]+(?:/[^/\s`]+)*"),
+    ),
+    (
+        "Linux user-home path",
+        re.compile(r"/home/[^/\s`]+(?:/[^/\s`]+)*"),
+    ),
+    (
+        "Codex home path",
+        re.compile(r"~[/\\]\.codex(?:[/\\][^\s`]+)*"),
+    ),
+    (
+        "workspace-specific absolute path",
+        re.compile(r"[A-Za-z]:\\[^\n`]*openproject(?:\\[^\n`]*)?"),
+    ),
+)
+
 PLACEHOLDER_DESCRIPTIONS = {
     "todo",
     "tbd",
@@ -105,7 +128,43 @@ def format_path(path: Path, root: Path) -> str:
         return str(path)
 
 
-def validate_skill(skill_dir: Path, *, require_example_prompts: bool = False) -> list[str]:
+def format_excerpt(text: str, *, limit: int = 80) -> str:
+    compact = " ".join(text.strip().split())
+    if len(compact) <= limit:
+        return compact
+    return compact[: limit - 3] + "..."
+
+
+def find_portability_issues(skill_dir: Path) -> list[str]:
+    errors: list[str] = []
+
+    for markdown_path in sorted(skill_dir.rglob("*.md")):
+        relative_path = format_path(markdown_path, skill_dir)
+        for line_number, line in enumerate(markdown_path.read_text(encoding="utf-8").splitlines(), start=1):
+            for label, pattern in PORTABILITY_PATTERNS:
+                match = pattern.search(line)
+                if not match:
+                    continue
+
+                excerpt = format_excerpt(match.group(0))
+                errors.append(
+                    (
+                        f"{relative_path}:{line_number}: contains {label} `{excerpt}`; "
+                        "replace machine-specific values with placeholders such as "
+                        "`<project-root>`, `<cli-path>`, or repo-relative paths"
+                    )
+                )
+                break
+
+    return errors
+
+
+def validate_skill(
+    skill_dir: Path,
+    *,
+    require_example_prompts: bool = False,
+    check_portability: bool = False,
+) -> list[str]:
     errors: list[str] = []
     skill_md = skill_dir / "SKILL.md"
     openai_yaml = skill_dir / "agents" / "openai.yaml"
@@ -169,6 +228,9 @@ def validate_skill(skill_dir: Path, *, require_example_prompts: bool = False) ->
                         f"{format_path(openai_yaml, skill_dir)}: missing required `interface.{field}` value"
                     )
 
+    if check_portability:
+        errors.extend(find_portability_issues(skill_dir))
+
     return errors
 
 
@@ -179,6 +241,11 @@ def main() -> int:
         "--require-example-prompts",
         action="store_true",
         help="Fail if references/example-prompts.md is missing for any skill.",
+    )
+    parser.add_argument(
+        "--check-portability",
+        action="store_true",
+        help="Fail if skill markdown files contain machine-specific local paths or home-directory references.",
     )
     args = parser.parse_args()
 
@@ -191,7 +258,11 @@ def main() -> int:
     all_errors: list[str] = []
 
     for skill_dir in skill_dirs:
-        errors = validate_skill(skill_dir, require_example_prompts=args.require_example_prompts)
+        errors = validate_skill(
+            skill_dir,
+            require_example_prompts=args.require_example_prompts,
+            check_portability=args.check_portability,
+        )
         for error in errors:
             all_errors.append(f"{skill_dir.name}: {error}")
 

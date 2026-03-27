@@ -1,5 +1,7 @@
 # Skill Map
 
+English | [中文](./skill-map.zh-CN.md)
+
 ## Active Public Skills
 
 | Skill | Purpose | Current Shape | Public Readiness |
