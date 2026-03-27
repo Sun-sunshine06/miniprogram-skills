@@ -30,7 +30,7 @@ The four public skills now ship with reusable prompt examples plus recorded vali
 ## Likely v0.3 Focus
 
 - add more external forward-tests, especially on collaborator hosts and on repos with different scaffold shapes
-- decide whether to keep or replace the current user-supplied `miniprogram-automator` runtime model
+- revisit the runtime model only if broader cross-machine evidence shows the current user-supplied approach is no longer the right tradeoff
 - continue proving that the public skills generalize cleanly across more than one repo shape
 - only expand into higher-level miniapp workflow skills after the public boundary remains clean under that broader testing
 

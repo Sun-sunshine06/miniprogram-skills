@@ -76,7 +76,6 @@ powershell.exe -File scripts/check.ps1
 ## 当前下一步
 
 - 把 GUI harness 的 forward-test 证据从首个公开小程序仓库扩展到更多样本，优先放到协作者宿主机上验证跨机可行性。
-- 继续评估当前用户自带 `miniprogram-automator` 的运行时模式是否要保留。
 
 ## 推荐阅读
 
@@ -86,6 +85,7 @@ powershell.exe -File scripts/check.ps1
 - [docs/conventions.zh-CN.md](./docs/conventions.zh-CN.md): 中文编写约定
 - [docs/releasing.zh-CN.md](./docs/releasing.zh-CN.md): 中文发布清单
 - [docs/release-v0.2.0-draft.md](./docs/release-v0.2.0-draft.md): `v0.2.0` 发布说明草稿
+- [docs/runtime-model-decision.md](./docs/runtime-model-decision.md): GUI 运行时模型决策记录
 - [tools/wechat-gui-check/README.zh-CN.md](./tools/wechat-gui-check/README.zh-CN.md): GUI 工具中文使用说明
 - [docs/public-roadmap.md](./docs/public-roadmap.md): 公开路线图
 - [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md): v0.2 执行清单

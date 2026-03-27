@@ -46,6 +46,7 @@ Current status on 2026-03-27:
   - recorded one documented external forward-test on a public miniapp repo for `tools/wechat-gui-check`
   - updated GUI checker docs with clearer forward-test and troubleshooting guidance
   - added a second bundled sample config that exercises `wait`, `tap`, and `callMethod` against the public fixture miniapp
+  - documented the current runtime-model decision to keep `miniprogram-automator` user-supplied during the `v0.2` release window
 - in progress:
   - broader cross-repo forward-testing beyond the first public-repo evidence point
   - collaborator-host forward-testing to validate cross-machine behavior

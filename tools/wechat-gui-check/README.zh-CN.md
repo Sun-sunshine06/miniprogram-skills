@@ -155,4 +155,4 @@ npm run check -- --project-path <project-root> --route home --dry-run
 
 - 把 forward-test 从首个公开小程序仓库扩展到更多仓库样本
 - 补一个真实公开 demo repo 的 sample config
-- 决定是否继续保留当前用户自带 `miniprogram-automator` 的运行时模式，还是改成更干净的长期适配方案
+- 只有在拿到更多跨机器证据后，再复审当前用户自带 `miniprogram-automator` 的运行时模式是否要演进成更干净的长期适配方案

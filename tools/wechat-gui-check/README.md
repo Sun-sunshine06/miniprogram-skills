@@ -163,4 +163,4 @@ Current report schema highlights:
 
 - expand forward-testing beyond the first documented public miniapp repo
 - add sample config for a real public demo repo
-- decide whether to keep the current user-supplied runtime model or replace `miniprogram-automator` with a cleaner long-term adapter
+- revisit whether the current user-supplied runtime model should evolve into a cleaner adapter only after broader cross-machine evidence is collected
