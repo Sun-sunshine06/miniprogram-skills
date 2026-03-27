@@ -51,7 +51,7 @@ Current status on 2026-03-27:
   - collaborator-host forward-testing to validate cross-machine behavior
 - next:
   - add one more public repo forward-test with a different scaffold shape on a collaborator machine
-  - draft the `v0.2.0` release note once the remaining evidence is stable
+  - turn `docs/release-v0.2.0-draft.md` into final tag copy once the remaining evidence is stable
 
 Exit criteria:
 
