@@ -6,20 +6,9 @@
 
 ## 发布前检查
 
-1. 运行 `python scripts/validate_skills.py skills --require-example-prompts`
-2. 运行 `node --check tools/wechat-gui-check/check.js`
-3. 运行 `node --check tools/wechat-gui-check/lib/check-helpers.js`
-4. 运行 `node --check tools/wechat-gui-check/lib/load-automator.js`
-5. 在 `tools/wechat-gui-check` 目录里运行 `npm ci --ignore-scripts`
-6. 把 `tools/wechat-gui-check/examples/fixture-miniapp` 复制到仓库外，运行一次 external-project dry run：
-
-```powershell
-node tools/wechat-gui-check/check.js --config tools/wechat-gui-check/examples/sample.route-config.json --project-path <copied-fixture-path> --route home --dry-run
-```
-
-7. 在 `tools/wechat-gui-check` 目录里运行 `npm audit --omit=dev --package-lock-only`
-8. 确认 `tools/wechat-gui-check/node_modules` 和 `.tmp/` 没有被暂存
-9. 确认 release note 仍然符合当前范围和已知限制
+1. 运行 `pwsh -File scripts/check.ps1 -IncludeAudit` 或 `powershell.exe -File scripts/check.ps1 -IncludeAudit`
+2. 确认 `tools/wechat-gui-check/node_modules` 和 `.tmp/` 没有被暂存
+3. 确认 release note 仍然符合当前范围和已知限制
 
 ## 发布时建议的表述
 

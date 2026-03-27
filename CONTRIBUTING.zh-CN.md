@@ -20,6 +20,17 @@
 - 如果是小范围的维护者更新，并且仍符合当前分支保护规则，可以直接 push。
 - 当 GitHub 提示分支落后于 `main` 时，记得及时同步。
 
+## 本地校验
+
+在提交 PR 前，先运行统一的本地校验命令：
+
+```powershell
+pwsh -File scripts/check.ps1
+powershell.exe -File scripts/check.ps1
+```
+
+这条命令要求 `python`、`node` 和 `npm` 已经在 `PATH` 里。它会在 `tools/wechat-gui-check` 目录执行 `npm ci --ignore-scripts` 安装依赖，校验公开 skill，检查 markdown 链接和双语文档互链，校验仓库里的 JSON 文件，检查工具语法，并对复制出来的 fixture 运行 external-project dry-run smoke check。
+
 ## 修改 Skills 时
 
 如果改动位于 `skills/` 下：
@@ -27,7 +38,7 @@
 1. 更新 `SKILL.md`
 2. 如果工作流细节变了，同步更新 `references/`
 3. 确认 `agents/openai.yaml` 仍然和 skill 对齐
-4. 运行 skill validator
+4. 运行 `pwsh -File scripts/check.ps1` 或 `powershell.exe -File scripts/check.ps1`；如果只是迭代 skill 文案，至少要重新跑一遍 skill validator
 
 ## 修改 Tools 时
 
@@ -46,3 +57,4 @@
 - 仓库变得更容易复用
 - 文档和工具行为仍然一致
 - 文档里的协作流程仍然符合当前仓库规则
+- 如果 PR 涉及 `skills/`，评审意见最好能落到 `docs/skill-review-checklist.md` 里的具体检查项

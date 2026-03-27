@@ -9,7 +9,7 @@ English | [中文](./README.zh-CN.md)
 
 ## Status
 
-This repository is suitable for a public docs-first release. The four core skills are reusable today, each active skill now has example prompts plus at least one recorded validation pass, and the GUI checker ships as a beta utility with a bundled demo miniapp instead of assuming access to a private source repo.
+This repository is suitable for a public docs-first release. The four core skills are reusable today, each active skill now has example prompts plus at least one recorded validation pass, and the GUI checker ships as a beta utility with a bundled demo miniapp plus one documented forward-test on an external public repo instead of assuming access to a private source repo.
 
 ## Why This Exists
 
@@ -65,12 +65,23 @@ This repository is suitable for a public docs-first release. The four core skill
 3. Add one or more sample repos or fixtures for forward-testing.
 4. Expand from DevTools skills into broader miniapp workflow skills only after the public boundary is clean.
 
+## Local Validation
+
+Run the shared local validation flow before opening a PR:
+
+```powershell
+pwsh -File scripts/check.ps1
+powershell.exe -File scripts/check.ps1
+```
+
+This command expects `python`, `node`, and `npm` on `PATH`. It installs the tool dependencies with `npm ci --ignore-scripts`, validates public skills, checks markdown links plus bilingual doc cross-links, validates repository JSON, checks tool syntax, and runs the external-project dry-run smoke check against a copied fixture.
+
 ## Immediate Next Steps
 
-- Add `docs/skill-review-checklist.md` so PR review can use a short shared rubric.
-- Add a single local validation entry point for contributors.
-- Forward-test the full GUI harness on an independent public miniapp repo now that all four active skills have recorded validation passes and host-side evidence exists.
+- expand the GUI harness forward-test evidence beyond the first documented public miniapp repo, preferably on a collaborator host for cross-machine validation
+- Review whether `tools/wechat-gui-check/examples/sample.route-config.json` now needs a second public sample that covers more than one route or action type.
 - Decide whether to keep the current user-supplied `miniprogram-automator` runtime model or replace it with a cleaner long-term adapter.
+- Draft the `v0.2.0` release note once the remaining forward-test evidence is in place.
 
-See [CHANGELOG.md](./CHANGELOG.md), [docs/release-v0.1.0-public-beta.md](./docs/release-v0.1.0-public-beta.md), [docs/releasing.md](./docs/releasing.md), [docs/skill-map.md](./docs/skill-map.md), [docs/skill-map.zh-CN.md](./docs/skill-map.zh-CN.md), [docs/public-roadmap.md](./docs/public-roadmap.md), [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md), [docs/skill-validation-log.md](./docs/skill-validation-log.md), [docs/extraction-checklist.md](./docs/extraction-checklist.md), [docs/license-decision.md](./docs/license-decision.md), and [CONTRIBUTING.md](./CONTRIBUTING.md) for the detailed draft plan.
+See [CHANGELOG.md](./CHANGELOG.md), [docs/release-v0.1.0-public-beta.md](./docs/release-v0.1.0-public-beta.md), [docs/releasing.md](./docs/releasing.md), [docs/skill-map.md](./docs/skill-map.md), [docs/skill-map.zh-CN.md](./docs/skill-map.zh-CN.md), [docs/public-roadmap.md](./docs/public-roadmap.md), [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md), [docs/skill-validation-log.md](./docs/skill-validation-log.md), [docs/skill-review-checklist.md](./docs/skill-review-checklist.md), [docs/gui-check-forward-test.md](./docs/gui-check-forward-test.md), [docs/gui-check-collaborator-forward-test.md](./docs/gui-check-collaborator-forward-test.md), [docs/extraction-checklist.md](./docs/extraction-checklist.md), [docs/license-decision.md](./docs/license-decision.md), and [CONTRIBUTING.md](./CONTRIBUTING.md) for the detailed draft plan.
 

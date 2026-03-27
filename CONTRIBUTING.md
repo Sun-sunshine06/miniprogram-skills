@@ -20,6 +20,17 @@ Keep this repository focused on reusable WeChat Mini Program skills and supporti
 - small maintainer-only updates may be pushed directly when they stay within the current branch protection rules
 - keep pull-request branches up to date with `main` when GitHub reports them as behind
 
+## Local Validation
+
+Run the shared validation command before opening a PR:
+
+```powershell
+pwsh -File scripts/check.ps1
+powershell.exe -File scripts/check.ps1
+```
+
+This command expects `python`, `node`, and `npm` on `PATH`. It installs `tools/wechat-gui-check` dependencies with `npm ci --ignore-scripts`, validates public skills, checks markdown links plus bilingual doc cross-links, validates repository JSON plus tool syntax, and runs the external-project dry-run smoke check against a copied fixture.
+
 ## Skill Changes
 
 For changes under `skills/`:
@@ -27,7 +38,7 @@ For changes under `skills/`:
 1. update `SKILL.md`
 2. update `references/` if the workflow details changed
 3. verify `agents/openai.yaml` still matches the skill
-4. run the skill validator
+4. run `pwsh -File scripts/check.ps1` or `powershell.exe -File scripts/check.ps1`, or at minimum rerun the skill validator while iterating on skill-only changes
 
 ## Tool Changes
 
@@ -46,3 +57,4 @@ Accept changes only when:
 - the repo becomes easier to reuse
 - the docs and tool behavior still match
 - the documented collaboration flow still matches the current repository rules
+- skill-review feedback can be grounded in `docs/skill-review-checklist.md` when the PR touches `skills/`

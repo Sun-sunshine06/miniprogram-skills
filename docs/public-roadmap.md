@@ -34,19 +34,24 @@ Goal:
 
 - harden the extracted host-side GUI smoke harness in `tools/wechat-gui-check`
 
-Current status on 2026-03-24:
+Current status on 2026-03-27:
 
 - completed:
   - example prompts for all four public skills
   - recorded validation passes for all four active skills
   - upgraded skill validator with stronger content checks
+  - added a shared local validation entry point and aligned CI around it
+  - added markdown link hygiene plus bilingual doc cross-link checks to the shared validation flow
+  - expanded repository validation from selected samples to repo-wide JSON validity checks
+  - recorded one documented external forward-test on a public miniapp repo for `tools/wechat-gui-check`
+  - updated GUI checker docs with clearer forward-test and troubleshooting guidance
 - in progress:
-  - repository-level contributor workflow improvements
-  - CI alignment around the stronger validator expectations
+  - broader cross-repo forward-testing beyond the first public-repo evidence point
+  - collaborator-host forward-testing to validate cross-machine behavior
 - next:
-  - add a single local validation entry point
-  - document forward-testing on an external public miniapp repo
-  - standardize GUI checker failure classification and docs
+  - add one more public repo forward-test with a different scaffold shape on a collaborator machine
+  - review whether the bundled sample route config should grow into a second public sample that covers more than one route or action type
+  - draft the `v0.2.0` release note once the remaining evidence is stable
 
 Exit criteria:
 

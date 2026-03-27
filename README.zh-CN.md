@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-这个仓库已经适合以“文档优先”的方式公开发布。当前四个核心 skill 都可以复用，每个 active skill 都已经补齐示例提示词并至少记录过一次验证；`wechat-gui-check` 则以 beta 工具的形式提供，并附带了一个公开可运行的示例小程序。
+这个仓库已经适合以“文档优先”的方式公开发布。当前四个核心 skill 都可以复用，每个 active skill 都已经补齐示例提示词并至少记录过一次验证；`wechat-gui-check` 则以 beta 工具的形式提供，并附带了一个公开可运行的示例小程序，以及一条已经记录下来的外部公开仓库 forward-test 证据。
 
 ## 为什么会有这个仓库
 
@@ -62,12 +62,23 @@
 3. 增加一个或多个用于 forward test 的样例仓库或夹具。
 4. 只有在公开边界足够干净后，再从 DevTools 技能扩展到更高层的小程序工作流技能。
 
+## 本地校验
+
+在提交 PR 前，先运行这条统一的本地校验命令：
+
+```powershell
+pwsh -File scripts/check.ps1
+powershell.exe -File scripts/check.ps1
+```
+
+这条命令要求 `python`、`node` 和 `npm` 已经在 `PATH` 里。它会自动执行 `npm ci --ignore-scripts` 安装工具依赖，校验公开 skill，检查 markdown 链接和双语文档互链，校验仓库里的 JSON 文件，检查工具语法，并对复制出来的 fixture 运行一次 external-project dry-run smoke check。
+
 ## 当前下一步
 
-- 增加 `docs/skill-review-checklist.md`，让 PR 评审有一个统一而简短的标准。
-- 增加一个单命令的本地校验入口，方便贡献者在提交前自检。
-- 在独立的公开小程序仓库上做一次完整 forward test。
+- 把 GUI harness 的 forward-test 证据从首个公开小程序仓库扩展到更多样本，优先放到协作者宿主机上验证跨机可行性。
+- 评估 `tools/wechat-gui-check/examples/sample.route-config.json` 是否需要再补一个覆盖多 route 或更多 action 类型的公开 sample。
 - 继续评估当前用户自带 `miniprogram-automator` 的运行时模式是否要保留。
+- 在 forward-test 证据补齐后，起草 `v0.2.0` 的 release note。
 
 ## 推荐阅读
 
@@ -80,3 +91,6 @@
 - [docs/public-roadmap.md](./docs/public-roadmap.md): 公开路线图
 - [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md): v0.2 执行清单
 - [docs/skill-validation-log.md](./docs/skill-validation-log.md): 当前验证记录
+- [docs/skill-review-checklist.md](./docs/skill-review-checklist.md): skill 评审短清单
+- [docs/gui-check-forward-test.md](./docs/gui-check-forward-test.md): GUI 工具外部 forward-test 记录
+- [docs/gui-check-collaborator-forward-test.md](./docs/gui-check-collaborator-forward-test.md): 第二个公开样本给协作者执行的 runbook
