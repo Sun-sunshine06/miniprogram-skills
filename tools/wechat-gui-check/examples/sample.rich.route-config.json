@@ -1,0 +1,41 @@
+{
+  "projectPath": "<project-root>",
+  "outputRoot": "<project-root>/.tmp/gui-check",
+  "routes": [
+    {
+      "key": "home-rich-actions",
+      "route": "/pages/home/index",
+      "expectedPath": "pages/home/index",
+      "primarySelector": ".page-shell",
+      "titleSelector": ".page-title",
+      "settleMs": 1600,
+      "dataFields": [
+        "loading",
+        "errorMessage",
+        "lastAction",
+        "actionPayloadSource"
+      ],
+      "actions": [
+        {
+          "type": "wait",
+          "waitMs": 300
+        },
+        {
+          "type": "tap",
+          "selector": ".btn-primary",
+          "waitMs": 300
+        },
+        {
+          "type": "callMethod",
+          "method": "applyScenario",
+          "payload": {
+            "lastAction": "method",
+            "payloadSource": "config",
+            "title": "Fixture Home"
+          },
+          "waitMs": 300
+        }
+      ]
+    }
+  ]
+}

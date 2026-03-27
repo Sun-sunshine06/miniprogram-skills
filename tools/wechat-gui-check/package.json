@@ -7,7 +7,9 @@
   "scripts": {
     "check": "node check.js",
     "check:fixture": "node check.js --config examples/sample.route-config.json --route home",
-    "check:fixture:dry-run": "node check.js --config examples/sample.route-config.json --route home --dry-run"
+    "check:fixture:dry-run": "node check.js --config examples/sample.route-config.json --route home --dry-run",
+    "check:fixture:rich": "node check.js --config examples/sample.rich.route-config.json --route home-rich-actions",
+    "check:fixture:rich:dry-run": "node check.js --config examples/sample.rich.route-config.json --route home-rich-actions --dry-run"
   },
   "dependencies": {
     "pngjs": "^7.0.0"

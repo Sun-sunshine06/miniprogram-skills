@@ -294,6 +294,7 @@ function probeAutomator(options) {
 function summarizeSpec(spec) {
   return {
     actionCount: Array.isArray(spec.actions) ? spec.actions.length : 0,
+    actionTypes: Array.isArray(spec.actions) ? spec.actions.map((action) => action.type) : [],
     expectedPath: spec.expectedPath,
     key: spec.key,
     primarySelector: spec.primarySelector,

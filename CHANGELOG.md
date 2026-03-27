@@ -23,6 +23,7 @@ All notable changes to this repository will be documented in this file.
 - improved `wechat-gui-check` cleanup and README troubleshooting guidance after the first public-repo forward-test
 - refined GUI screenshot warnings so unsupported screenshot APIs classify as `screenshot_capability_missing` instead of the broader `devtools_session_error`
 - recorded one successful Windows host run against a copied external fixture project, with screenshot capture still treated as best-effort
+- added `examples/sample.rich.route-config.json` plus fixture and dry-run coverage updates so the bundled public sample surface now exercises `wait`, `tap`, and `callMethod`
 
 ## v0.1.0-public-beta
 

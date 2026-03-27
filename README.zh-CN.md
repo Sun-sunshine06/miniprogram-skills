@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-这个仓库已经适合以“文档优先”的方式公开发布。当前四个核心 skill 都可以复用，每个 active skill 都已经补齐示例提示词并至少记录过一次验证；`wechat-gui-check` 则以 beta 工具的形式提供，并附带了一个公开可运行的示例小程序，以及一条已经记录下来的外部公开仓库 forward-test 证据。
+这个仓库已经适合以“文档优先”的方式公开发布。当前四个核心 skill 都可以复用，每个 active skill 都已经补齐示例提示词并至少记录过一次验证；`wechat-gui-check` 则以 beta 工具的形式提供，并附带了一个公开可运行的示例小程序、两份公开 sample 路由配置，以及一条已经记录下来的外部公开仓库 forward-test 证据。
 
 ## 为什么会有这个仓库
 
@@ -71,12 +71,11 @@ pwsh -File scripts/check.ps1
 powershell.exe -File scripts/check.ps1
 ```
 
-这条命令要求 `python`、`node` 和 `npm` 已经在 `PATH` 里。它会自动执行 `npm ci --ignore-scripts` 安装工具依赖，校验公开 skill，检查 markdown 链接和双语文档互链，校验仓库里的 JSON 文件，检查工具语法，并对复制出来的 fixture 运行一次 external-project dry-run smoke check。
+这条命令要求 `python`、`node` 和 `npm` 已经在 `PATH` 里。它会自动执行 `npm ci --ignore-scripts` 安装工具依赖，校验公开 skill，检查 markdown 链接和双语文档互链，校验仓库里的 JSON 文件，检查工具语法，并对复制出来的 fixture 针对两份仓库自带 sample 配置分别运行 external-project dry-run smoke check。
 
 ## 当前下一步
 
 - 把 GUI harness 的 forward-test 证据从首个公开小程序仓库扩展到更多样本，优先放到协作者宿主机上验证跨机可行性。
-- 评估 `tools/wechat-gui-check/examples/sample.route-config.json` 是否需要再补一个覆盖多 route 或更多 action 类型的公开 sample。
 - 继续评估当前用户自带 `miniprogram-automator` 的运行时模式是否要保留。
 - 在 forward-test 证据补齐后，起草 `v0.2.0` 的 release note。
 

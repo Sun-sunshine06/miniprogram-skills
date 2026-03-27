@@ -45,12 +45,12 @@ Current status on 2026-03-27:
   - expanded repository validation from selected samples to repo-wide JSON validity checks
   - recorded one documented external forward-test on a public miniapp repo for `tools/wechat-gui-check`
   - updated GUI checker docs with clearer forward-test and troubleshooting guidance
+  - added a second bundled sample config that exercises `wait`, `tap`, and `callMethod` against the public fixture miniapp
 - in progress:
   - broader cross-repo forward-testing beyond the first public-repo evidence point
   - collaborator-host forward-testing to validate cross-machine behavior
 - next:
   - add one more public repo forward-test with a different scaffold shape on a collaborator machine
-  - review whether the bundled sample route config should grow into a second public sample that covers more than one route or action type
   - draft the `v0.2.0` release note once the remaining evidence is stable
 
 Exit criteria:
@@ -59,6 +59,7 @@ Exit criteria:
 - report format is documented
 - route spec configuration is externalized
 - one sample result artifact is documented
+- bundled fixture samples cover both multi-route tap flows and richer mixed-action flows
 - the harness has been exercised on at least one real miniapp repo outside the source project
 
 ## v0.3 Forward-Tested Skills

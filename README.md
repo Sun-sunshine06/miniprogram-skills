@@ -9,7 +9,7 @@ English | [中文](./README.zh-CN.md)
 
 ## Status
 
-This repository is suitable for a public docs-first release. The four core skills are reusable today, each active skill now has example prompts plus at least one recorded validation pass, and the GUI checker ships as a beta utility with a bundled demo miniapp plus one documented forward-test on an external public repo instead of assuming access to a private source repo.
+This repository is suitable for a public docs-first release. The four core skills are reusable today, each active skill now has example prompts plus at least one recorded validation pass, and the GUI checker ships as a beta utility with a bundled demo miniapp, two public sample route configs, and one documented forward-test on an external public repo instead of assuming access to a private source repo.
 
 ## Why This Exists
 
@@ -74,12 +74,11 @@ pwsh -File scripts/check.ps1
 powershell.exe -File scripts/check.ps1
 ```
 
-This command expects `python`, `node`, and `npm` on `PATH`. It installs the tool dependencies with `npm ci --ignore-scripts`, validates public skills, checks markdown links plus bilingual doc cross-links, validates repository JSON, checks tool syntax, and runs the external-project dry-run smoke check against a copied fixture.
+This command expects `python`, `node`, and `npm` on `PATH`. It installs the tool dependencies with `npm ci --ignore-scripts`, validates public skills, checks markdown links plus bilingual doc cross-links, validates repository JSON, checks tool syntax, and runs the external-project dry-run smoke checks against a copied fixture for both bundled sample configs.
 
 ## Immediate Next Steps
 
 - expand the GUI harness forward-test evidence beyond the first documented public miniapp repo, preferably on a collaborator host for cross-machine validation
-- Review whether `tools/wechat-gui-check/examples/sample.route-config.json` now needs a second public sample that covers more than one route or action type.
 - Decide whether to keep the current user-supplied `miniprogram-automator` runtime model or replace it with a cleaner long-term adapter.
 - Draft the `v0.2.0` release note once the remaining forward-test evidence is in place.
 

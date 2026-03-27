@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-目前是 public beta 抽离版本。仓库自带一个 fixture 小程序示例，默认依赖面也尽量保持轻量：`miniprogram-automator` 不再随仓库默认安装，而是从显式指定的运行时安装位置加载。现在已经支持对仓库外复制出来的小程序根目录做 dry-run 预检，也已经补了一次面向公开小程序仓库的外部 forward-test 记录；更广泛的跨仓库验证仍在继续。详见 `../../docs/gui-check-forward-test.md`。
+目前是 public beta 抽离版本。仓库自带一个 fixture 小程序示例和两份仓库内 sample 配置，默认依赖面也尽量保持轻量：`miniprogram-automator` 不再随仓库默认安装，而是从显式指定的运行时安装位置加载。现在已经支持对仓库外复制出来的小程序根目录做 dry-run 预检，也已经补了一次面向公开小程序仓库的外部 forward-test 记录；更广泛的跨仓库验证仍在继续。详见 `../../docs/gui-check-forward-test.md`。
 
 ## 它能做什么
 
@@ -22,7 +22,8 @@
 
 - `check.js`: 主运行入口
 - `lib/check-helpers.js`: 公共辅助函数
-- `examples/sample.route-config.json`: 示例路由配置
+- `examples/sample.route-config.json`: 基础示例路由配置
+- `examples/sample.rich.route-config.json`: 覆盖混合 action 类型的 richer 示例配置
 - `examples/sample-report.json`: 示例输出结构
 
 ## 安装
@@ -56,6 +57,13 @@ npm run check -- --route home
 ```
 
 默认会把 `examples/fixture-miniapp` 作为项目根目录，把 `examples/sample.route-config.json` 作为路由配置。
+
+如果你想用仓库自带 fixture 顺手覆盖 `wait`、`tap` 和 `callMethod` 三类 action，可以直接跑 richer sample：
+
+```powershell
+cd tools/wechat-gui-check
+npm run check:fixture:rich:dry-run
+```
 
 使用你自己的小程序项目：
 
@@ -101,14 +109,14 @@ npm run check -- --project-path <project-root> --route home --dry-run
 - `tap`
 - `callMethod`
 
-具体示例见 `examples/sample.route-config.json`。
+基础多 route 示例见 `examples/sample.route-config.json`；如果要看同一条 route 里串联 `wait`、`tap`、`callMethod` 的写法，见 `examples/sample.rich.route-config.json`。
 
 ## 仓库自带 Fixture
 
 仓库在 `examples/fixture-miniapp/` 下提供了一个最小可公开演示的小程序：
 
 - 含有有效的 `project.config.json`
-- 含有一个带 `.page-shell`、`.page-title` 和 `.btn-primary` 的 `home` 页面
+- 含有一个带 `.page-shell`、`.page-title`、`.btn-primary` 和稳定 `applyScenario` page method 的 `home` 页面
 - 含有一个包含 `.filter-tab` 交互的 `tasks` 页面
 
 这让 sample config 可以稳定复现，也给后续维护工具的贡献者提供了一个安全基线。
@@ -136,6 +144,7 @@ npm run check -- --project-path <project-root> --route home --dry-run
 - 截图是 best-effort 的，失败不一定代表整次检查失败
 - 依赖后端的页面前提应写在 route config 里，不要藏在代码中
 - 先从单一路由开始，稳定后再扩展到多路由
+- richer sample 的存在，是为了在第二个真实公开仓库 sample 还没补齐前，先把 `wait` 和 `callMethod` 的公开可复现覆盖保留下来
 - 仓库默认安装现在不再携带 `miniprogram-automator` 的上游图像依赖链；这个依赖改成由用户在执行时自行提供
 - 已经有一次在 Windows 宿主机上针对仓库外复制 fixture 项目的成功运行记录；截图在那次运行中曾发生超时，因此目前仍应把截图视为辅助证据
 - 现在也已经记录了一次面向公开仓库的 external forward-test，详见 `../../docs/gui-check-forward-test.md`

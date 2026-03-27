@@ -10,6 +10,7 @@ $RepoRoot = (Resolve-Path (Join-Path $ScriptRoot '..')).Path
 $ToolRoot = Join-Path $RepoRoot 'tools\wechat-gui-check'
 $FixtureRoot = Join-Path $ToolRoot 'examples\fixture-miniapp'
 $SampleConfigPath = Join-Path $ToolRoot 'examples\sample.route-config.json'
+$RichSampleConfigPath = Join-Path $ToolRoot 'examples\sample.rich.route-config.json'
 $SampleReportPath = Join-Path $ToolRoot 'examples\sample-report.json'
 
 function Assert-Command {
@@ -178,6 +179,42 @@ if (report.automator.available !== false || !String(report.automator.error).incl
 }
 '@
 
+$richDryRunValidationScript = @'
+const fs = require('fs');
+
+const report = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
+
+if (!report.ok || report.mode !== 'dry-run') {
+  throw new Error('unexpected richer dry-run result');
+}
+
+if (!String(report.configPath).endsWith('sample.rich.route-config.json')) {
+  throw new Error('wrong richer config path');
+}
+
+if (!Array.isArray(report.selectedRoutes) || report.selectedRoutes.length !== 1) {
+  throw new Error('wrong richer route selection size');
+}
+
+const selected = report.selectedRoutes[0];
+
+if (selected.key !== 'home-rich-actions') {
+  throw new Error('wrong richer route key');
+}
+
+if (selected.actionCount !== 3) {
+  throw new Error('wrong richer action count');
+}
+
+if (JSON.stringify(selected.actionTypes) !== JSON.stringify(['wait', 'tap', 'callMethod'])) {
+  throw new Error('wrong richer action types');
+}
+
+if (report.automator.available !== false || !String(report.automator.error).includes('miniprogram-automator')) {
+  throw new Error('expected missing automator guidance');
+}
+'@
+
 Invoke-Step 'Validate skills' {
     Invoke-Native 'python' @(
         (Join-Path $RepoRoot 'scripts\validate_skills.py'),
@@ -242,6 +279,7 @@ Invoke-Step 'Check external-project dry run' {
     try {
         $copiedFixtureRoot = Join-Path $tempRoot 'fixture-miniapp'
         $preflightPath = Join-Path $tempRoot 'preflight.json'
+        $richPreflightPath = Join-Path $tempRoot 'preflight.rich.json'
         Copy-Item -LiteralPath $FixtureRoot -Destination $copiedFixtureRoot -Recurse
 
         $preflightOutput = Invoke-NativeCapture 'node' @(
@@ -261,6 +299,25 @@ Invoke-Step 'Check external-project dry run' {
             '-e',
             $dryRunValidationScript,
             $preflightPath
+        )
+
+        $richPreflightOutput = Invoke-NativeCapture 'node' @(
+            (Join-Path $ToolRoot 'check.js'),
+            '--config',
+            $RichSampleConfigPath,
+            '--project-path',
+            $copiedFixtureRoot,
+            '--route',
+            'home-rich-actions',
+            '--dry-run'
+        )
+
+        [System.IO.File]::WriteAllText($richPreflightPath, $richPreflightOutput, $utf8NoBom)
+
+        Invoke-Native 'node' @(
+            '-e',
+            $richDryRunValidationScript,
+            $richPreflightPath
         )
     }
     finally {

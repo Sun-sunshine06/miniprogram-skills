@@ -6,7 +6,7 @@ Config-driven WeChat DevTools GUI smoke harness for runtime and interaction chec
 
 ## Current Status
 
-Public beta extraction. The harness now ships with a bundled fixture miniapp, keeps its default repo-owned dependency surface small by loading `miniprogram-automator` only from an explicit runtime install, supports automated dry-run checks against a copied project root outside the repository, and now has one documented external forward-test on a public miniapp repo. Broader cross-repo validation is still pending. See `../../docs/gui-check-forward-test.md`.
+Public beta extraction. The harness now ships with a bundled fixture miniapp plus two repo-owned sample configs, keeps its default repo-owned dependency surface small by loading `miniprogram-automator` only from an explicit runtime install, supports automated dry-run checks against a copied project root outside the repository, and now has one documented external forward-test on a public miniapp repo. Broader cross-repo validation is still pending. See `../../docs/gui-check-forward-test.md`.
 
 ## What It Does
 
@@ -23,6 +23,7 @@ Public beta extraction. The harness now ships with a bundled fixture miniapp, ke
 - `check.js`: main runner
 - `lib/check-helpers.js`: shared helpers
 - `examples/sample.route-config.json`: example route config
+- `examples/sample.rich.route-config.json`: richer fixture config with mixed action types
 - `examples/sample-report.json`: example output shape
 
 ## Install
@@ -56,6 +57,13 @@ npm run check -- --route home
 ```
 
 The default run uses `examples/fixture-miniapp` as the project root and `examples/sample.route-config.json` as the route config.
+
+Use the richer bundled sample when you want the fixture to exercise `wait`, `tap`, and `callMethod` in one route:
+
+```powershell
+cd tools/wechat-gui-check
+npm run check:fixture:rich:dry-run
+```
 
 Use your own miniapp project:
 
@@ -101,14 +109,14 @@ Supported action types:
 - `tap`
 - `callMethod`
 
-See `examples/sample.route-config.json`.
+See `examples/sample.route-config.json` for the baseline multi-route fixture example and `examples/sample.rich.route-config.json` for a mixed-action route that exercises `wait`, `tap`, and `callMethod` against the bundled fixture.
 
 ## Bundled Fixture
 
 The repository includes a minimal public demo project under `examples/fixture-miniapp/` with:
 
 - a valid `project.config.json`
-- a small `home` page with `.page-shell`, `.page-title`, and `.btn-primary`
+- a small `home` page with `.page-shell`, `.page-title`, `.btn-primary`, and a stable `applyScenario` page method for `callMethod` samples
 - a small `tasks` page with `.filter-tab` interactions
 
 This keeps the sample config reproducible and gives contributors a safe baseline when changing the harness.
@@ -144,6 +152,7 @@ Current report schema highlights:
 - screenshots are best-effort and may fail without invalidating the full run
 - backend-dependent routes should be documented in the route config, not hidden in code
 - start with one route before expanding to multiple routes
+- the richer bundled sample exists to keep `wait` and `callMethod` coverage public and reproducible even before a second real-repo sample is documented
 - the default repo install no longer carries `miniprogram-automator`'s transitive image stack; that runtime dependency is now user-supplied at execution time
 - a Windows host run against a copied fixture project outside the repository completed successfully for the `home` route, but screenshot capture still timed out in that live run
 - one external public-repo forward-test is now documented in `../../docs/gui-check-forward-test.md`
