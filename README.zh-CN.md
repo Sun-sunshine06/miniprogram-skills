@@ -90,6 +90,7 @@ powershell.exe -File scripts/check.ps1
 - [docs/public-roadmap.md](./docs/public-roadmap.md): 公开路线图
 - [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md): v0.2 执行清单
 - [docs/skill-validation-log.md](./docs/skill-validation-log.md): 当前验证记录
+- [docs/routing-eval-plan.md](./docs/routing-eval-plan.md): 下一阶段最小 routing-eval / transcript 方案
 - [docs/skill-review-checklist.md](./docs/skill-review-checklist.md): skill 评审短清单
 - [docs/gui-check-forward-test.md](./docs/gui-check-forward-test.md): GUI 工具外部 forward-test 记录
 - [docs/gui-check-collaborator-forward-test.md](./docs/gui-check-collaborator-forward-test.md): 第二个公开样本给协作者执行的 runbook
