@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-这个仓库已经适合以“文档优先”的方式公开发布。当前四个核心 skill 都可以复用，每个 active skill 都已经补齐示例提示词并至少记录过一次验证；`wechat-gui-check` 则以 beta 工具的形式提供，并附带了一个公开可运行的示例小程序、两份公开 sample 路由配置，以及一条已经记录下来的外部公开仓库 forward-test 证据。
+这个仓库现在已经打上 `v0.3.0` 标签，并进入 `v0.3` 的早期阶段。当前四个核心 skill 都可以复用，每个 active skill 都已经补齐示例提示词并至少记录过一次验证；`wechat-gui-check` 仍以 beta 工具的形式提供，并附带了一个公开可运行的示例小程序、两份公开 sample 路由配置，以及一条已经记录下来的外部公开仓库 forward-test 证据。
 
 ## 为什么会有这个仓库
 
@@ -57,10 +57,10 @@
 
 ## 发布方向
 
-1. 保持 `v0` 以文档优先、易于审阅为主。
-2. 继续打磨 `tools/wechat-gui-check` 这套抽离出来的 GUI 冒烟检查工具。
-3. 增加一个或多个用于 forward test 的样例仓库或夹具。
-4. 只有在公开边界足够干净后，再从 DevTools 技能扩展到更高层的小程序工作流技能。
+1. 把 `v0.3.0` 视为当前抽离 skill 集合和 GUI harness 的稳定基线。
+2. 继续补强更多宿主机和更多仓库形态下的 forward-test 与 routing 证据。
+3. 为 recovery、scaffold 和 GUI/session 失败场景增加更多负路径验证。
+4. 只有在这些公开边界持续保持干净后，再扩展到更高层的小程序工作流技能。
 
 ## 本地校验
 
@@ -75,7 +75,8 @@ powershell.exe -File scripts/check.ps1
 
 ## 当前下一步
 
-- 把 GUI harness 的 forward-test 证据从首个公开小程序仓库扩展到更多样本，优先放到协作者宿主机上验证跨机可行性。
+- 在不同脚手架形态的公开仓库上补一条协作者宿主机 forward-test 记录。
+- 给四个公开 skill 以及它们最接近的 non-use 边界补 routing-eval / transcript 证据。
 
 ## 推荐阅读
 
@@ -84,11 +85,11 @@ powershell.exe -File scripts/check.ps1
 - [CONTRIBUTING.zh-CN.md](./CONTRIBUTING.zh-CN.md): 中文贡献说明
 - [docs/conventions.zh-CN.md](./docs/conventions.zh-CN.md): 中文编写约定
 - [docs/releasing.zh-CN.md](./docs/releasing.zh-CN.md): 中文发布清单
-- [docs/release-v0.2.0-draft.md](./docs/release-v0.2.0-draft.md): `v0.2.0` 发布说明草稿
+- [docs/release-v0.3.0.md](./docs/release-v0.3.0.md): `v0.3.0` 发布说明
 - [docs/runtime-model-decision.md](./docs/runtime-model-decision.md): GUI 运行时模型决策记录
 - [tools/wechat-gui-check/README.zh-CN.md](./tools/wechat-gui-check/README.zh-CN.md): GUI 工具中文使用说明
 - [docs/public-roadmap.md](./docs/public-roadmap.md): 公开路线图
-- [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md): v0.2 执行清单
+- [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md): 当前 `v0.3.0` 基线对应的历史 v0.2 执行清单
 - [docs/skill-validation-log.md](./docs/skill-validation-log.md): 当前验证记录
 - [docs/routing-eval-plan.md](./docs/routing-eval-plan.md): 下一阶段最小 routing-eval / transcript 方案
 - [docs/skill-review-checklist.md](./docs/skill-review-checklist.md): skill 评审短清单

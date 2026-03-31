@@ -2,7 +2,7 @@
 
 ## Selected Default
 
-For the current `v0.2` release window, `tools/wechat-gui-check` should keep the current user-supplied `miniprogram-automator` runtime model.
+For the `v0.3.0` release snapshot, `tools/wechat-gui-check` should keep the current user-supplied `miniprogram-automator` runtime model.
 
 That means:
 
@@ -93,6 +93,6 @@ Revisit this decision only if one of these changes:
 
 Until then, the recommended path is:
 
-1. keep the current user-supplied runtime model for `v0.2`
+1. keep the current user-supplied runtime model for `v0.3.0`
 2. collect broader cross-machine forward-test evidence
 3. reconsider an adapter-style design only after that evidence shows it would materially help

@@ -34,9 +34,9 @@ Goal:
 
 - harden the extracted host-side GUI smoke harness in `tools/wechat-gui-check`
 
-Current status on 2026-03-27:
+Status on 2026-03-31:
 
-- completed:
+- completed and rolled into the `v0.3.0` tag:
   - example prompts for all four public skills
   - recorded validation passes for all four active skills
   - upgraded skill validator with stronger content checks
@@ -46,13 +46,9 @@ Current status on 2026-03-27:
   - recorded one documented external forward-test on a public miniapp repo for `tools/wechat-gui-check`
   - updated GUI checker docs with clearer forward-test and troubleshooting guidance
   - added a second bundled sample config that exercises `wait`, `tap`, and `callMethod` against the public fixture miniapp
-  - documented the current runtime-model decision to keep `miniprogram-automator` user-supplied during the `v0.2` release window
-- in progress:
-  - broader cross-repo forward-testing beyond the first public-repo evidence point
-  - collaborator-host forward-testing to validate cross-machine behavior
-- next:
-  - add one more public repo forward-test with a different scaffold shape on a collaborator machine
-  - turn `docs/release-v0.2.0-draft.md` into final tag copy once the remaining evidence is stable
+  - documented the current runtime-model decision to keep `miniprogram-automator` user-supplied in the release baseline
+
+This work was originally tracked as a standalone `v0.2` cycle, but it was ultimately released as part of `v0.3.0` instead of a separate `v0.2.0` tag.
 
 Exit criteria:
 
@@ -69,15 +65,27 @@ Goal:
 
 - confirm that the skills generalize across more than one repo
 
-Entry conditions from current progress:
+Current status on 2026-03-31:
 
-- internal fixture-based validation evidence now exists for all active skills
-- the next gating step is an external public repo forward-test rather than more docs-only evidence
+- starting point:
+  - the `v0.3.0` tag now captures the completed tool-extraction baseline
+  - internal fixture-based validation evidence exists for all active skills
+  - one external public-repo forward-test exists for `tools/wechat-gui-check`
+  - a routing-eval / transcript plan exists, but the evidence pack is not recorded yet
+- in progress:
+  - collaborator-host forward-testing to validate cross-machine behavior
+  - building a small routing evidence pack for the four public skills
+  - expanding negative-path validation beyond clean success scenarios
+- next:
+  - add one collaborator-host public-repo forward-test with a different scaffold shape
+  - record one positive routing sample per public skill plus the adjacent non-use boundary prompts
+  - add one deliberately broken scaffold or wrong-root recovery sample to the validation log
 
 Exit criteria:
 
 - each active skill is tested through realistic prompts
-- at least one non-source miniapp repo is used for evaluation
+- at least two non-source miniapp repos or host environments contribute evidence, with at least one collaborator-host run
+- adjacent-skill boundaries have reviewable routing evidence
 - repo-specific wording is removed where it blocks reuse
 
 ## Later Expansion

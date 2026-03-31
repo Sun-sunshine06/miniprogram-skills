@@ -11,7 +11,7 @@
 - static quality: high
 - workflow completion: medium
 - trigger rate / user reaction / undertrigger: low
-**Release stage**: docs-first public beta / `v0.2` tool-extraction stage
+**Release stage**: pre-`v0.3.0` tool-extraction baseline, now carried forward into early `v0.3`
 
 ## Scope Notes
 
@@ -51,7 +51,7 @@ None from the current evidence set.
 
 Severity calibration note:
 
-- As of 2026-03-30, this repository still presents itself as docs-first and beta-oriented, and its public roadmap does not claim that live agent routing quality is already proven.
+- As of 2026-03-30, this repository still presented itself as docs-first and beta-oriented, and its public roadmap did not claim that live agent routing quality was already proven.
 - Because of that, the missing routing-eval / transcript evidence is best treated as the top `P1` for the next maturity step, not as an immediate `P0` contradiction of the current public story.
 
 ## P1 Improvements

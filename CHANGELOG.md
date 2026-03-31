@@ -4,6 +4,8 @@ All notable changes to this repository will be documented in this file.
 
 ## Unreleased
 
+## v0.3.0 - 2026-03-31
+
 - added a Chinese entry README and a Chinese skill map to improve first-run usability for Chinese-speaking miniapp developers
 - added Chinese contributor, conventions, releasing, and `wechat-gui-check` user docs for human-facing repository guidance
 - added `references/example-prompts.md` for all four public skills and linked them from each `SKILL.md`
@@ -24,8 +26,8 @@ All notable changes to this repository will be documented in this file.
 - refined GUI screenshot warnings so unsupported screenshot APIs classify as `screenshot_capability_missing` instead of the broader `devtools_session_error`
 - recorded one successful Windows host run against a copied external fixture project, with screenshot capture still treated as best-effort
 - added `examples/sample.rich.route-config.json` plus fixture and dry-run coverage updates so the bundled public sample surface now exercises `wait`, `tap`, and `callMethod`
-- drafted `docs/release-v0.2.0-draft.md` so the current v0.2 release story is ready without reconstructing context from recent commits
-- added `docs/runtime-model-decision.md` to record why `v0.2` keeps `miniprogram-automator` as a user-supplied live runtime dependency
+- published `docs/release-v0.3.0.md` so the current release story is ready without reconstructing context from recent commits
+- added `docs/runtime-model-decision.md` to record why `v0.3.0` keeps `miniprogram-automator` as a user-supplied live runtime dependency
 
 ## v0.1.0-public-beta
 

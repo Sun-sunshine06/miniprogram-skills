@@ -2,13 +2,13 @@
 
 This document describes the smallest useful routing-eval / transcript evidence pack for `miniprogram_skills`.
 
-The goal is not to build a large telemetry system during the current docs-first / `v0.2` stage. The goal is to collect enough clean evidence that future audits can say the public skill boundaries were tested in real agent routing conditions, not only in repository-owned validation flows.
+The goal is not to build a large telemetry system during the current early `v0.3` stage. The goal is to collect enough clean evidence that future audits can say the public skill boundaries were tested in real agent routing conditions, not only in repository-owned validation flows.
 
 ## Why This Is Not A Current P0
 
-As of 2026-03-30:
+As of 2026-03-31:
 
-- the repository still presents itself as docs-first and public beta
+- the repository has just been tagged `v0.3.0` and is only starting the evidence-heavy part of `v0.3`
 - `tools/wechat-gui-check` is still explicitly beta and host-dependent
 - the public roadmap does not claim that all 4 skills are already proven in live installed-skill routing
 

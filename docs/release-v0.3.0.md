@@ -1,10 +1,10 @@
-# v0.2.0 Draft Release Notes
+# v0.3.0 Release Notes
 
 ## Summary
 
-`v0.2.0` moves `miniprogram_skills` from a docs-first public beta toward a more validated and repeatable public toolkit.
+`v0.3.0` rolls the completed tool-extraction work and the first round of public evidence gathering into one tagged release for `miniprogram_skills`.
 
-The four public skills now ship with reusable prompt examples plus recorded validation evidence, contributors get a shared local check flow mirrored by CI, and `tools/wechat-gui-check` now has clearer failure classification, richer bundled samples, and one documented forward-test on a public miniapp repository outside this repo.
+Instead of publishing a separate `v0.2.0` tag, this release promotes the finished tool-extraction baseline directly into the early `v0.3` line. The four public skills now ship with reusable prompt examples plus recorded validation evidence, contributors get a shared local check flow mirrored by CI, and `tools/wechat-gui-check` now has clearer failure classification, richer bundled samples, and one documented forward-test on a public miniapp repository outside this repo.
 
 ## What Improved For Skill Consumers
 
@@ -27,7 +27,7 @@ The four public skills now ship with reusable prompt examples plus recorded vali
 - screenshot capture remains best-effort evidence rather than the main release gate
 - this repository still focuses on DevTools and scaffold workflows, not a full GUI automation product or generic business-flow skill set
 
-## Likely v0.3 Focus
+## Early Post-v0.3.0 Focus
 
 - add more external forward-tests, especially on collaborator hosts and on repos with different scaffold shapes
 - revisit the runtime model only if broader cross-machine evidence shows the current user-supplied approach is no longer the right tradeoff
@@ -36,4 +36,4 @@ The four public skills now ship with reusable prompt examples plus recorded vali
 
 ## Suggested Release Notes Copy
 
-`miniprogram_skills v0.2.0` strengthens the repository's public boundary and contributor workflow. All four public skills now include reusable example prompts and recorded validation evidence, the shared validation flow now checks skills, docs, JSON, and GUI dry-run behavior in one command, and `wechat-gui-check` now has clearer failure classification, richer bundled samples, and a documented forward-test on a public miniapp repo. The GUI harness remains beta because live automation still depends on a user-supplied `miniprogram-automator` install and broader cross-machine evidence is still in progress.
+`miniprogram_skills v0.3.0` strengthens the repository's public boundary and contributor workflow. All four public skills now include reusable example prompts and recorded validation evidence, the shared validation flow now checks skills, docs, JSON, and GUI dry-run behavior in one command, and `wechat-gui-check` now has clearer failure classification, richer bundled samples, and a documented forward-test on a public miniapp repo. The GUI harness remains beta because live automation still depends on a user-supplied `miniprogram-automator` install and broader cross-machine evidence is still in progress.

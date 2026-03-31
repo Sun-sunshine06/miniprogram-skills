@@ -9,7 +9,7 @@ English | [中文](./README.zh-CN.md)
 
 ## Status
 
-This repository is suitable for a public docs-first release. The four core skills are reusable today, each active skill now has example prompts plus at least one recorded validation pass, and the GUI checker ships as a beta utility with a bundled demo miniapp, two public sample route configs, and one documented forward-test on an external public repo instead of assuming access to a private source repo.
+This repository is now tagged as `v0.3.0` and enters the early `v0.3` stage. The four core skills are reusable today, each active skill has example prompts plus at least one recorded validation pass, and the GUI checker remains a beta utility with a bundled demo miniapp, two public sample route configs, and one documented forward-test on an external public repo instead of assuming access to a private source repo.
 
 ## Why This Exists
 
@@ -60,10 +60,10 @@ This repository is suitable for a public docs-first release. The four core skill
 
 ## Release Direction
 
-1. Keep `v0` documentation-first and easy to review.
-2. Harden the extracted GUI smoke harness in `tools/wechat-gui-check`.
-3. Add one or more sample repos or fixtures for forward-testing.
-4. Expand from DevTools skills into broader miniapp workflow skills only after the public boundary is clean.
+1. Treat `v0.3.0` as the stable baseline for the extracted skill set and GUI harness.
+2. Broaden forward-test and routing evidence across more hosts and repo shapes.
+3. Add more negative-path validation for recovery, scaffold, and GUI/session failures.
+4. Expand into broader miniapp workflow skills only after those boundaries stay clean.
 
 ## Local Validation
 
@@ -78,7 +78,8 @@ This command expects `python`, `node`, and `npm` on `PATH`. It installs the tool
 
 ## Immediate Next Steps
 
-- expand the GUI harness forward-test evidence beyond the first documented public miniapp repo, preferably on a collaborator host for cross-machine validation
+- record one collaborator-host forward-test on a public repo with a different scaffold shape
+- add routing-eval / transcript evidence for the four public skills and their closest non-use boundaries
 
-See [CHANGELOG.md](./CHANGELOG.md), [docs/release-v0.1.0-public-beta.md](./docs/release-v0.1.0-public-beta.md), [docs/release-v0.2.0-draft.md](./docs/release-v0.2.0-draft.md), [docs/releasing.md](./docs/releasing.md), [docs/skill-map.md](./docs/skill-map.md), [docs/skill-map.zh-CN.md](./docs/skill-map.zh-CN.md), [docs/public-roadmap.md](./docs/public-roadmap.md), [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md), [docs/skill-validation-log.md](./docs/skill-validation-log.md), [docs/skill-review-checklist.md](./docs/skill-review-checklist.md), [docs/gui-check-forward-test.md](./docs/gui-check-forward-test.md), [docs/gui-check-collaborator-forward-test.md](./docs/gui-check-collaborator-forward-test.md), [docs/runtime-model-decision.md](./docs/runtime-model-decision.md), [docs/extraction-checklist.md](./docs/extraction-checklist.md), [docs/license-decision.md](./docs/license-decision.md), and [CONTRIBUTING.md](./CONTRIBUTING.md) for the detailed draft plan.
+See [CHANGELOG.md](./CHANGELOG.md), [docs/release-v0.1.0-public-beta.md](./docs/release-v0.1.0-public-beta.md), [docs/release-v0.3.0.md](./docs/release-v0.3.0.md), [docs/releasing.md](./docs/releasing.md), [docs/skill-map.md](./docs/skill-map.md), [docs/skill-map.zh-CN.md](./docs/skill-map.zh-CN.md), [docs/public-roadmap.md](./docs/public-roadmap.md), [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md), [docs/skill-validation-log.md](./docs/skill-validation-log.md), [docs/skill-review-checklist.md](./docs/skill-review-checklist.md), [docs/gui-check-forward-test.md](./docs/gui-check-forward-test.md), [docs/gui-check-collaborator-forward-test.md](./docs/gui-check-collaborator-forward-test.md), [docs/runtime-model-decision.md](./docs/runtime-model-decision.md), [docs/extraction-checklist.md](./docs/extraction-checklist.md), [docs/license-decision.md](./docs/license-decision.md), and [CONTRIBUTING.md](./CONTRIBUTING.md) for the detailed release plan.
 
