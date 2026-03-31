@@ -10,9 +10,12 @@ Use this short checklist during PR review for changes under `skills/`.
 - Does the change avoid repo-specific leakage such as private product names, absolute local paths, storage keys, or one-off route names?
 - Do the `references/` files add real operational value instead of repeating the `SKILL.md` body?
 - Do the example prompts cover both a realistic use case and at least one clear non-use case?
+- If the skill is public-facing, does `manifests/skill-catalog.json` still reflect the current boundary and evidence state?
+- If the routing boundary changed, is the matching `evals/routing/` fixture coverage updated too?
 
 ## Accept If
 
 - most review answers are "yes" without needing maintainer-only context
 - any remaining draft-only limits are stated explicitly
+- catalog and routing fixture updates land with the skill change when the public boundary moved
 - review comments can point to one checklist item instead of vague "make it more reusable" feedback

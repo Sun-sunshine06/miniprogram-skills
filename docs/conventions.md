@@ -38,7 +38,9 @@ skill-name/
 ## Validation Rules
 
 - Run the skill validator on every skill folder after major edits.
+- Keep `manifests/skill-catalog.json` aligned with the current public skill surface, host requirements, and evidence state.
 - Keep `agents/openai.yaml` aligned with `SKILL.md`.
+- Add or update the matching `evals/routing/` fixture coverage when a public skill boundary changes.
 - Forward-test on realistic prompts before calling a skill public-ready.
 
 ## Non-Goals

@@ -4,6 +4,8 @@ This document describes the smallest useful routing-eval / transcript evidence p
 
 The goal is not to build a large telemetry system during the current early `v0.3` stage. The goal is to collect enough clean evidence that future audits can say the public skill boundaries were tested in real agent routing conditions, not only in repository-owned validation flows.
 
+The prompt pack described below is now mirrored under `evals/routing/` as machine-readable fixtures. The next step is to record observed routing outcomes against those committed prompts instead of keeping the plan as prose only.
+
 ## Why This Is Not A Current P0
 
 As of 2026-03-31:

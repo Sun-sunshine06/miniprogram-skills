@@ -1,0 +1,16 @@
+{
+  "id": "scaffold-alignment-over-recovery",
+  "kind": "boundary",
+  "prompt": "I have not imported this repo into DevTools yet. I just want to know whether the planned `miniprogramRoot`, `app.json.pages`, and file quartets form an officially valid starting scaffold.",
+  "expected_skill": "miniapp-official-scaffold-alignment",
+  "forbidden_skills": [
+    "miniapp-devtools-recovery"
+  ],
+  "expected_output_sections": [
+    "officially valid parts",
+    "missing or risky parts",
+    "recommended scaffold decision",
+    "first edit to make"
+  ],
+  "source_plan": "docs/routing-eval-plan.md"
+}

@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "id": "miniapp-official-scaffold-alignment",
+      "status": "public-draft",
+      "public_readiness": "medium",
+      "surface": "scaffold",
+      "repo_action": "review-only",
+      "requires": {
+        "wechat_devtools_installation": false,
+        "official_cli": false,
+        "gui_automation": false,
+        "user_supplied_miniprogram_automator": false
+      },
+      "evidence": {
+        "validation_log": true,
+        "routing_fixture": true,
+        "external_forward_test": false,
+        "collaborator_host_test": false
+      },
+      "routing_priority_over": [
+        "miniapp-devtools-recovery"
+      ]
+    },
+    {
+      "id": "miniapp-devtools-recovery",
+      "status": "public-draft",
+      "public_readiness": "medium",
+      "surface": "recovery",
+      "repo_action": "restore-and-clean",
+      "requires": {
+        "wechat_devtools_installation": false,
+        "official_cli": false,
+        "gui_automation": false,
+        "user_supplied_miniprogram_automator": false
+      },
+      "evidence": {
+        "validation_log": true,
+        "routing_fixture": true,
+        "external_forward_test": false,
+        "collaborator_host_test": false
+      },
+      "routing_priority_over": []
+    },
+    {
+      "id": "miniapp-devtools-cli-repair",
+      "status": "public-draft",
+      "public_readiness": "high",
+      "surface": "cli",
+      "repo_action": "safe-repo-fix",
+      "requires": {
+        "wechat_devtools_installation": true,
+        "official_cli": true,
+        "gui_automation": false,
+        "user_supplied_miniprogram_automator": false
+      },
+      "evidence": {
+        "validation_log": true,
+        "routing_fixture": true,
+        "external_forward_test": false,
+        "collaborator_host_test": false
+      },
+      "routing_priority_over": []
+    },
+    {
+      "id": "miniapp-devtools-gui-check",
+      "status": "public-beta-tool",
+      "public_readiness": "high",
+      "surface": "gui",
+      "repo_action": "runtime-smoke-check",
+      "requires": {
+        "wechat_devtools_installation": true,
+        "official_cli": false,
+        "gui_automation": true,
+        "user_supplied_miniprogram_automator": true
+      },
+      "evidence": {
+        "validation_log": true,
+        "routing_fixture": true,
+        "external_forward_test": true,
+        "collaborator_host_test": false
+      },
+      "routing_priority_over": [
+        "miniapp-devtools-cli-repair"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "miniapp-devtools-recovery",
+  "kind": "positive",
+  "prompt": "After importing this repo into WeChat DevTools the wrong way, the project gained template residue and the start page drifted. Restore the intended repo shape, tell me what should be reverted, and tell me what to change in DevTools.",
+  "expected_skill": "miniapp-devtools-recovery",
+  "forbidden_skills": [],
+  "expected_output_sections": [
+    "what DevTools changed",
+    "what should remain in the repo",
+    "what to delete or restore",
+    "what the user must change in DevTools"
+  ],
+  "source_plan": "docs/routing-eval-plan.md"
+}

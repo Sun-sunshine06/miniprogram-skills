@@ -4,6 +4,12 @@ All notable changes to this repository will be documented in this file.
 
 ## Unreleased
 
+- added `manifests/skill-catalog.json` plus JSON schemas and a dedicated validator so the public skill surface, host requirements, evidence state, and adjacent routing priorities are now machine-readable
+- added replayable routing-eval fixtures under `evals/routing/` plus validation coverage for the four public skills and their two closest non-use boundaries
+- added `docs/routing-eval-log.md` with the first committed routing outcome notes, explicitly labeled as curated maintainer replay evidence while live transcript capture is still pending
+- added `docs/release-v0.4.0-draft.md` so the next release can be framed around catalog and routing-baseline progress without overstating current maturity
+- updated the shared validation flow, README, conventions, review checklist, and roadmap so catalog and routing fixtures are treated as part of the repository's public release surface
+
 ## v0.3.0 - 2026-03-31
 
 - added a Chinese entry README and a Chinese skill map to improve first-run usability for Chinese-speaking miniapp developers

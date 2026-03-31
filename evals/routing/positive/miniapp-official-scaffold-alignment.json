@@ -1,0 +1,14 @@
+{
+  "id": "miniapp-official-scaffold-alignment",
+  "kind": "positive",
+  "prompt": "I am starting a new WeChat Mini Program repo. Before feature work begins, review the intended `project.config.json`, `app.json`, `miniprogramRoot`, and page file layout against official platform rules and tell me the smallest valid scaffold decision.",
+  "expected_skill": "miniapp-official-scaffold-alignment",
+  "forbidden_skills": [],
+  "expected_output_sections": [
+    "officially valid parts",
+    "missing or risky parts",
+    "recommended scaffold decision",
+    "first edit to make"
+  ],
+  "source_plan": "docs/routing-eval-plan.md"
+}

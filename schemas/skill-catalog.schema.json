@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Miniprogram Skills Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "skills"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "status",
+          "public_readiness",
+          "surface",
+          "repo_action",
+          "requires",
+          "evidence",
+          "routing_priority_over"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "public-draft",
+              "public-beta-tool"
+            ]
+          },
+          "public_readiness": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "surface": {
+            "type": "string",
+            "enum": [
+              "scaffold",
+              "recovery",
+              "cli",
+              "gui"
+            ]
+          },
+          "repo_action": {
+            "type": "string",
+            "enum": [
+              "review-only",
+              "restore-and-clean",
+              "safe-repo-fix",
+              "runtime-smoke-check"
+            ]
+          },
+          "requires": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "wechat_devtools_installation",
+              "official_cli",
+              "gui_automation",
+              "user_supplied_miniprogram_automator"
+            ],
+            "properties": {
+              "wechat_devtools_installation": {
+                "type": "boolean"
+              },
+              "official_cli": {
+                "type": "boolean"
+              },
+              "gui_automation": {
+                "type": "boolean"
+              },
+              "user_supplied_miniprogram_automator": {
+                "type": "boolean"
+              }
+            }
+          },
+          "evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "validation_log",
+              "routing_fixture",
+              "external_forward_test",
+              "collaborator_host_test"
+            ],
+            "properties": {
+              "validation_log": {
+                "type": "boolean"
+              },
+              "routing_fixture": {
+                "type": "boolean"
+              },
+              "external_forward_test": {
+                "type": "boolean"
+              },
+              "collaborator_host_test": {
+                "type": "boolean"
+              }
+            }
+          },
+          "routing_priority_over": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9-]+$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

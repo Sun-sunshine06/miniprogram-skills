@@ -11,6 +11,8 @@ English | [中文](./README.zh-CN.md)
 
 This repository is now tagged as `v0.3.0` and enters the early `v0.3` stage. The four core skills are reusable today, each active skill has example prompts plus at least one recorded validation pass, and the GUI checker remains a beta utility with a bundled demo miniapp, two public sample route configs, and one documented forward-test on an external public repo instead of assuming access to a private source repo.
 
+The main branch additionally carries a machine-readable public skill catalog plus replayable routing-eval fixtures so future reviews can compare declared skill boundaries against committed evidence assets.
+
 ## Why This Exists
 
 - WeChat Mini Program setup and DevTools failures repeat across projects.
@@ -36,6 +38,13 @@ This repository is now tagged as `v0.3.0` and enters the early `v0.3` stage. The
 |   |-- extraction-checklist.md
 |   |-- public-roadmap.md
 |   `-- skill-map.md
+|-- evals/
+|   `-- routing/
+|-- manifests/
+|   `-- skill-catalog.json
+|-- schemas/
+|   |-- routing-eval-case.schema.json
+|   `-- skill-catalog.schema.json
 |-- skills/
 |   |-- miniapp-devtools-cli-repair/
 |   |-- miniapp-devtools-gui-check/
@@ -74,12 +83,12 @@ pwsh -File scripts/check.ps1
 powershell.exe -File scripts/check.ps1
 ```
 
-This command expects `python`, `node`, and `npm` on `PATH`. It installs the tool dependencies with `npm ci --ignore-scripts`, validates public skills, checks markdown links plus bilingual doc cross-links, validates repository JSON, checks tool syntax, and runs the external-project dry-run smoke checks against a copied fixture for both bundled sample configs.
+This command expects `python`, `node`, and `npm` on `PATH`. It installs the tool dependencies with `npm ci --ignore-scripts`, validates public skills, validates the machine-readable skill catalog and replayable routing fixtures, checks markdown links plus bilingual doc cross-links, validates repository JSON, checks tool syntax, and runs the external-project dry-run smoke checks against a copied fixture for both bundled sample configs.
 
 ## Immediate Next Steps
 
 - record one collaborator-host forward-test on a public repo with a different scaffold shape
-- add routing-eval / transcript evidence for the four public skills and their closest non-use boundaries
+- upgrade `docs/routing-eval-log.md` from curated maintainer replay notes to installed-skill or replayable transcript-backed evidence
 
-See [CHANGELOG.md](./CHANGELOG.md), [docs/release-v0.1.0-public-beta.md](./docs/release-v0.1.0-public-beta.md), [docs/release-v0.3.0.md](./docs/release-v0.3.0.md), [docs/releasing.md](./docs/releasing.md), [docs/skill-map.md](./docs/skill-map.md), [docs/skill-map.zh-CN.md](./docs/skill-map.zh-CN.md), [docs/public-roadmap.md](./docs/public-roadmap.md), [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md), [docs/skill-validation-log.md](./docs/skill-validation-log.md), [docs/skill-review-checklist.md](./docs/skill-review-checklist.md), [docs/gui-check-forward-test.md](./docs/gui-check-forward-test.md), [docs/gui-check-collaborator-forward-test.md](./docs/gui-check-collaborator-forward-test.md), [docs/runtime-model-decision.md](./docs/runtime-model-decision.md), [docs/extraction-checklist.md](./docs/extraction-checklist.md), [docs/license-decision.md](./docs/license-decision.md), and [CONTRIBUTING.md](./CONTRIBUTING.md) for the detailed release plan.
+See [CHANGELOG.md](./CHANGELOG.md), [docs/release-v0.1.0-public-beta.md](./docs/release-v0.1.0-public-beta.md), [docs/release-v0.3.0.md](./docs/release-v0.3.0.md), [docs/release-v0.4.0-draft.md](./docs/release-v0.4.0-draft.md), [docs/releasing.md](./docs/releasing.md), [docs/skill-map.md](./docs/skill-map.md), [docs/skill-map.zh-CN.md](./docs/skill-map.zh-CN.md), [docs/public-roadmap.md](./docs/public-roadmap.md), [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md), [docs/skill-validation-log.md](./docs/skill-validation-log.md), [docs/routing-eval-log.md](./docs/routing-eval-log.md), [docs/skill-review-checklist.md](./docs/skill-review-checklist.md), [docs/gui-check-forward-test.md](./docs/gui-check-forward-test.md), [docs/gui-check-collaborator-forward-test.md](./docs/gui-check-collaborator-forward-test.md), [docs/runtime-model-decision.md](./docs/runtime-model-decision.md), [docs/extraction-checklist.md](./docs/extraction-checklist.md), [docs/license-decision.md](./docs/license-decision.md), and [CONTRIBUTING.md](./CONTRIBUTING.md) for the detailed release plan.
 

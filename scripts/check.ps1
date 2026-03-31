@@ -224,6 +224,22 @@ Invoke-Step 'Validate skills' {
     )
 }
 
+Invoke-Step 'Validate skill catalog' {
+    Invoke-Native 'python' @(
+        (Join-Path $RepoRoot 'scripts\validate_skill_catalog.py'),
+        (Join-Path $RepoRoot 'manifests\skill-catalog.json'),
+        (Join-Path $RepoRoot 'skills')
+    )
+}
+
+Invoke-Step 'Validate routing eval fixtures' {
+    Invoke-Native 'python' @(
+        (Join-Path $RepoRoot 'scripts\validate_routing_evals.py'),
+        (Join-Path $RepoRoot 'evals\routing'),
+        (Join-Path $RepoRoot 'manifests\skill-catalog.json')
+    )
+}
+
 Invoke-Step 'Validate docs' {
     Invoke-Native 'python' @(
         (Join-Path $RepoRoot 'scripts\validate_docs.py'),

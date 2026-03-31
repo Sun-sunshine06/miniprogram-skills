@@ -71,14 +71,15 @@ Current status on 2026-03-31:
   - the `v0.3.0` tag now captures the completed tool-extraction baseline
   - internal fixture-based validation evidence exists for all active skills
   - one external public-repo forward-test exists for `tools/wechat-gui-check`
-  - a routing-eval / transcript plan exists, but the evidence pack is not recorded yet
+  - a replayable routing prompt pack plus a machine-readable skill catalog now exist
+  - `docs/routing-eval-log.md` records an initial review pass as curated maintainer notes, but live transcript-backed routing evidence is not recorded yet
 - in progress:
   - collaborator-host forward-testing to validate cross-machine behavior
-  - building a small routing evidence pack for the four public skills
+  - replacing the initial curated routing notes with real installed-skill or replayable eval evidence
   - expanding negative-path validation beyond clean success scenarios
 - next:
   - add one collaborator-host public-repo forward-test with a different scaffold shape
-  - record one positive routing sample per public skill plus the adjacent non-use boundary prompts
+  - record the observed outcomes for one positive routing sample per public skill plus the adjacent non-use boundary prompts
   - add one deliberately broken scaffold or wrong-root recovery sample to the validation log
 
 Exit criteria:
@@ -87,6 +88,30 @@ Exit criteria:
 - at least two non-source miniapp repos or host environments contribute evidence, with at least one collaborator-host run
 - adjacent-skill boundaries have reviewable routing evidence
 - repo-specific wording is removed where it blocks reuse
+
+## v0.4 Catalog And Routing Baseline
+
+Goal:
+
+- make the public skill surface machine-readable and replayable before claiming a broader maturity jump
+
+Current status on 2026-03-31:
+
+- `manifests/skill-catalog.json` records the current public skill surface, host requirements, evidence state, and adjacent routing priorities
+- `evals/routing/` now contains replayable positive and boundary prompt fixtures for the four public skills
+- `docs/routing-eval-log.md` records the current fixture review status honestly as curated maintainer replay notes
+- shared validation checks the catalog and the routing fixture pack on every run
+
+Still missing:
+
+- installed-skill or replayable transcript-backed routing outcomes
+- collaborator-host evidence for another repo or host shape beyond the first external forward-test
+
+Exit criteria:
+
+- the machine-readable catalog stays aligned with live public skill folders and review docs
+- each public skill has replayable positive coverage and each adjacent high-confusion pair has a committed boundary prompt
+- at least one installed-skill or replayable transcript-backed routing result is recorded against the committed prompt pack
 
 ## Later Expansion
 

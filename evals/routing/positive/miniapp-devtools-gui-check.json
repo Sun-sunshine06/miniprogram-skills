@@ -1,0 +1,15 @@
+{
+  "id": "miniapp-devtools-gui-check",
+  "kind": "positive",
+  "prompt": "CLI `preview` already succeeds, but the page still blanks only after entering the route and tapping one button. Run a narrow host-side GUI smoke check and separate repo runtime failures from DevTools session problems.",
+  "expected_skill": "miniapp-devtools-gui-check",
+  "forbidden_skills": [],
+  "expected_output_sections": [
+    "which route or flow was checked",
+    "whether automation really connected",
+    "what runtime evidence was collected",
+    "whether the issue is in repo code, session state, or still needs manual visual confirmation",
+    "the next command or user action"
+  ],
+  "source_plan": "docs/routing-eval-plan.md"
+}

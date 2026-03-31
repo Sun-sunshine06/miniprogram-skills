@@ -8,6 +8,8 @@
 
 这个仓库现在已经打上 `v0.3.0` 标签，并进入 `v0.3` 的早期阶段。当前四个核心 skill 都可以复用，每个 active skill 都已经补齐示例提示词并至少记录过一次验证；`wechat-gui-check` 仍以 beta 工具的形式提供，并附带了一个公开可运行的示例小程序、两份公开 sample 路由配置，以及一条已经记录下来的外部公开仓库 forward-test 证据。
 
+当前主分支还额外维护了一份机器可读的公开 skill catalog，以及一组可重放的 routing-eval fixtures，方便后续把“声明出来的边界”和“实际记录下来的证据”对齐审查。
+
 ## 为什么会有这个仓库
 
 - 微信小程序初始化、导入和 DevTools 故障会在不同项目里重复出现。
@@ -33,6 +35,13 @@
 |   |-- public-roadmap.md
 |   |-- skill-map.md
 |   `-- skill-map.zh-CN.md
+|-- evals/
+|   `-- routing/
+|-- manifests/
+|   `-- skill-catalog.json
+|-- schemas/
+|   |-- routing-eval-case.schema.json
+|   `-- skill-catalog.schema.json
 |-- skills/
 |   |-- miniapp-devtools-cli-repair/
 |   |-- miniapp-devtools-gui-check/
@@ -71,12 +80,12 @@ pwsh -File scripts/check.ps1
 powershell.exe -File scripts/check.ps1
 ```
 
-这条命令要求 `python`、`node` 和 `npm` 已经在 `PATH` 里。它会自动执行 `npm ci --ignore-scripts` 安装工具依赖，校验公开 skill，检查 markdown 链接和双语文档互链，校验仓库里的 JSON 文件，检查工具语法，并对复制出来的 fixture 针对两份仓库自带 sample 配置分别运行 external-project dry-run smoke check。
+这条命令要求 `python`、`node` 和 `npm` 已经在 `PATH` 里。它会自动执行 `npm ci --ignore-scripts` 安装工具依赖，校验公开 skill，校验机器可读的 skill catalog 与 routing-eval fixtures，检查 markdown 链接和双语文档互链，校验仓库里的 JSON 文件，检查工具语法，并对复制出来的 fixture 针对两份仓库自带 sample 配置分别运行 external-project dry-run smoke check。
 
 ## 当前下一步
 
 - 在不同脚手架形态的公开仓库上补一条协作者宿主机 forward-test 记录。
-- 给四个公开 skill 以及它们最接近的 non-use 边界补 routing-eval / transcript 证据。
+- 把 `docs/routing-eval-log.md` 从当前的维护者复核记录升级为 installed-skill 或 replayable transcript 级别的真实路由证据。
 
 ## 推荐阅读
 
@@ -92,6 +101,8 @@ powershell.exe -File scripts/check.ps1
 - [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md): 当前 `v0.3.0` 基线对应的历史 v0.2 执行清单
 - [docs/skill-validation-log.md](./docs/skill-validation-log.md): 当前验证记录
 - [docs/routing-eval-plan.md](./docs/routing-eval-plan.md): 下一阶段最小 routing-eval / transcript 方案
+- [docs/routing-eval-log.md](./docs/routing-eval-log.md): 当前 routing prompt pack 的首轮观察记录
 - [docs/skill-review-checklist.md](./docs/skill-review-checklist.md): skill 评审短清单
+- [docs/release-v0.4.0-draft.md](./docs/release-v0.4.0-draft.md): `v0.4.0` 发布说明草稿
 - [docs/gui-check-forward-test.md](./docs/gui-check-forward-test.md): GUI 工具外部 forward-test 记录
 - [docs/gui-check-collaborator-forward-test.md](./docs/gui-check-collaborator-forward-test.md): 第二个公开样本给协作者执行的 runbook

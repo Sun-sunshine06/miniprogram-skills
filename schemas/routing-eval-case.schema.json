@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Miniprogram Routing Eval Case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "kind",
+    "prompt",
+    "expected_skill",
+    "forbidden_skills",
+    "expected_output_sections",
+    "source_plan"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "positive",
+        "boundary"
+      ]
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 20
+    },
+    "expected_skill": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "forbidden_skills": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      }
+    },
+    "expected_output_sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "source_plan": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/-]+$"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "miniapp-devtools-cli-repair",
+  "kind": "positive",
+  "prompt": "WeChat DevTools `preview` is failing and I only trust CLI-visible evidence right now. Re-establish the live port through the official CLI, determine whether this is a repo-level issue, and only apply a safe fix if the failure is clearly local to the repo.",
+  "expected_skill": "miniapp-devtools-cli-repair",
+  "forbidden_skills": [],
+  "expected_output_sections": [
+    "what the CLI exposed",
+    "whether the issue is auto-fixable",
+    "what was changed or what screenshot is still needed",
+    "the next command or user action"
+  ],
+  "source_plan": "docs/routing-eval-plan.md"
+}

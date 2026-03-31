@@ -1,0 +1,17 @@
+{
+  "id": "gui-check-over-cli-repair",
+  "kind": "boundary",
+  "prompt": "`preview` is already green, but tapping the home-page CTA intermittently opens a blank page. I need runtime evidence, not another compile check.",
+  "expected_skill": "miniapp-devtools-gui-check",
+  "forbidden_skills": [
+    "miniapp-devtools-cli-repair"
+  ],
+  "expected_output_sections": [
+    "which route or flow was checked",
+    "whether automation really connected",
+    "what runtime evidence was collected",
+    "whether the issue is in repo code, session state, or still needs manual visual confirmation",
+    "the next command or user action"
+  ],
+  "source_plan": "docs/routing-eval-plan.md"
+}
