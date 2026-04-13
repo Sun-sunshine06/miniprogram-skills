@@ -42,6 +42,18 @@ Use the official WeChat DevTools CLI on this public miniapp repo, re-establish t
 - This records a real external public-repo CLI blocker, but it is still a failure-path sample rather than a success-path preview run.
 - A future pass should add one public repo where `open` and `preview` succeed cleanly so the success branch is documented too.
 
+**Post-login retest on 2026-04-13**
+
+- After a fresh `cli.bat login` scan, `cli.bat islogin` returned `{"login":true}` on port `40318`, so the host-side login/session blocker was cleared.
+- Retesting the upstream repo still failed for the expected reason:
+  - `open` / `preview` on the unmodified upstream checkout returned `登录用户不是该小程序的开发者`
+- Retesting a disposable public-repo copy with a test-only AppID override narrowed the remaining blocker further:
+  - the copy was `D:\openproject\skills\miniprogram_skills\.tmp\external-echarts-for-weixin-previewable`
+  - `project.config.json.appid` was changed from the upstream real AppID to `touristappid`
+  - `open` then succeeded on port `40318`
+  - `preview` still failed with `AppID 不合法, invalid appid`
+- This means the remaining gap is no longer basic CLI connectivity or login. The missing ingredient for a true success-path public-repo preview sample is a preview-acceptable testing AppID controlled by the current account, not another repo-local fix.
+
 ## 2026-04-13 - `miniapp-devtools-gui-check` session blocker sample
 
 **Prompt used**

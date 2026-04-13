@@ -8,6 +8,7 @@ All notable changes to this repository will be documented in this file.
 - updated `scripts/check.ps1`, the routing log, roadmap, conventions, review checklist, and README docs so routing replay transcripts are treated as part of the repository's maintained evidence surface
 - added committed negative-path fixtures for broken scaffold review, wrong-root recovery residue, and a GUI session blocker sample, plus validation coverage and log entries for those non-success paths
 - recorded initial non-GUI public-repo evidence for scaffold review, recovery cleanup on a disposable public-repo copy, and CLI auth/session blocker classification on `ecomfe/echarts-for-weixin`, and updated the skill catalog evidence flags accordingly
+- recorded a post-login CLI retest showing that public-repo `open` can succeed on a disposable copy while `preview` still requires a preview-acceptable testing AppID, narrowing the remaining success-path blocker for `miniapp-devtools-cli-repair`
 
 ## v0.4.0 - 2026-03-31
 
