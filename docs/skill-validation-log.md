@@ -4,7 +4,7 @@ This log records prompt-level and host-side validation passes for public skills.
 
 Current status:
 
-- `miniapp-devtools-cli-repair`: one host-side validation recorded, plus one external public-repo auth/session blocker sample
+- `miniapp-devtools-cli-repair`: two host-side validations recorded, plus one external public-repo auth/session blocker sample
 - `miniapp-devtools-gui-check`: one host-side validation recorded, plus one session-blocker failure-shape sample
 - `miniapp-devtools-recovery`: one host-side validation recorded, plus one wrong-root residue fixture review and one external public-repo-derived recovery sample
 - `miniapp-official-scaffold-alignment`: one local scaffold validation recorded, plus one deliberately broken scaffold fixture review and one external public-repo scaffold review
@@ -53,6 +53,48 @@ Use the official WeChat DevTools CLI on this public miniapp repo, re-establish t
   - `open` then succeeded on port `40318`
   - `preview` still failed with `AppID 不合法, invalid appid`
 - This means the remaining gap is no longer basic CLI connectivity or login. The missing ingredient for a true success-path public-repo preview sample is a preview-acceptable testing AppID controlled by the current account, not another repo-local fix.
+
+## 2026-04-13 - `miniapp-devtools-cli-repair` local host-side preview success
+
+**Prompt used**
+
+```text
+Use the official WeChat DevTools CLI on a project owned by the current logged-in account, recover or reuse the live IDE port, and confirm the full `open` + `preview` success path with output artifacts.
+```
+
+**Expected behavior**
+
+- reuse a live CLI port instead of forcing a new one when the IDE is already serving
+- prove that `open` succeeds before claiming preview success
+- prove preview success with both CLI output and generated artifacts
+- keep the result narrowly on CLI-visible evidence instead of GUI/runtime claims
+
+**Observed behavior**
+
+- A locally available project from the DevTools project list was selected:
+  - `D:\微信web开发者工具\MpWechatProject\miniprogram-1`
+  - `project.config.json.appid = wx4b466a75420cb9ab`
+- `cli.bat islogin` had already returned `{"login":true}` and the IDE HTTP server was live on `http://127.0.0.1:40318`.
+- Running:
+
+```powershell
+& "D:\微信web开发者工具\cli.bat" open --project "D:\微信web开发者工具\MpWechatProject\miniprogram-1" --port 40318
+& "D:\微信web开发者工具\cli.bat" preview --project "D:\微信web开发者工具\MpWechatProject\miniprogram-1" --port 40318 --qr-format base64 --qr-output "D:\openproject\skills\miniprogram_skills\.tmp\local-cli-success\miniprogram-1.qr.txt" --info-output "D:\openproject\skills\miniprogram_skills\.tmp\local-cli-success\miniprogram-1.info.json"
+```
+
+- produced:
+  - `open` success
+  - `preview` success
+  - one QR output artifact at `.tmp/local-cli-success/miniprogram-1.qr.txt`
+  - one info artifact at `.tmp/local-cli-success/miniprogram-1.info.json`
+- The info artifact recorded a successful package summary:
+  - `size.total = 4661`
+  - one package entry with name `TOTAL`
+
+**Gaps / follow-up**
+
+- This proves the CLI repair success path on a real host-owned project, but it is not a public-repo sample.
+- The remaining evidence gap for this skill is now specifically a public-repo success-path preview sample with a preview-acceptable testing AppID.
 
 ## 2026-04-13 - `miniapp-devtools-gui-check` session blocker sample
 

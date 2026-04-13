@@ -9,6 +9,7 @@ All notable changes to this repository will be documented in this file.
 - added committed negative-path fixtures for broken scaffold review, wrong-root recovery residue, and a GUI session blocker sample, plus validation coverage and log entries for those non-success paths
 - recorded initial non-GUI public-repo evidence for scaffold review, recovery cleanup on a disposable public-repo copy, and CLI auth/session blocker classification on `ecomfe/echarts-for-weixin`, and updated the skill catalog evidence flags accordingly
 - recorded a post-login CLI retest showing that public-repo `open` can succeed on a disposable copy while `preview` still requires a preview-acceptable testing AppID, narrowing the remaining success-path blocker for `miniapp-devtools-cli-repair`
+- recorded a successful host-side `open` + `preview` CLI sample on a locally owned miniapp project, proving the `miniapp-devtools-cli-repair` success branch even though the remaining public-repo success sample still needs a preview-acceptable testing AppID
 
 ## v0.4.0 - 2026-03-31
 
