@@ -4,10 +4,206 @@ This log records prompt-level and host-side validation passes for public skills.
 
 Current status:
 
-- `miniapp-devtools-cli-repair`: one host-side validation recorded
-- `miniapp-devtools-gui-check`: one host-side validation recorded
-- `miniapp-devtools-recovery`: one host-side validation recorded
-- `miniapp-official-scaffold-alignment`: one local scaffold validation recorded
+- `miniapp-devtools-cli-repair`: one host-side validation recorded, plus one external public-repo auth/session blocker sample
+- `miniapp-devtools-gui-check`: one host-side validation recorded, plus one session-blocker failure-shape sample
+- `miniapp-devtools-recovery`: one host-side validation recorded, plus one wrong-root residue fixture review and one external public-repo-derived recovery sample
+- `miniapp-official-scaffold-alignment`: one local scaffold validation recorded, plus one deliberately broken scaffold fixture review and one external public-repo scaffold review
+
+## 2026-04-13 - `miniapp-devtools-cli-repair` external public-repo auth/session blocker
+
+**Prompt used**
+
+```text
+Use the official WeChat DevTools CLI on this public miniapp repo, re-establish the live IDE port if needed, and determine whether any failure is a repo-scoped preview problem or a host/session blocker that should not trigger repo edits.
+```
+
+**Expected behavior**
+
+- treat the official CLI as the primary evidence source
+- recover or reuse the live IDE port before classifying `preview`
+- distinguish repo-local preview failures from AppID, login, or DevTools session blockers
+- avoid inventing repo fixes when the CLI failure is clearly host-side
+
+**Observed behavior**
+
+- The public repo cloned was `https://github.com/ecomfe/echarts-for-weixin` into `.tmp/external-echarts-for-weixin`.
+- Initial CLI state on this host was inconsistent:
+  - one `cli.bat islogin` pass returned `{"login":true}` and exposed an IDE server on `http://127.0.0.1:30590`
+  - asking `open` or `preview` to use a new port returned `IDE server has started on http://127.0.0.1:30590 and must be restarted on port 47611 first`
+- Retrying `open` and `preview` against the live port `30590` then returned `需要重新登录 (code 10)` instead of a repo-local compile or page-path error.
+- A later captured retry under `.tmp/external-cli-echarts/` showed the instability more clearly:
+  - `islogin.txt` ended with `{"login":false}`
+  - `open.txt` and `preview.txt` both ended with `#initialize-error: wait IDE port timeout`
+  - no QR or info output files were produced
+- The observed failure was therefore classified as a host/session authentication problem on the external repo, not a repo-scoped auto-fix candidate.
+
+**Gaps / follow-up**
+
+- This records a real external public-repo CLI blocker, but it is still a failure-path sample rather than a success-path preview run.
+- A future pass should add one public repo where `open` and `preview` succeed cleanly so the success branch is documented too.
+
+## 2026-04-13 - `miniapp-devtools-gui-check` session blocker sample
+
+**Prompt used**
+
+```text
+CLI `preview` is already green, but the GUI checker never gets a ready DevTools session and exits before the route can open. Classify whether this is repo runtime, host setup, or DevTools session state, and tell me what evidence is still missing.
+```
+
+**Expected behavior**
+
+- do not pretend that a route-level runtime result was collected when automation never became ready
+- classify the failure as a DevTools session or environment blocker rather than a repo runtime regression
+- keep the answer operational and tell the user what host-side evidence is still needed
+
+**Observed behavior**
+
+- Reviewed the committed failure sample at `tools/wechat-gui-check/examples/sample.session-error.json`.
+- The sample records:
+  - `ok: false`
+  - `classification: devtools_session_error`
+  - `error: cli auto exited because DevTools did not become ready before timeout`
+- This is the intended negative-path shape for a session blocker:
+  - automation did not connect cleanly
+  - no route/path/selector/runtime conclusion should be claimed yet
+  - the next step should stay on host/session recovery rather than repo-runtime blame
+
+**Gaps / follow-up**
+
+- This is a repo-owned failure-shape sample, not a second live host-side run.
+- A future pass should capture one real host-side session blocker artifact so the same classification is proven outside the sample JSON.
+
+## 2026-04-13 - `miniapp-devtools-recovery` external public-repo-derived sample
+
+**Prompt used**
+
+```text
+This public miniapp repo was copied into a disposable local directory and then polluted with a generated page plus a stale local compile condition. Follow the recovery workflow, remove only the residue, and prove the repo returns to its intended shape.
+```
+
+**Expected behavior**
+
+- keep the upstream public repo shape as the source of truth
+- identify the generated residue as local-only pollution rather than shared repo state
+- remove the stale compile condition and generated page with minimal cleanup
+- confirm the disposable copy matches the original public repo again after recovery
+
+**Observed behavior**
+
+- The upstream public repo used was `https://github.com/ecomfe/echarts-for-weixin`, cloned into `.tmp/external-echarts-for-weixin`.
+- A disposable copy was created at `.tmp/external-echarts-for-weixin-recovery`.
+- The disposable copy was intentionally polluted with:
+  - `pages/generated/index.{js,json,wxml,wxss}`
+  - `project.private.config.json` containing a stale compile condition for `pages/generated/index`
+- Before cleanup, `git diff --no-index --stat` between the upstream clone and the disposable copy showed exactly those 5 residue files.
+- Recovery then removed only:
+  - `project.private.config.json`
+  - `pages/generated/`
+- After cleanup, `git diff --no-index --exit-code .tmp/external-echarts-for-weixin .tmp/external-echarts-for-weixin-recovery` returned success, confirming the disposable copy matched the public-repo source again.
+
+**Gaps / follow-up**
+
+- This is a public-repo-derived disposable-copy sample, not a live DevTools-side mutation captured from a real import mistake.
+- A future pass should add one host-created wrong-root or compile-condition drift artifact on a second repo shape.
+
+## 2026-04-13 - `miniapp-devtools-recovery` wrong-root residue fixture
+
+**Prompt used**
+
+```text
+After importing this repo the wrong way, DevTools left root-level template pages behind and the local compile target now points at the wrong start page. Restore the intended repo shape, keep only the real miniapp root, and tell me what to clear in DevTools.
+```
+
+**Expected behavior**
+
+- detect that the intended miniapp root lives under a subfolder instead of the repo root
+- keep the real shared miniapp tree
+- remove generated wrong-root residue and stale compile-condition drift
+- tell the user what belongs in local DevTools state rather than shared repo state
+
+**Observed behavior**
+
+- Reviewed the committed fixture at `evals/negative-fixtures/recovery-wrong-root-residue`.
+- The fixture intentionally shows:
+  - `project.config.json.miniprogramRoot = "miniprogram"`
+  - the intended app under `miniprogram/pages/home/index`
+  - a root-level `pages/index/` quartet that acts as wrong-root residue
+  - `project.private.config.json` carrying a stale compile condition for `pages/index/index`
+- This exercises the recovery branch that should keep the `miniprogram/` tree, delete the root residue, and clear the stale local compile condition.
+
+**Gaps / follow-up**
+
+- This is a repo-owned negative fixture, not a live DevTools mutation captured on a second repo shape.
+- A future pass should add one host-side residue example beyond config rewrite drift.
+
+## 2026-04-13 - `miniapp-official-scaffold-alignment` broken scaffold fixture
+
+**Prompt used**
+
+```text
+Review this planned miniapp scaffold before import. Tell me what is officially valid, what is incomplete, and what the first corrective edit should be if one page listed in `app.json` is missing part of its required file quartet.
+```
+
+**Expected behavior**
+
+- identify the repository root and the miniapp code root
+- verify that `app.json.pages` maps to real page folders
+- catch the missing file-quartet member instead of calling the scaffold valid
+- recommend the smallest correction before feature work begins
+
+**Observed behavior**
+
+- Reviewed the committed fixture at `evals/negative-fixtures/scaffold-missing-page-style`.
+- The fixture intentionally shows:
+  - a valid repo-root `project.config.json` with `miniprogramRoot = "."`
+  - `app.json.pages` listing `pages/missing/index`
+  - a complete file quartet for `pages/home/index`
+  - a deliberately incomplete file set for `pages/missing/index`, where `index.wxss` is absent
+- This exercises the scaffold branch that should mark the scaffold as incomplete and recommend restoring the missing page file before feature work starts.
+
+**Gaps / follow-up**
+
+- This is a repo-owned negative fixture, not a public-repo review artifact.
+- A future pass could add a TypeScript-specific negative scaffold sample so the TS/plugin branch is exercised too.
+
+## 2026-04-13 - `miniapp-official-scaffold-alignment` external public-repo review
+
+**Prompt used**
+
+```text
+Review this public WeChat Mini Program repo against the official scaffold rules before feature changes. Verify the effective miniapp root, the `app.json.pages` list, and whether the repo keeps complete page/component file sets.
+```
+
+**Expected behavior**
+
+- identify the repository root and the miniapp code root
+- verify that `app.json.pages` maps to real page folders
+- verify that each page has matching logic, structure, style, and config files
+- call out component-shape or TypeScript ambiguity only when it is actually present
+
+**Observed behavior**
+
+- The public repo reviewed was `https://github.com/ecomfe/echarts-for-weixin`, cloned into `.tmp/external-echarts-for-weixin`.
+- `project.config.json` was valid for a repo-root miniapp:
+  - `compileType` was `miniprogram`
+  - `miniprogramRoot` was absent, so the effective miniapp root resolved to `.`
+- `app.json.pages` listed 25 routes under `pages/**/index`.
+- A scripted page-quartet check confirmed that all 25 listed pages had matching:
+  - `.js`
+  - `.json`
+  - `.wxml`
+  - `.wxss`
+- The shared `ec-canvas` component folder also had the expected component quartet:
+  - `ec-canvas.js`
+  - `ec-canvas.json`
+  - `ec-canvas.wxml`
+  - `ec-canvas.wxss`
+- No immediate scaffold mismatch was found for this external public repo shape.
+
+**Gaps / follow-up**
+
+- This is a JavaScript repo-root sample, so it does not yet exercise a nested `miniprogramRoot` or TypeScript-first scaffold.
+- A future pass should add one external public repo with a non-root code folder or explicit TS tooling so those branches are covered too.
 
 ## 2026-03-24 - `miniapp-devtools-gui-check`
 

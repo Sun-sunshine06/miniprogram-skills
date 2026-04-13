@@ -1,0 +1,14 @@
+{
+  "description": "Local-only stale compile condition sample",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "wrong-root residue",
+          "pathName": "pages/index/index",
+          "query": ""
+        }
+      ]
+    }
+  }
+}

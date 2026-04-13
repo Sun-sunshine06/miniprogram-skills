@@ -6,9 +6,11 @@
 
 ## 当前状态
 
-这个仓库现在已经打上 `v0.3.0` 标签，并进入 `v0.3` 的早期阶段。当前四个核心 skill 都可以复用，每个 active skill 都已经补齐示例提示词并至少记录过一次验证；`wechat-gui-check` 仍以 beta 工具的形式提供，并附带了一个公开可运行的示例小程序、两份公开 sample 路由配置，以及一条已经记录下来的外部公开仓库 forward-test 证据。
+这个仓库现在已经打上 `v0.4.0` 标签。当前四个核心 skill 仍然都可以复用，每个 active skill 都已经补齐示例提示词并至少记录过一次验证；`wechat-gui-check` 仍以 beta 工具的形式提供，并附带了一个公开可运行的示例小程序、两份公开 sample 路由配置，以及一条已经记录下来的外部公开仓库 forward-test 证据。
 
-当前主分支还额外维护了一份机器可读的公开 skill catalog，以及一组可重放的 routing-eval fixtures，方便后续把“声明出来的边界”和“实际记录下来的证据”对齐审查。
+`v0.4.0` 基线还额外纳入了一份机器可读的公开 skill catalog，以及一组可重放的 routing-eval fixtures，方便后续把“声明出来的边界”和“实际记录下来的证据”对齐审查。
+
+当前 `main` 分支还补上了针对这组 committed prompt pack 的 transcript-backed 本地 routing replay 记录，以及面向 scaffold、recovery、GUI/session 失败复核的 repo-owned 负路径样本，不过 installed-skill 和协作者宿主机上的 routing 证据仍然待补。
 
 ## 为什么会有这个仓库
 
@@ -66,7 +68,7 @@
 
 ## 发布方向
 
-1. 把 `v0.3.0` 视为当前抽离 skill 集合和 GUI harness 的稳定基线。
+1. 把 `v0.4.0` 视为当前抽离 skill 集合和 GUI harness 的 catalog 与 routing 稳定基线。
 2. 继续补强更多宿主机和更多仓库形态下的 forward-test 与 routing 证据。
 3. 为 recovery、scaffold 和 GUI/session 失败场景增加更多负路径验证。
 4. 只有在这些公开边界持续保持干净后，再扩展到更高层的小程序工作流技能。
@@ -80,12 +82,12 @@ pwsh -File scripts/check.ps1
 powershell.exe -File scripts/check.ps1
 ```
 
-这条命令要求 `python`、`node` 和 `npm` 已经在 `PATH` 里。它会自动执行 `npm ci --ignore-scripts` 安装工具依赖，校验公开 skill，校验机器可读的 skill catalog 与 routing-eval fixtures，检查 markdown 链接和双语文档互链，校验仓库里的 JSON 文件，检查工具语法，并对复制出来的 fixture 针对两份仓库自带 sample 配置分别运行 external-project dry-run smoke check。
+这条命令要求 `python`、`node` 和 `npm` 已经在 `PATH` 里。它会自动执行 `npm ci --ignore-scripts` 安装工具依赖，校验公开 skill，校验机器可读的 skill catalog，同时校验 routing-eval fixtures、routing replay transcripts 和已提交的负路径样本，检查 markdown 链接和双语文档互链，校验仓库里的 JSON 文件，检查工具语法，并对复制出来的 fixture 针对两份仓库自带 sample 配置分别运行 external-project dry-run smoke check。
 
 ## 当前下一步
 
 - 在不同脚手架形态的公开仓库上补一条协作者宿主机 forward-test 记录。
-- 把 `docs/routing-eval-log.md` 从当前的维护者复核记录升级为 installed-skill 或 replayable transcript 级别的真实路由证据。
+- 继续补 recovery 和 success-path CLI 的公开仓库证据，并在当前本地 replay pack 之外继续补 installed-skill 或 host-routed transcript。
 
 ## 推荐阅读
 

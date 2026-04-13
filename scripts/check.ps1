@@ -240,6 +240,15 @@ Invoke-Step 'Validate routing eval fixtures' {
     )
 }
 
+Invoke-Step 'Validate routing replay transcripts' {
+    Invoke-Native 'python' @(
+        (Join-Path $RepoRoot 'scripts\validate_routing_replays.py'),
+        (Join-Path $RepoRoot 'evals\routing-replays'),
+        (Join-Path $RepoRoot 'evals\routing'),
+        (Join-Path $RepoRoot 'skills')
+    )
+}
+
 Invoke-Step 'Validate docs' {
     Invoke-Native 'python' @(
         (Join-Path $RepoRoot 'scripts\validate_docs.py'),
@@ -285,6 +294,14 @@ Invoke-Step 'Check bundled fixture files' {
         (Join-Path $FixtureRoot 'app.json'),
         (Join-Path $FixtureRoot 'pages\home\index.wxml'),
         (Join-Path $FixtureRoot 'pages\tasks\index.wxml')
+    )
+}
+
+Invoke-Step 'Validate negative-path fixtures' {
+    Invoke-Native 'python' @(
+        (Join-Path $RepoRoot 'scripts\validate_negative_skill_fixtures.py'),
+        (Join-Path $RepoRoot 'evals\negative-fixtures'),
+        (Join-Path $RepoRoot 'tools\wechat-gui-check\examples\sample.session-error.json')
     )
 }
 

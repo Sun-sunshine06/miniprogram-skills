@@ -1,0 +1,6 @@
+{
+  "ok": false,
+  "classification": "devtools_session_error",
+  "error": "cli auto exited because DevTools did not become ready before timeout",
+  "stack": null
+}

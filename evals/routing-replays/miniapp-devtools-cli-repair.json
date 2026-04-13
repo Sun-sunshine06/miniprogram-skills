@@ -1,0 +1,31 @@
+{
+  "case_id": "miniapp-devtools-cli-repair",
+  "transcript_kind": "replay",
+  "captured_at": "2026-04-13",
+  "capture_method": "Manual local replay against the committed routing fixture and current SKILL.md contract.",
+  "selected_skill": "miniapp-devtools-cli-repair",
+  "rejected_skills": [
+    "miniapp-official-scaffold-alignment",
+    "miniapp-devtools-recovery",
+    "miniapp-devtools-gui-check"
+  ],
+  "observed_output_sections": [
+    {
+      "heading": "what the CLI exposed",
+      "content": "The right first pass is to prove the official CLI is callable, re-establish the live IDE port with `open`, and then use `preview` so the failure is classified from CLI-visible evidence instead of screenshots."
+    },
+    {
+      "heading": "whether the issue is auto-fixable",
+      "content": "It is auto-fixable only if `preview` shows a narrow repo-local problem such as `project.config.json`, `app.json`, `tsconfig.json`, or a precise syntax/path mismatch; AppID, login, and GUI-only runtime failures are not safe repo auto-fixes."
+    },
+    {
+      "heading": "what was changed or what screenshot is still needed",
+      "content": "If `preview` exposes a local config or path issue, apply the smallest matching repo fix; if `preview` is already green and the failure only appears after interaction, stop here and ask for a GUI-side smoke check instead of another screenshot."
+    },
+    {
+      "heading": "the next command or user action",
+      "content": "Run `\"<cli-path>\" open --project \"<project-root>\" --port <port>` first, then `\"<cli-path>\" preview --project \"<project-root>\" --port <port>` and classify the result before editing repo files."
+    }
+  ],
+  "notes": "Captured as a replayable prompt-and-answer sample. This is transcript-backed local evidence, not a live installed-skill router transcript."
+}

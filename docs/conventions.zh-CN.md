@@ -41,6 +41,7 @@ skill-name/
 - 保持 `manifests/skill-catalog.json` 与当前公开 skill 边界、宿主依赖和证据状态一致。
 - 保持 `agents/openai.yaml` 和 `SKILL.md` 一致。
 - 如果公开 skill 的路由边界变了，就同步补或更新对应的 `evals/routing/` fixtures。
+- 如果 committed routing fixture 或输出契约变了，也要同步补或更新对应的 `evals/routing-replays/` transcript 记录。
 - 在称某个 skill 已经 public-ready 之前，先用真实提示词做 forward test。
 
 ## 非目标

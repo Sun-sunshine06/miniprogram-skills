@@ -1,0 +1,31 @@
+{
+  "case_id": "miniapp-official-scaffold-alignment",
+  "transcript_kind": "replay",
+  "captured_at": "2026-04-13",
+  "capture_method": "Manual local replay against the committed routing fixture and current SKILL.md contract.",
+  "selected_skill": "miniapp-official-scaffold-alignment",
+  "rejected_skills": [
+    "miniapp-devtools-recovery",
+    "miniapp-devtools-cli-repair",
+    "miniapp-devtools-gui-check"
+  ],
+  "observed_output_sections": [
+    {
+      "heading": "officially valid parts",
+      "content": "The request is clearly a pre-import scaffold review, so the valid core is an official `miniprogram` project shape with an explicit `miniprogramRoot`, a real `app.json.pages` list, and matching page file quartets."
+    },
+    {
+      "heading": "missing or risky parts",
+      "content": "The prompt does not yet specify whether the repo authors in JavaScript or TypeScript, whether the code root is `.` or a subfolder, or whether any custom components need their own matching file sets."
+    },
+    {
+      "heading": "recommended scaffold decision",
+      "content": "Start with the smallest runnable scaffold: keep `compileType` as `miniprogram`, point `miniprogramRoot` at the actual code root, list only real pages in `app.json`, and make TypeScript support explicit only if the repo truly authors in TS."
+    },
+    {
+      "heading": "first edit to make",
+      "content": "Write or correct `project.config.json.miniprogramRoot` first, then create or verify the first page quartet that matches the first path listed in `app.json.pages`."
+    }
+  ],
+  "notes": "Captured as a replayable prompt-and-answer sample. This is transcript-backed local evidence, not a live installed-skill router transcript."
+}

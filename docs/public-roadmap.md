@@ -65,22 +65,24 @@ Goal:
 
 - confirm that the skills generalize across more than one repo
 
-Current status on 2026-03-31:
+Current status on 2026-04-13:
 
 - starting point:
   - the `v0.3.0` tag now captures the completed tool-extraction baseline
   - internal fixture-based validation evidence exists for all active skills
   - one external public-repo forward-test exists for `tools/wechat-gui-check`
   - a replayable routing prompt pack plus a machine-readable skill catalog now exist
-  - `docs/routing-eval-log.md` records an initial review pass as curated maintainer notes, but live transcript-backed routing evidence is not recorded yet
+  - replayable prompt-and-answer routing transcripts now exist for all 4 positive fixtures and the 2 adjacent boundary prompts
+  - repo-owned negative-path fixtures now exist for a broken scaffold, wrong-root recovery residue, and a GUI session blocker sample
+  - non-GUI public-repo evidence now exists for scaffold review, CLI auth/session blocker classification, and a recovery sample derived from `ecomfe/echarts-for-weixin`
 - in progress:
   - collaborator-host forward-testing to validate cross-machine behavior
-  - replacing the initial curated routing notes with real installed-skill or replayable eval evidence
-  - expanding negative-path validation beyond clean success scenarios
+  - broadening external evidence beyond the current GUI-focused public forward-test into more success-path and recovery-path repo shapes
+  - extending the current negative-path pack into more live host-side and external-repo observations
 - next:
   - add one collaborator-host public-repo forward-test with a different scaffold shape
-  - record the observed outcomes for one positive routing sample per public skill plus the adjacent non-use boundary prompts
-  - add one deliberately broken scaffold or wrong-root recovery sample to the validation log
+  - add at least one success-path CLI public-repo run beyond the current auth/session blocker sample
+  - add at least one live host-side negative sample beyond the current repo-owned fixture pack
 
 Exit criteria:
 
@@ -95,16 +97,17 @@ Goal:
 
 - make the public skill surface machine-readable and replayable before claiming a broader maturity jump
 
-Current status on 2026-03-31:
+Current status on 2026-04-13:
 
 - `manifests/skill-catalog.json` records the current public skill surface, host requirements, evidence state, and adjacent routing priorities
 - `evals/routing/` now contains replayable positive and boundary prompt fixtures for the four public skills
-- `docs/routing-eval-log.md` records the current fixture review status honestly as curated maintainer replay notes
-- shared validation checks the catalog and the routing fixture pack on every run
+- `evals/routing-replays/` now contains transcript-backed local replay records for every committed routing case
+- `docs/routing-eval-log.md` records the current routing outcomes against those replay transcripts instead of only curated maintainer notes
+- shared validation checks the catalog, the routing fixture pack, and the routing replay pack on every run
 
 Still missing:
 
-- installed-skill or replayable transcript-backed routing outcomes
+- installed-skill or host-routed transcript capture beyond the current local replay pack
 - collaborator-host evidence for another repo or host shape beyond the first external forward-test
 
 Exit criteria:

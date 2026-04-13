@@ -1,0 +1,8 @@
+{
+  "pages": [
+    "pages/home/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "Recovery Fixture"
+  }
+}

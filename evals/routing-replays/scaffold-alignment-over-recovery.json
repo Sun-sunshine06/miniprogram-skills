@@ -1,0 +1,31 @@
+{
+  "case_id": "scaffold-alignment-over-recovery",
+  "transcript_kind": "replay",
+  "captured_at": "2026-04-13",
+  "capture_method": "Manual local replay against the committed routing fixture and current SKILL.md contract.",
+  "selected_skill": "miniapp-official-scaffold-alignment",
+  "rejected_skills": [
+    "miniapp-devtools-recovery",
+    "miniapp-devtools-cli-repair",
+    "miniapp-devtools-gui-check"
+  ],
+  "observed_output_sections": [
+    {
+      "heading": "officially valid parts",
+      "content": "Because the repo has not been imported into DevTools yet, the valid review surface is the planned scaffold itself: `miniprogramRoot`, `app.json.pages`, and matching page quartets."
+    },
+    {
+      "heading": "missing or risky parts",
+      "content": "The risky parts are any page entries that do not map to real folders, any missing `.js`/`.json`/`.wxml`/`.wxss` files, and any unspoken TypeScript expectations that would be left implicit."
+    },
+    {
+      "heading": "recommended scaffold decision",
+      "content": "Keep this as a pre-import scaffold decision: verify the code root, keep the page list minimal and real, and only move into recovery flows if a later DevTools import actually introduces drift."
+    },
+    {
+      "heading": "first edit to make",
+      "content": "Align `project.config.json.miniprogramRoot` with the intended code root and ensure every path in `app.json.pages` already has a matching file quartet before the first DevTools import."
+    }
+  ],
+  "notes": "Captured as a replayable prompt-and-answer sample. This transcript records the boundary where scaffold review wins over recovery because no post-import drift has happened yet."
+}

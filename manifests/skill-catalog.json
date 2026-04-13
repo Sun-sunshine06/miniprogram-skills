@@ -16,7 +16,7 @@
       "evidence": {
         "validation_log": true,
         "routing_fixture": true,
-        "external_forward_test": false,
+        "external_forward_test": true,
         "collaborator_host_test": false
       },
       "routing_priority_over": [
@@ -38,7 +38,7 @@
       "evidence": {
         "validation_log": true,
         "routing_fixture": true,
-        "external_forward_test": false,
+        "external_forward_test": true,
         "collaborator_host_test": false
       },
       "routing_priority_over": []
@@ -58,7 +58,7 @@
       "evidence": {
         "validation_log": true,
         "routing_fixture": true,
-        "external_forward_test": false,
+        "external_forward_test": true,
         "collaborator_host_test": false
       },
       "routing_priority_over": []

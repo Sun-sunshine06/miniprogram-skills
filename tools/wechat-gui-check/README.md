@@ -25,6 +25,7 @@ Public beta extraction. The harness now ships with a bundled fixture miniapp plu
 - `examples/sample.route-config.json`: example route config
 - `examples/sample.rich.route-config.json`: richer fixture config with mixed action types
 - `examples/sample-report.json`: example output shape
+- `examples/sample.session-error.json`: example fatal session-blocker output shape
 
 ## Install
 

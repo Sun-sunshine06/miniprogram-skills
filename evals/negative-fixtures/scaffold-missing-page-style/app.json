@@ -1,0 +1,9 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/missing/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "Broken Scaffold Fixture"
+  }
+}

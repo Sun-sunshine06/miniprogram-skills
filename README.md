@@ -9,9 +9,11 @@ English | [中文](./README.zh-CN.md)
 
 ## Status
 
-This repository is now tagged as `v0.3.0` and enters the early `v0.3` stage. The four core skills are reusable today, each active skill has example prompts plus at least one recorded validation pass, and the GUI checker remains a beta utility with a bundled demo miniapp, two public sample route configs, and one documented forward-test on an external public repo instead of assuming access to a private source repo.
+This repository is now tagged as `v0.4.0`. The four core skills remain reusable today, each active skill has example prompts plus at least one recorded validation pass, and the GUI checker remains a beta utility with a bundled demo miniapp, two public sample route configs, and one documented forward-test on an external public repo instead of assuming access to a private source repo.
 
-The main branch additionally carries a machine-readable public skill catalog plus replayable routing-eval fixtures so future reviews can compare declared skill boundaries against committed evidence assets.
+The `v0.4.0` baseline additionally includes a machine-readable public skill catalog plus replayable routing-eval fixtures so future reviews can compare declared skill boundaries against committed evidence assets.
+
+The current `main` branch also carries transcript-backed local routing replays for the committed prompt pack plus repo-owned negative-path fixtures for scaffold, recovery, and GUI/session failure review, while installed-skill and collaborator-host routing evidence are still pending.
 
 ## Why This Exists
 
@@ -69,7 +71,7 @@ The main branch additionally carries a machine-readable public skill catalog plu
 
 ## Release Direction
 
-1. Treat `v0.3.0` as the stable baseline for the extracted skill set and GUI harness.
+1. Treat `v0.4.0` as the stable catalog-and-routing baseline for the extracted skill set and GUI harness.
 2. Broaden forward-test and routing evidence across more hosts and repo shapes.
 3. Add more negative-path validation for recovery, scaffold, and GUI/session failures.
 4. Expand into broader miniapp workflow skills only after those boundaries stay clean.
@@ -83,12 +85,12 @@ pwsh -File scripts/check.ps1
 powershell.exe -File scripts/check.ps1
 ```
 
-This command expects `python`, `node`, and `npm` on `PATH`. It installs the tool dependencies with `npm ci --ignore-scripts`, validates public skills, validates the machine-readable skill catalog and replayable routing fixtures, checks markdown links plus bilingual doc cross-links, validates repository JSON, checks tool syntax, and runs the external-project dry-run smoke checks against a copied fixture for both bundled sample configs.
+This command expects `python`, `node`, and `npm` on `PATH`. It installs the tool dependencies with `npm ci --ignore-scripts`, validates public skills, validates the machine-readable skill catalog, validates both routing fixtures and routing replay transcripts, validates the committed negative-path fixtures, checks markdown links plus bilingual doc cross-links, validates repository JSON, checks tool syntax, and runs the external-project dry-run smoke checks against a copied fixture for both bundled sample configs.
 
 ## Immediate Next Steps
 
 - record one collaborator-host forward-test on a public repo with a different scaffold shape
-- upgrade `docs/routing-eval-log.md` from curated maintainer replay notes to installed-skill or replayable transcript-backed evidence
+- broaden recovery and success-path CLI public-repo evidence, and add installed-skill or host-routed transcripts beyond the current local replay pack
 
 See [CHANGELOG.md](./CHANGELOG.md), [docs/release-v0.1.0-public-beta.md](./docs/release-v0.1.0-public-beta.md), [docs/release-v0.3.0.md](./docs/release-v0.3.0.md), [docs/release-v0.4.0-draft.md](./docs/release-v0.4.0-draft.md), [docs/releasing.md](./docs/releasing.md), [docs/skill-map.md](./docs/skill-map.md), [docs/skill-map.zh-CN.md](./docs/skill-map.zh-CN.md), [docs/public-roadmap.md](./docs/public-roadmap.md), [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md), [docs/skill-validation-log.md](./docs/skill-validation-log.md), [docs/routing-eval-log.md](./docs/routing-eval-log.md), [docs/skill-review-checklist.md](./docs/skill-review-checklist.md), [docs/gui-check-forward-test.md](./docs/gui-check-forward-test.md), [docs/gui-check-collaborator-forward-test.md](./docs/gui-check-collaborator-forward-test.md), [docs/runtime-model-decision.md](./docs/runtime-model-decision.md), [docs/extraction-checklist.md](./docs/extraction-checklist.md), [docs/license-decision.md](./docs/license-decision.md), and [CONTRIBUTING.md](./CONTRIBUTING.md) for the detailed release plan.
 

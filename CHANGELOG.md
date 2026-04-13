@@ -4,6 +4,13 @@ All notable changes to this repository will be documented in this file.
 
 ## Unreleased
 
+- added `evals/routing-replays/` plus `scripts/validate_routing_replays.py` so every committed routing case now has a replayable prompt-and-answer transcript with section-level validation
+- updated `scripts/check.ps1`, the routing log, roadmap, conventions, review checklist, and README docs so routing replay transcripts are treated as part of the repository's maintained evidence surface
+- added committed negative-path fixtures for broken scaffold review, wrong-root recovery residue, and a GUI session blocker sample, plus validation coverage and log entries for those non-success paths
+- recorded initial non-GUI public-repo evidence for scaffold review, recovery cleanup on a disposable public-repo copy, and CLI auth/session blocker classification on `ecomfe/echarts-for-weixin`, and updated the skill catalog evidence flags accordingly
+
+## v0.4.0 - 2026-03-31
+
 - added `manifests/skill-catalog.json` plus JSON schemas and a dedicated validator so the public skill surface, host requirements, evidence state, and adjacent routing priorities are now machine-readable
 - added replayable routing-eval fixtures under `evals/routing/` plus validation coverage for the four public skills and their two closest non-use boundaries
 - added `docs/routing-eval-log.md` with the first committed routing outcome notes, explicitly labeled as curated maintainer replay evidence while live transcript capture is still pending

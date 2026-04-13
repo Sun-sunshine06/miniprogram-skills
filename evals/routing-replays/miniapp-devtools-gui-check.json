@@ -1,0 +1,35 @@
+{
+  "case_id": "miniapp-devtools-gui-check",
+  "transcript_kind": "replay",
+  "captured_at": "2026-04-13",
+  "capture_method": "Manual local replay against the committed routing fixture and current SKILL.md contract.",
+  "selected_skill": "miniapp-devtools-gui-check",
+  "rejected_skills": [
+    "miniapp-official-scaffold-alignment",
+    "miniapp-devtools-recovery",
+    "miniapp-devtools-cli-repair"
+  ],
+  "observed_output_sections": [
+    {
+      "heading": "which route or flow was checked",
+      "content": "Start with only the failing route and the one button tap that reproduces the blank page so the run stays narrow and the result is easy to attribute."
+    },
+    {
+      "heading": "whether automation really connected",
+      "content": "Treat the host DevTools session as part of the test: confirm the checker connected, the selected route opened, and a report was written before drawing any runtime conclusion."
+    },
+    {
+      "heading": "what runtime evidence was collected",
+      "content": "Use page path, primary selector presence, console output, exception events, and the generated report as the primary signals; screenshots are best-effort only."
+    },
+    {
+      "heading": "whether the issue is in repo code, session state, or still needs manual visual confirmation",
+      "content": "A selector/assertion failure or runtime exception points back to repo behavior, an automation connection or session/auth problem points to DevTools state, and a screenshot-only mismatch still needs manual visual confirmation."
+    },
+    {
+      "heading": "the next command or user action",
+      "content": "Run `node tools/wechat-gui-check/check.js --config <route-config-path> --project-path <project-root> --route <route-key>` and inspect the generated report before widening the route coverage."
+    }
+  ],
+  "notes": "Captured as a replayable prompt-and-answer sample. This is transcript-backed local evidence, not a live installed-skill router transcript."
+}

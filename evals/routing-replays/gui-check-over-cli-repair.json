@@ -1,0 +1,35 @@
+{
+  "case_id": "gui-check-over-cli-repair",
+  "transcript_kind": "replay",
+  "captured_at": "2026-04-13",
+  "capture_method": "Manual local replay against the committed routing fixture and current SKILL.md contract.",
+  "selected_skill": "miniapp-devtools-gui-check",
+  "rejected_skills": [
+    "miniapp-official-scaffold-alignment",
+    "miniapp-devtools-recovery",
+    "miniapp-devtools-cli-repair"
+  ],
+  "observed_output_sections": [
+    {
+      "heading": "which route or flow was checked",
+      "content": "The right scope is the home-page CTA path that intermittently blanks after the tap, not a second compile-only sweep."
+    },
+    {
+      "heading": "whether automation really connected",
+      "content": "Because `preview` is already green, the key check is whether host-side automation can still connect to DevTools, enter the route, and complete the tap sequence."
+    },
+    {
+      "heading": "what runtime evidence was collected",
+      "content": "Collect the final page path, selector state after the CTA tap, console output, and any runtime exceptions so the blank page can be classified from runtime evidence rather than another CLI compile result."
+    },
+    {
+      "heading": "whether the issue is in repo code, session state, or still needs manual visual confirmation",
+      "content": "If the route enters and then fails after the CTA with runtime evidence, treat it as repo behavior; if automation cannot establish a stable session, classify it as DevTools state; if only the screenshot looks wrong, keep manual visual follow-up open."
+    },
+    {
+      "heading": "the next command or user action",
+      "content": "Run one narrow GUI smoke config for the CTA route and only fall back to broader debugging after the report shows whether the failure is runtime, session, or visual-only."
+    }
+  ],
+  "notes": "Captured as a replayable prompt-and-answer sample. This transcript records the boundary where GUI runtime evidence wins over another CLI repair pass."
+}

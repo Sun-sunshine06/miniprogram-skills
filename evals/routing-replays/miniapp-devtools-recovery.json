@@ -1,0 +1,31 @@
+{
+  "case_id": "miniapp-devtools-recovery",
+  "transcript_kind": "replay",
+  "captured_at": "2026-04-13",
+  "capture_method": "Manual local replay against the committed routing fixture and current SKILL.md contract.",
+  "selected_skill": "miniapp-devtools-recovery",
+  "rejected_skills": [
+    "miniapp-official-scaffold-alignment",
+    "miniapp-devtools-cli-repair",
+    "miniapp-devtools-gui-check"
+  ],
+  "observed_output_sections": [
+    {
+      "heading": "what DevTools changed",
+      "content": "The prompt points to post-import drift: DevTools likely imported the wrong root, added template residue, rewrote shared config, or left a stale compile condition that changed the start page."
+    },
+    {
+      "heading": "what should remain in the repo",
+      "content": "Keep the intended repo root, the real miniapp code root, tracked `project.config.json` and `app.json` values, and any genuine app pages or components that existed before the DevTools-side drift."
+    },
+    {
+      "heading": "what to delete or restore",
+      "content": "Restore tracked config files first, then delete only generated template pages, wrong-root residue, or stale compile-condition side effects that are not part of the intended project shape."
+    },
+    {
+      "heading": "what the user must change in DevTools",
+      "content": "Re-import the correct directory, clear any stale custom compile condition, and make sure DevTools is pointed at the intended miniapp root instead of a generated subfolder or template shell."
+    }
+  ],
+  "notes": "Captured as a replayable prompt-and-answer sample. This is transcript-backed local evidence, not a live installed-skill router transcript."
+}
