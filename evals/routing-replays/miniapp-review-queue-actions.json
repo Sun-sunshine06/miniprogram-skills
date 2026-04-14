@@ -1,0 +1,30 @@
+{
+  "case_id": "miniapp-review-queue-actions",
+  "transcript_kind": "replay",
+  "captured_at": "2026-04-14",
+  "capture_method": "Manual local replay against the committed routing fixture and the extracted public-draft skill contract.",
+  "selected_skill": "miniapp-review-queue-actions",
+  "rejected_skills": [
+    "miniapp-center-hub-refactor",
+    "miniapp-user-facing-copy-trim"
+  ],
+  "observed_output_sections": [
+    {
+      "heading": "queue states and actions",
+      "content": "The replay answer starts by defining the pending-item states and the primary versus secondary actions per state instead of widening into navigation work."
+    },
+    {
+      "heading": "card interaction contract",
+      "content": "The answer keeps card tap for detail while moving common mutations onto the card itself, with acting state and action boundaries called out explicitly."
+    },
+    {
+      "heading": "refresh and side-effect chain",
+      "content": "The replay answer preserves a stable sequence of mutate, optional downstream recomputation, reload, and user feedback, which is the core reusable interaction pattern."
+    },
+    {
+      "heading": "files or components to change first",
+      "content": "The answer points first to the queue surface, its service or page-method mutation boundary, and the refresh owner, which keeps the work implementation-oriented."
+    }
+  ],
+  "notes": "Captured as transcript-backed replay evidence for the queue-action skill before any external forward-test on a second miniapp repository."
+}

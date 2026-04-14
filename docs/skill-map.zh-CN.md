@@ -10,10 +10,13 @@
 | `miniapp-devtools-recovery` | 在错误导入根目录或 DevTools 模板污染后恢复仓库。 | `SKILL.md` + 恢复检查清单 | medium |
 | `miniapp-devtools-cli-repair` | 把官方 DevTools CLI 作为主诊断路径。 | `SKILL.md` + CLI playbook | high |
 | `miniapp-devtools-gui-check` | 捕捉 `preview` 暴露不出来的运行时和交互故障。 | `SKILL.md` + GUI playbook + public beta tool | high |
+| `miniapp-center-hub-refactor` | 把功能增长后变得分散的小程序重排成更清晰的中心 / hub 结构。 | `SKILL.md` + hub playbook | medium |
+| `miniapp-review-queue-actions` | 让待处理 / 审核队列在卡片层直接完成常用动作。 | `SKILL.md` + queue-actions playbook | medium |
+| `miniapp-user-facing-copy-trim` | 把冗长页面文案收成更短、更面向用户的标签与状态摘要。 | `SKILL.md` + copy-trim playbook | medium |
 
 ## 计划中的 Skills
 
-这些方向有价值，但当前仍然和具体产品实现绑定得更紧，所以没有进入第一批公开范围：
+这些方向有价值，但当前仍然和具体产品实现绑定得更紧，所以没有进入当前公开范围：
 
 | Skill | 用途 | 暂未纳入原因 |
 | --- | --- | --- |

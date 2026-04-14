@@ -1,0 +1,30 @@
+{
+  "case_id": "miniapp-center-hub-refactor-over-miniapp-user-facing-copy-trim",
+  "transcript_kind": "replay",
+  "captured_at": "2026-04-14",
+  "capture_method": "Manual local replay against the committed boundary fixture and the extracted public-draft skill contract.",
+  "selected_skill": "miniapp-center-hub-refactor",
+  "rejected_skills": [
+    "miniapp-user-facing-copy-trim",
+    "miniapp-review-queue-actions"
+  ],
+  "observed_output_sections": [
+    {
+      "heading": "current navigation problem",
+      "content": "The replay answer treats the wordy text as secondary because the prompt's strongest signal is that users cannot tell which top-level destination owns pending work versus settings."
+    },
+    {
+      "heading": "proposed hub structure",
+      "content": "The answer stays on a hub redesign with section ownership instead of drifting into pure copy cleanup."
+    },
+    {
+      "heading": "page ownership and migration map",
+      "content": "The replay answer explains where reminder, connection, and pending-work entry points move, which is architectural rather than editorial."
+    },
+    {
+      "heading": "migration order",
+      "content": "The answer sequences structure changes before text polishing, which validates the intended routing boundary over the copy skill."
+    }
+  ],
+  "notes": "Boundary replay confirming that structural ownership problems outrank copy-only cleanup when both appear in the same prompt."
+}

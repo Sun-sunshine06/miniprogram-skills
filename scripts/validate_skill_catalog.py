@@ -8,12 +8,15 @@ from pathlib import Path
 
 ALLOWED_STATUS = {"public-draft", "public-beta-tool"}
 ALLOWED_READINESS = {"low", "medium", "high"}
-ALLOWED_SURFACES = {"scaffold", "recovery", "cli", "gui"}
+ALLOWED_SURFACES = {"scaffold", "recovery", "cli", "gui", "architecture", "workflow", "copy"}
 ALLOWED_REPO_ACTIONS = {
     "review-only",
     "restore-and-clean",
     "safe-repo-fix",
     "runtime-smoke-check",
+    "navigation-restructure",
+    "interaction-flow-refine",
+    "ui-copy-simplify",
 }
 REQUIRED_REQUIRES_FIELDS = (
     "wechat_devtools_installation",
@@ -177,6 +180,12 @@ def validate_entry(entry: object, known_skill_ids: set[str], index: int) -> list
         errors.append(f"{context}: `surface` `recovery` must use `repo_action` `restore-and-clean`")
     if surface == "cli" and repo_action != "safe-repo-fix":
         errors.append(f"{context}: `surface` `cli` must use `repo_action` `safe-repo-fix`")
+    if surface == "architecture" and repo_action != "navigation-restructure":
+        errors.append(f"{context}: `surface` `architecture` must use `repo_action` `navigation-restructure`")
+    if surface == "workflow" and repo_action != "interaction-flow-refine":
+        errors.append(f"{context}: `surface` `workflow` must use `repo_action` `interaction-flow-refine`")
+    if surface == "copy" and repo_action != "ui-copy-simplify":
+        errors.append(f"{context}: `surface` `copy` must use `repo_action` `ui-copy-simplify`")
 
     if status == "public-beta-tool" and surface != "gui":
         errors.append(f"{context}: `public-beta-tool` status is only expected on the GUI tool surface")

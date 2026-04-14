@@ -1,0 +1,14 @@
+{
+  "id": "miniapp-center-hub-refactor",
+  "kind": "positive",
+  "prompt": "This miniapp started with `home / tasks / profile`, but now pending work, integrations, and settings are scattered across too many tabs. Refactor the top-level information architecture into a clearer center without turning everything into one long page.",
+  "expected_skill": "miniapp-center-hub-refactor",
+  "forbidden_skills": [],
+  "expected_output_sections": [
+    "current navigation problem",
+    "proposed hub structure",
+    "page ownership and migration map",
+    "migration order"
+  ],
+  "source_plan": "docs/routing-eval-plan.md"
+}

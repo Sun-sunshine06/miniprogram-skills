@@ -63,6 +63,19 @@ Focus on:
 - console events
 - exception events
 
+If `report.json` is missing but the run directory exists, inspect:
+
+```text
+.tmp/gui-check/<timestamp>/trace.log
+```
+
+Use the last recorded stage to decide whether the blocker is:
+
+- DevTools launcher startup
+- websocket connection
+- app runtime readiness
+- route-level action or selector failure
+
 ## Failure Classification
 
 ### Automation Does Not Connect
@@ -72,12 +85,15 @@ Typical meaning:
 - DevTools reused an old session
 - a blocking dialog is still open
 - the websocket endpoint never became available
+- the launcher never exited cleanly and the harness had to continue in background mode
 
 Action:
 
 1. clear dialogs
 2. fully quit DevTools
 3. rerun the same narrow check
+
+If `trace.log` never gets past launcher or websocket stages, keep the diagnosis on host or session state first.
 
 ### Runtime Exceptions Or Severe Console Errors Appear
 
@@ -92,6 +108,20 @@ Action:
 2. inspect page data and report fields
 3. patch the repo
 4. rerun the same route
+
+### Page Shows `request:fail` Or Localhost Refusal
+
+Typical meaning:
+
+- the route opened correctly
+- compile succeeded
+- a local backend or service dependency is unavailable
+
+Action:
+
+1. keep the GUI report as runtime evidence
+2. do not misclassify it as a DevTools launcher problem
+3. verify the local service or runtime dependency outside the GUI harness
 
 ### Action Is Skipped Because A Selector Is Missing
 

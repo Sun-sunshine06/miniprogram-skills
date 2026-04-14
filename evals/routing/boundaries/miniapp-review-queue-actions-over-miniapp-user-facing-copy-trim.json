@@ -1,0 +1,16 @@
+{
+  "id": "miniapp-review-queue-actions-over-miniapp-user-facing-copy-trim",
+  "kind": "boundary",
+  "prompt": "The labels could be shorter, but the real issue is that every pending item still requires a full-page detour. Put the main actions directly on the queue cards and define the refresh chain.",
+  "expected_skill": "miniapp-review-queue-actions",
+  "forbidden_skills": [
+    "miniapp-user-facing-copy-trim"
+  ],
+  "expected_output_sections": [
+    "queue states and actions",
+    "card interaction contract",
+    "refresh and side-effect chain",
+    "files or components to change first"
+  ],
+  "source_plan": "docs/routing-eval-plan.md"
+}

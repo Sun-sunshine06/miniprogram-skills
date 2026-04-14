@@ -1,0 +1,14 @@
+{
+  "id": "miniapp-user-facing-copy-trim",
+  "kind": "positive",
+  "prompt": "The miniapp pages read like internal documentation. Trim the on-page text, keep only action-first labels and short status summaries, and move implementation-heavy explanation out of the main surfaces.",
+  "expected_skill": "miniapp-user-facing-copy-trim",
+  "forbidden_skills": [],
+  "expected_output_sections": [
+    "high-friction copy to cut",
+    "replacement labels and summaries",
+    "what to move out of the page",
+    "copy validation pass"
+  ],
+  "source_plan": "docs/routing-eval-plan.md"
+}

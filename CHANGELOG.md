@@ -4,6 +4,9 @@ All notable changes to this repository will be documented in this file.
 
 ## Unreleased
 
+- added three new public-draft skills: `miniapp-center-hub-refactor`, `miniapp-review-queue-actions`, and `miniapp-user-facing-copy-trim`, plus catalog entries, routing fixtures, and replay transcripts for their public boundaries
+- expanded the public skill catalog and validators so architecture, queue-interaction, and copy-simplification skills are now first-class public surfaces
+- upgraded the public `wechat-gui-check` guidance and harness shape to capture `trace.log`, making launcher-stage DevTools hangs easier to classify without source-repo coupling
 - added `evals/routing-replays/` plus `scripts/validate_routing_replays.py` so every committed routing case now has a replayable prompt-and-answer transcript with section-level validation
 - updated `scripts/check.ps1`, the routing log, roadmap, conventions, review checklist, and README docs so routing replay transcripts are treated as part of the repository's maintained evidence surface
 - added committed negative-path fixtures for broken scaffold review, wrong-root recovery residue, and a GUI session blocker sample, plus validation coverage and log entries for those non-success paths

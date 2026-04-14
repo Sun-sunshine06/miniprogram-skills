@@ -14,7 +14,7 @@ Use these prompts to validate whether the skill is triggered at the right time a
 
 1. what CLI command was used and what it exposed
 2. whether the failure is repository-scoped and safe to auto-fix
-3. what changed in the repo or why no safe change was applied
+3. what changed in the repo or what further evidence is still needed
 4. the exact next command or remaining evidence needed
 
 **Evaluation notes**
@@ -35,7 +35,7 @@ Use these prompts to validate whether the skill is triggered at the right time a
 
 1. how IDE connectivity and the live port were established
 2. the preview result and the exact file or config area involved
-3. whether a narrow repo fix was applied
+3. whether a narrow repo fix was applied or why the issue falls outside preview scope
 4. the rerun command that proves the fix or the limit of CLI evidence
 
 **Evaluation notes**

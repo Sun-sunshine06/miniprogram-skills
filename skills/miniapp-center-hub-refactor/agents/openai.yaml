@@ -1,0 +1,4 @@
+interface:
+  display_name: "Miniapp Center Hub Refactor"
+  short_description: "Reorganize a growing miniapp into a clearer hub-based navigation structure."
+  default_prompt: "Use $miniapp-center-hub-refactor to regroup top-level miniapp navigation into a clearer center or hub, separate pending-work flow from settings, and define a safe page migration plan."

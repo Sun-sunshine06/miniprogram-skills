@@ -1,0 +1,30 @@
+{
+  "case_id": "miniapp-center-hub-refactor-over-miniapp-review-queue-actions",
+  "transcript_kind": "replay",
+  "captured_at": "2026-04-14",
+  "capture_method": "Manual local replay against the committed boundary fixture and the extracted public-draft skill contract.",
+  "selected_skill": "miniapp-center-hub-refactor",
+  "rejected_skills": [
+    "miniapp-review-queue-actions",
+    "miniapp-user-facing-copy-trim"
+  ],
+  "observed_output_sections": [
+    {
+      "heading": "current navigation problem",
+      "content": "The replay answer keeps the focus on scattered ownership across top-level tabs, treating queue-card improvements as secondary until the hub problem is fixed."
+    },
+    {
+      "heading": "proposed hub structure",
+      "content": "The answer responds with a hub-first structure that groups pending work, settings, and integrations under one clearer entry point."
+    },
+    {
+      "heading": "page ownership and migration map",
+      "content": "The replay answer explains where the queue detail flow should live after the hub exists, instead of jumping straight into card-button implementation."
+    },
+    {
+      "heading": "migration order",
+      "content": "The answer sequences navigation cleanup before queue-card optimization, which is exactly the boundary the fixture was meant to test."
+    }
+  ],
+  "notes": "Boundary replay confirming that broad navigation drift should route to the hub refactor skill even when queue actions also need later cleanup."
+}

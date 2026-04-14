@@ -22,6 +22,7 @@ const { loadAutomator } = require('./lib/load-automator')
 const DEFAULT_PROJECT_PATH = path.resolve(__dirname, 'examples', 'fixture-miniapp')
 const DEFAULT_OUTPUT_ROOT = path.resolve(DEFAULT_PROJECT_PATH, '.tmp', 'gui-check')
 const DEFAULT_CONFIG_PATH = path.resolve(__dirname, 'examples', 'sample.route-config.json')
+const DEFAULT_CLI_LAUNCH_TIMEOUT_MS = 15000
 
 function sleep(ms) {
   return new Promise((resolve) => {
@@ -54,6 +55,14 @@ function readJsonFile(filePath, label = filePath) {
 
 function timestampSlug() {
   return new Date().toISOString().replace(/[:.]/g, '-')
+}
+
+function appendRunTrace(runDir, message) {
+  try {
+    fs.appendFileSync(path.join(runDir, 'trace.log'), `[${new Date().toISOString()}] ${message}\n`)
+  } catch (error) {
+    console.warn(`[gui-check] failed writing trace: ${error && error.message ? error.message : String(error)}`)
+  }
 }
 
 function safeSerialize(value) {
@@ -434,7 +443,17 @@ async function inspectImage(imagePath) {
   }
 }
 
-async function startAutomationCli(options) {
+function stopLauncherProcess(child) {
+  if (!child || child.exitCode !== null || child.killed) {
+    return
+  }
+
+  try {
+    child.kill()
+  } catch (error) {}
+}
+
+async function startAutomationCli(options, runDir) {
   const commandParts = [
     `& '${String(options.cliPath).replace(/'/g, "''")}'`,
     'auto',
@@ -448,7 +467,7 @@ async function startAutomationCli(options) {
 
   const commandLine = commandParts.join(' ')
 
-  await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const child = childProcess.spawn('powershell.exe', ['-NoProfile', '-Command', commandLine], {
       stdio: ['ignore', 'pipe', 'pipe'],
       windowsHide: true,
@@ -456,6 +475,31 @@ async function startAutomationCli(options) {
 
     let stdout = ''
     let stderr = ''
+    let settled = false
+
+    const launchTimeout = setTimeout(() => {
+      appendRunTrace(
+        runDir,
+        `cli auto did not exit within ${DEFAULT_CLI_LAUNCH_TIMEOUT_MS}ms; continuing while DevTools finishes booting in the background`
+      )
+
+      if (child.stdout && !child.stdout.destroyed) {
+        child.stdout.removeAllListeners('data')
+        child.stdout.destroy()
+      }
+
+      if (child.stderr && !child.stderr.destroyed) {
+        child.stderr.removeAllListeners('data')
+        child.stderr.destroy()
+      }
+
+      child.unref()
+      settled = true
+      resolve({
+        child,
+        mode: 'backgrounded',
+      })
+    }, DEFAULT_CLI_LAUNCH_TIMEOUT_MS)
 
     child.stdout.on('data', (chunk) => {
       stdout += String(chunk)
@@ -465,13 +509,32 @@ async function startAutomationCli(options) {
       stderr += String(chunk)
     })
 
-    child.on('error', reject)
-    child.on('exit', (code) => {
-      if (code === 0) {
-        resolve()
+    child.on('error', (error) => {
+      if (settled) {
         return
       }
 
+      clearTimeout(launchTimeout)
+      settled = true
+      reject(error)
+    })
+    child.on('exit', (code) => {
+      if (settled) {
+        return
+      }
+
+      clearTimeout(launchTimeout)
+
+      if (code === 0) {
+        settled = true
+        resolve({
+          child: null,
+          mode: 'exited',
+        })
+        return
+      }
+
+      settled = true
       reject(new Error(`cli auto exited with code ${code}\nstdout:\n${stdout.trim()}\nstderr:\n${stderr.trim()}`))
     })
   })
@@ -678,6 +741,7 @@ async function runActionSequence(page, actions) {
 
 async function runSpec({ miniProgram, spec, runDir, consoleEvents, exceptionEvents }) {
   console.log(`[gui-check] start ${spec.key} ${spec.route}`)
+  appendRunTrace(runDir, `start spec ${spec.key} ${spec.route}`)
 
   const consoleStart = consoleEvents.length
   const exceptionStart = exceptionEvents.length
@@ -761,6 +825,10 @@ async function runSpec({ miniProgram, spec, runDir, consoleEvents, exceptionEven
   }
 
   console.log(`[gui-check] finish ${spec.key} ok=${result.ok}`)
+  appendRunTrace(
+    runDir,
+    `finish spec ${spec.key} ok=${result.ok} failures=${result.failureDetails.length} warnings=${result.warningDetails.length}`
+  )
   return result
 }
 
@@ -825,22 +893,37 @@ async function main() {
 
   const runDir = path.join(config.outputRoot, timestampSlug())
   ensureDir(runDir)
+  appendRunTrace(runDir, `selected routes: ${selectedSpecs.map((spec) => spec.key).join(', ')}`)
+  appendRunTrace(runDir, `config path: ${config.configPath}`)
+  appendRunTrace(runDir, `project path: ${config.projectPath}`)
 
   const consoleEvents = []
   const exceptionEvents = []
   let miniProgram = null
+  let cliLaunchRuntime = {
+    child: null,
+    mode: 'not-started',
+  }
 
   try {
-    await startAutomationCli({
-      cliPath: cli.path,
-      port: options.port,
-      projectPath: config.projectPath,
-      trustProject: options.trustProject,
-    })
+    appendRunTrace(runDir, `launching DevTools CLI on port ${options.port}`)
+    cliLaunchRuntime = await startAutomationCli(
+      {
+        cliPath: cli.path,
+        port: options.port,
+        projectPath: config.projectPath,
+        trustProject: options.trustProject,
+      },
+      runDir
+    )
+    appendRunTrace(runDir, `DevTools CLI launch mode: ${cliLaunchRuntime.mode}`)
 
     await sleep(1500)
+    appendRunTrace(runDir, `connecting automator websocket ws://127.0.0.1:${options.port}`)
     miniProgram = await connectWithRetry(automatorModule, options.port, 30000)
+    appendRunTrace(runDir, 'automator websocket connected')
     await waitForAppReady(miniProgram, 45000)
+    appendRunTrace(runDir, 'mini program runtime ready')
 
     miniProgram.on('console', (payload) => {
       consoleEvents.push(normalizeConsoleEvent(payload))
@@ -909,6 +992,7 @@ async function main() {
             consoleEvents: consoleEvents.slice(),
             exceptionEvents: exceptionEvents.slice(),
           }
+          appendRunTrace(runDir, `fail spec ${spec.key}: ${message}`)
         }
 
         report.pages.push(pageReport)
@@ -924,6 +1008,8 @@ async function main() {
           miniProgram.disconnect()
         }
       }
+
+      stopLauncherProcess(cliLaunchRuntime.child)
     }
 
     report.summary.total = report.pages.length
@@ -939,13 +1025,17 @@ async function main() {
 
     const reportPath = path.join(runDir, 'report.json')
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2))
+    appendRunTrace(
+      runDir,
+      `summary total=${report.summary.total} passed=${report.summary.passed} failed=${report.summary.failed} warningPages=${report.summary.warningPages}`
+    )
     console.log(JSON.stringify(report, null, 2))
 
     if (report.summary.failed > 0) {
       process.exitCode = 1
     }
   } finally {
-    // disconnected in the inner cleanup block after close/keep-open handling
+    stopLauncherProcess(cliLaunchRuntime.child)
   }
 }
 

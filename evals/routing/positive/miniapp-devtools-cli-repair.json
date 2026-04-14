@@ -7,7 +7,7 @@
   "expected_output_sections": [
     "what the CLI exposed",
     "whether the issue is auto-fixable",
-    "what was changed or what screenshot is still needed",
+    "what was changed or what further evidence is still needed",
     "the next command or user action"
   ],
   "source_plan": "docs/routing-eval-plan.md"

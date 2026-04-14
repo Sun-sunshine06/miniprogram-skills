@@ -23,8 +23,8 @@
       "content": "Collect the final page path, selector state after the CTA tap, console output, and any runtime exceptions so the blank page can be classified from runtime evidence rather than another CLI compile result."
     },
     {
-      "heading": "whether the issue is in repo code, session state, or still needs manual visual confirmation",
-      "content": "If the route enters and then fails after the CTA with runtime evidence, treat it as repo behavior; if automation cannot establish a stable session, classify it as DevTools state; if only the screenshot looks wrong, keep manual visual follow-up open."
+      "heading": "whether the issue is in repo code, session state, a local service dependency, or still needs manual visual confirmation",
+      "content": "If the route enters and then fails after the CTA with runtime evidence, treat it as repo behavior; if the route only fails because a local service request is unavailable, classify that separately from DevTools state; if automation cannot establish a stable session, keep it on the session side; if only the screenshot looks wrong, keep manual visual follow-up open."
     },
     {
       "heading": "the next command or user action",

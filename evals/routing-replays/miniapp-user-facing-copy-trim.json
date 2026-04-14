@@ -1,0 +1,30 @@
+{
+  "case_id": "miniapp-user-facing-copy-trim",
+  "transcript_kind": "replay",
+  "captured_at": "2026-04-14",
+  "capture_method": "Manual local replay against the committed routing fixture and the extracted public-draft skill contract.",
+  "selected_skill": "miniapp-user-facing-copy-trim",
+  "rejected_skills": [
+    "miniapp-center-hub-refactor",
+    "miniapp-review-queue-actions"
+  ],
+  "observed_output_sections": [
+    {
+      "heading": "high-friction copy to cut",
+      "content": "The replay answer first identifies long labels, explanatory banners, and implementation-heavy text as the target, keeping the task scoped to wording rather than layout."
+    },
+    {
+      "heading": "replacement labels and summaries",
+      "content": "The answer replaces documentation-style sentences with shorter action-first labels and short status summaries, which matches the extracted copy-trim workflow."
+    },
+    {
+      "heading": "what to move out of the page",
+      "content": "The replay answer explicitly moves technical rationale and maintainer explanation to lower-emphasis surfaces instead of leaving them in the main page flow."
+    },
+    {
+      "heading": "copy validation pass",
+      "content": "The answer closes with a short pass over titles, buttons, empty states, banners, and toasts so the review stays operational and easy to apply."
+    }
+  ],
+  "notes": "Captured as transcript-backed replay evidence for the copy simplification skill before broader cross-repo validation is recorded."
+}

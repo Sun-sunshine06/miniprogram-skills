@@ -84,6 +84,71 @@
       "routing_priority_over": [
         "miniapp-devtools-cli-repair"
       ]
+    },
+    {
+      "id": "miniapp-center-hub-refactor",
+      "status": "public-draft",
+      "public_readiness": "medium",
+      "surface": "architecture",
+      "repo_action": "navigation-restructure",
+      "requires": {
+        "wechat_devtools_installation": false,
+        "official_cli": false,
+        "gui_automation": false,
+        "user_supplied_miniprogram_automator": false
+      },
+      "evidence": {
+        "validation_log": true,
+        "routing_fixture": true,
+        "external_forward_test": false,
+        "collaborator_host_test": false
+      },
+      "routing_priority_over": [
+        "miniapp-review-queue-actions",
+        "miniapp-user-facing-copy-trim"
+      ]
+    },
+    {
+      "id": "miniapp-review-queue-actions",
+      "status": "public-draft",
+      "public_readiness": "medium",
+      "surface": "workflow",
+      "repo_action": "interaction-flow-refine",
+      "requires": {
+        "wechat_devtools_installation": false,
+        "official_cli": false,
+        "gui_automation": false,
+        "user_supplied_miniprogram_automator": false
+      },
+      "evidence": {
+        "validation_log": true,
+        "routing_fixture": true,
+        "external_forward_test": false,
+        "collaborator_host_test": false
+      },
+      "routing_priority_over": [
+        "miniapp-user-facing-copy-trim"
+      ]
+    },
+    {
+      "id": "miniapp-user-facing-copy-trim",
+      "status": "public-draft",
+      "public_readiness": "medium",
+      "surface": "copy",
+      "repo_action": "ui-copy-simplify",
+      "requires": {
+        "wechat_devtools_installation": false,
+        "official_cli": false,
+        "gui_automation": false,
+        "user_supplied_miniprogram_automator": false
+      },
+      "evidence": {
+        "validation_log": true,
+        "routing_fixture": true,
+        "external_forward_test": false,
+        "collaborator_host_test": false
+      },
+      "routing_priority_over": []
     }
   ]
 }

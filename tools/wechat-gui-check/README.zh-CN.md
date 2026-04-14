@@ -25,6 +25,7 @@
 - `examples/sample.route-config.json`: 基础示例路由配置
 - `examples/sample.rich.route-config.json`: 覆盖混合 action 类型的 richer 示例配置
 - `examples/sample-report.json`: 示例输出结构
+- `examples/sample.session-error.json`: fatal session-blocker 的示例输出结构
 
 ## 安装
 
@@ -78,7 +79,7 @@ npm run check -- --config .\my-routes.json --project-path <project-root> --route
 
 ```powershell
 cd tools/wechat-gui-check
-npm run check -- --project-path <project-root> --automator-module-path C:\path\to\miniprogram-automator
+npm run check -- --project-path <project-root> --automator-module-path <automator-install-root>
 ```
 
 如果你只想做预检，不真正启动 DevTools：
@@ -127,10 +128,13 @@ npm run check -- --project-path <project-root> --route home --dry-run
 .tmp/gui-check/<timestamp>/
 |-- report.json
 |-- report.partial.json
+|-- trace.log
 `-- *.png
 ```
 
 `--dry-run` 不会创建运行目录，而是把 JSON 形式的预检摘要直接输出到 stdout。
+
+如果运行目录已经生成但没有 `report.json`，先看同目录下的 `trace.log`。它会记录当前卡在 DevTools launcher、websocket 连接、app runtime ready 还是具体 route 执行阶段。
 
 ## 排障提示
 
@@ -138,6 +142,7 @@ npm run check -- --project-path <project-root> --route home --dry-run
 - `登录用户不是该小程序的开发者`：这是 WeChat DevTools 的宿主机账号 / AppID 授权阻塞，不是仓库运行时错误。做公开仓库 forward-test 时，建议先复制一个一次性本地副本，再把真实上游 `appid` 换成 `touristappid` 或你自己可控的测试 `appid`，之后再运行 `cli auto`。
 - `screenshot unavailable: miniProgram.screenshot is not a function`：不同 `miniprogram-automator` 版本暴露的截图能力并不完全一致。报告里现在会把这类情况归类为 `screenshot_capability_missing`。当前应把截图视为 best-effort 证据；如果路由、路径和 selector 检查都通过，优先以这些结果为准。
 - 截图超时：报告里会归类为 `screenshot_timeout`；除非截图本身就是你要核验的重点，否则不要默认把它当成仓库失败。
+- 运行目录存在但没生成 `report.json`：先检查 `trace.log`。如果最后一条仍停在 DevTools 启动或 websocket 连接阶段，优先把它当成宿主机 / 会话问题，而不是仓库代码问题。
 
 ## 说明
 
@@ -149,6 +154,7 @@ npm run check -- --project-path <project-root> --route home --dry-run
 - 已经有一次在 Windows 宿主机上针对仓库外复制 fixture 项目的成功运行记录；截图在那次运行中曾发生超时，因此目前仍应把截图视为辅助证据
 - 现在也已经记录了一次面向公开仓库的 external forward-test，详见 `../../docs/gui-check-forward-test.md`
 - 如果第二个公开仓库样本准备交给协作者宿主机执行，直接使用 `../../docs/gui-check-collaborator-forward-test.md`
+- 现在 launcher 还带有一个 `cli auto` 超时兜底：如果 DevTools 仍在后台继续启动，工具会继续尝试连 websocket，并把这个决策写进 `trace.log`
 - 在上游依赖方案更稳定之前，这个包会继续保持 beta 状态
 
 ## 剩余工作

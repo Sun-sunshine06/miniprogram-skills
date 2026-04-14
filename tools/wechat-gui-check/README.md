@@ -79,7 +79,7 @@ If your automator install lives elsewhere, pass it explicitly:
 
 ```powershell
 cd tools/wechat-gui-check
-npm run check -- --project-path <project-root> --automator-module-path C:\path\to\miniprogram-automator
+npm run check -- --project-path <project-root> --automator-module-path <automator-install-root>
 ```
 
 Validate an external miniapp path without launching DevTools:
@@ -128,6 +128,7 @@ This keeps the sample config reproducible and gives contributors a safe baseline
 .tmp/gui-check/<timestamp>/
 |-- report.json
 |-- report.partial.json
+|-- trace.log
 `-- *.png
 ```
 
@@ -141,12 +142,15 @@ Current report schema highlights:
 - `pages[].failureCodes` / `pages[].warningCodes`: unique classification codes for a route
 - `pages[].failureDetails` / `pages[].warningDetails`: structured issue entries with `code` and `message`
 
+`trace.log` is a plain-text stage log for launcher, websocket, and per-route progress. Read it first if a run directory exists but `report.json` was never produced.
+
 ## Troubleshooting
 
 - `Unable to load miniprogram-automator`: install it with `npm install --no-save miniprogram-automator` in the target miniapp project or in `tools/wechat-gui-check`, or pass `--automator-module-path` to an existing install.
 - `登录用户不是该小程序的开发者`: this is a host/account AppID authorization blocker from WeChat DevTools. For public forward-tests, use a disposable local copy and swap the real upstream AppID for `touristappid` or another testing AppID you control before running `cli auto`.
 - `screenshot unavailable: miniProgram.screenshot is not a function`: screenshot support varies across `miniprogram-automator` builds. The report classifies this as `screenshot_capability_missing`. Treat screenshot capture as best-effort evidence and rely on route/path/selector data when the rest of the run succeeds.
 - screenshot capture timeout: the report classifies this as `screenshot_timeout`; rerun only if the screenshot itself matters, not as a default sign of repo failure.
+- run directory exists but `report.json` is missing: inspect `trace.log` first. If the last stage is still DevTools launcher startup or websocket connection, treat the blocker as host or session state before blaming repo code.
 
 ## Notes
 
@@ -158,6 +162,7 @@ Current report schema highlights:
 - a Windows host run against a copied fixture project outside the repository completed successfully for the `home` route, but screenshot capture still timed out in that live run
 - one external public-repo forward-test is now documented in `../../docs/gui-check-forward-test.md`
 - for a second public-repo sample on a collaborator machine, use `../../docs/gui-check-collaborator-forward-test.md`
+- the launcher now has a safety valve for `cli auto` hangs; if DevTools keeps booting in the background, the harness continues toward websocket connection and records that decision in `trace.log`
 - this package is intentionally beta until that upstream dependency story is cleaner
 
 ## Remaining Work

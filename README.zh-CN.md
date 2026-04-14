@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-这个仓库现在已经打上 `v0.4.0` 标签。当前四个核心 skill 仍然都可以复用，每个 active skill 都已经补齐示例提示词并至少记录过一次验证；`wechat-gui-check` 仍以 beta 工具的形式提供，并附带了一个公开可运行的示例小程序、两份公开 sample 路由配置，以及一条已经记录下来的外部公开仓库 forward-test 证据。
+这个仓库现在已经打上 `v0.4.0` 标签。当前公开范围已经从 4 个 DevTools / scaffold 类 skill 扩展到 7 个可复用 miniapp skill：原有 4 个基础设施 skill 继续保留，另外新增了 3 个 public draft，分别覆盖中心化信息架构重排、待处理队列卡片直达动作，以及用户导向文案收束。`wechat-gui-check` 仍以 beta 工具的形式提供，而且现在除了 `report.json` 之外还会写出 `trace.log`，方便定位 DevTools 宿主侧启动卡住这类问题。
 
 `v0.4.0` 基线还额外纳入了一份机器可读的公开 skill catalog，以及一组可重放的 routing-eval fixtures，方便后续把“声明出来的边界”和“实际记录下来的证据”对齐审查。
 
@@ -27,6 +27,9 @@
 | `miniapp-devtools-recovery` | 在错误导入、模板残留或编译漂移之后恢复仓库。 | public draft |
 | `miniapp-devtools-cli-repair` | 通过官方 CLI 诊断 DevTools 问题，并判断哪些仓库级修复是安全的。 | public draft |
 | `miniapp-devtools-gui-check` | 对 `preview` 看不到的运行时或交互问题做宿主机 GUI 冒烟检查。 | public beta tool |
+| `miniapp-center-hub-refactor` | 把功能增长后变得分散的小程序重排成更清晰的中心 / hub 结构。 | public draft |
+| `miniapp-review-queue-actions` | 让待处理 / 审核队列在卡片层直接完成常用动作。 | public draft |
+| `miniapp-user-facing-copy-trim` | 把冗长页面文案收成更短、更面向用户的标签与状态摘要。 | public draft |
 
 ## 仓库结构
 
@@ -48,6 +51,9 @@
 |   |-- miniapp-devtools-cli-repair/
 |   |-- miniapp-devtools-gui-check/
 |   |-- miniapp-devtools-recovery/
+|   |-- miniapp-center-hub-refactor/
+|   |-- miniapp-review-queue-actions/
+|   |-- miniapp-user-facing-copy-trim/
 |   `-- miniapp-official-scaffold-alignment/
 `-- tools/
     `-- wechat-gui-check/
@@ -71,7 +77,7 @@
 1. 把 `v0.4.0` 视为当前抽离 skill 集合和 GUI harness 的 catalog 与 routing 稳定基线。
 2. 继续补强更多宿主机和更多仓库形态下的 forward-test 与 routing 证据。
 3. 为 recovery、scaffold 和 GUI/session 失败场景增加更多负路径验证。
-4. 只有在这些公开边界持续保持干净后，再扩展到更高层的小程序工作流技能。
+4. 在继续扩大公开范围之前，先保持这些公开边界干净，并补强新工作流类 skill 的跨仓库 forward-test。
 
 ## 本地校验
 
@@ -88,6 +94,7 @@ powershell.exe -File scripts/check.ps1
 
 - 在不同脚手架形态的公开仓库上补一条协作者宿主机 forward-test 记录。
 - 继续补 recovery 和 success-path CLI 的公开仓库证据，并在当前本地 replay pack 之外继续补 installed-skill 或 host-routed transcript。
+- 为新的中心重排、队列动作、文案收束 skill 增加跨仓库 forward-test 证据。
 
 ## 推荐阅读
 

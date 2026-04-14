@@ -54,7 +54,10 @@
               "scaffold",
               "recovery",
               "cli",
-              "gui"
+              "gui",
+              "architecture",
+              "workflow",
+              "copy"
             ]
           },
           "repo_action": {
@@ -63,7 +66,10 @@
               "review-only",
               "restore-and-clean",
               "safe-repo-fix",
-              "runtime-smoke-check"
+              "runtime-smoke-check",
+              "navigation-restructure",
+              "interaction-flow-refine",
+              "ui-copy-simplify"
             ]
           },
           "requires": {

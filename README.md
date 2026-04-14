@@ -9,7 +9,7 @@ English | [中文](./README.zh-CN.md)
 
 ## Status
 
-This repository is now tagged as `v0.4.0`. The four core skills remain reusable today, each active skill has example prompts plus at least one recorded validation pass, and the GUI checker remains a beta utility with a bundled demo miniapp, two public sample route configs, and one documented forward-test on an external public repo instead of assuming access to a private source repo.
+This repository is now tagged as `v0.4.0`. The public surface has expanded from four DevTools-and-scaffold skills to seven reusable miniapp skills: the original four infrastructure skills remain, and three new public-draft skills now cover hub-style information architecture refactors, actionable review queues, and user-facing copy trimming. The GUI checker remains a beta utility and now records `trace.log` alongside `report.json` so launcher-stage DevTools hangs can be diagnosed without private source-repo context.
 
 The `v0.4.0` baseline additionally includes a machine-readable public skill catalog plus replayable routing-eval fixtures so future reviews can compare declared skill boundaries against committed evidence assets.
 
@@ -22,7 +22,7 @@ The current `main` branch also carries transcript-backed local routing replays f
 - Wrong-root imports, stale compile settings, and TypeScript recognition drift are common.
 - These patterns are more reusable than any one product repo.
 
-## Initial Public Scope
+## Current Public Scope
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
@@ -30,6 +30,9 @@ The current `main` branch also carries transcript-backed local routing replays f
 | `miniapp-devtools-recovery` | Recover a repo after wrong-root import, template residue, or compile drift. | public draft |
 | `miniapp-devtools-cli-repair` | Diagnose DevTools through the official CLI and classify safe repo-level fixes. | public draft |
 | `miniapp-devtools-gui-check` | Run or design host-side GUI smoke checks for runtime-only failures. | public beta tool |
+| `miniapp-center-hub-refactor` | Reorganize a growing miniapp into a clearer center or hub with stable ownership. | public draft |
+| `miniapp-review-queue-actions` | Make pending or review queues actionable directly from list cards. | public draft |
+| `miniapp-user-facing-copy-trim` | Shorten verbose miniapp copy into clearer action-first labels and summaries. | public draft |
 
 ## Repository Layout
 
@@ -51,6 +54,9 @@ The current `main` branch also carries transcript-backed local routing replays f
 |   |-- miniapp-devtools-cli-repair/
 |   |-- miniapp-devtools-gui-check/
 |   |-- miniapp-devtools-recovery/
+|   |-- miniapp-center-hub-refactor/
+|   |-- miniapp-review-queue-actions/
+|   |-- miniapp-user-facing-copy-trim/
 |   `-- miniapp-official-scaffold-alignment/
 `-- tools/
     `-- wechat-gui-check/
@@ -74,7 +80,7 @@ The current `main` branch also carries transcript-backed local routing replays f
 1. Treat `v0.4.0` as the stable catalog-and-routing baseline for the extracted skill set and GUI harness.
 2. Broaden forward-test and routing evidence across more hosts and repo shapes.
 3. Add more negative-path validation for recovery, scaffold, and GUI/session failures.
-4. Expand into broader miniapp workflow skills only after those boundaries stay clean.
+4. Keep the public boundary clean while forward-testing the newer workflow-oriented skills on more repo shapes.
 
 ## Local Validation
 
@@ -91,6 +97,7 @@ This command expects `python`, `node`, and `npm` on `PATH`. It installs the tool
 
 - record one collaborator-host forward-test on a public repo with a different scaffold shape
 - broaden recovery and success-path CLI public-repo evidence, and add installed-skill or host-routed transcripts beyond the current local replay pack
+- add cross-repo forward-testing for the newer hub, queue, and copy skills
 
 See [CHANGELOG.md](./CHANGELOG.md), [docs/release-v0.1.0-public-beta.md](./docs/release-v0.1.0-public-beta.md), [docs/release-v0.3.0.md](./docs/release-v0.3.0.md), [docs/release-v0.4.0-draft.md](./docs/release-v0.4.0-draft.md), [docs/releasing.md](./docs/releasing.md), [docs/skill-map.md](./docs/skill-map.md), [docs/skill-map.zh-CN.md](./docs/skill-map.zh-CN.md), [docs/public-roadmap.md](./docs/public-roadmap.md), [docs/v0.2-execution-checklist.md](./docs/v0.2-execution-checklist.md), [docs/skill-validation-log.md](./docs/skill-validation-log.md), [docs/routing-eval-log.md](./docs/routing-eval-log.md), [docs/skill-review-checklist.md](./docs/skill-review-checklist.md), [docs/gui-check-forward-test.md](./docs/gui-check-forward-test.md), [docs/gui-check-collaborator-forward-test.md](./docs/gui-check-collaborator-forward-test.md), [docs/runtime-model-decision.md](./docs/runtime-model-decision.md), [docs/extraction-checklist.md](./docs/extraction-checklist.md), [docs/license-decision.md](./docs/license-decision.md), and [CONTRIBUTING.md](./CONTRIBUTING.md) for the detailed release plan.
 

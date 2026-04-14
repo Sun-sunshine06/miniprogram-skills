@@ -1,0 +1,16 @@
+{
+  "id": "miniapp-center-hub-refactor-over-miniapp-user-facing-copy-trim",
+  "kind": "boundary",
+  "prompt": "The text is wordy, but the bigger problem is that users cannot tell where pending work lives versus where reminder and connection settings live. Redesign the top-level information architecture first.",
+  "expected_skill": "miniapp-center-hub-refactor",
+  "forbidden_skills": [
+    "miniapp-user-facing-copy-trim"
+  ],
+  "expected_output_sections": [
+    "current navigation problem",
+    "proposed hub structure",
+    "page ownership and migration map",
+    "migration order"
+  ],
+  "source_plan": "docs/routing-eval-plan.md"
+}

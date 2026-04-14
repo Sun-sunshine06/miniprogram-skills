@@ -10,7 +10,7 @@
     "which route or flow was checked",
     "whether automation really connected",
     "what runtime evidence was collected",
-    "whether the issue is in repo code, session state, or still needs manual visual confirmation",
+    "whether the issue is in repo code, session state, a local service dependency, or still needs manual visual confirmation",
     "the next command or user action"
   ],
   "source_plan": "docs/routing-eval-plan.md"

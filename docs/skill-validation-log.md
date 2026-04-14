@@ -8,6 +8,92 @@ Current status:
 - `miniapp-devtools-gui-check`: one host-side validation recorded, plus one session-blocker failure-shape sample
 - `miniapp-devtools-recovery`: one host-side validation recorded, plus one wrong-root residue fixture review and one external public-repo-derived recovery sample
 - `miniapp-official-scaffold-alignment`: one local scaffold validation recorded, plus one deliberately broken scaffold fixture review and one external public-repo scaffold review
+- `miniapp-center-hub-refactor`: one routing-backed draft extraction review recorded
+- `miniapp-review-queue-actions`: one routing-backed draft extraction review recorded
+- `miniapp-user-facing-copy-trim`: one routing-backed draft extraction review recorded
+
+## 2026-04-14 - `miniapp-center-hub-refactor` routing-backed draft extraction
+
+**Prompt used**
+
+```text
+This miniapp started with `home / tasks / profile`, but now pending work, integrations, and settings are scattered across too many tabs. Refactor the top-level information architecture into a clearer center without turning everything into one long page.
+```
+
+**Expected behavior**
+
+- recognize an information-architecture problem instead of a copy-only or queue-card problem
+- propose a hub structure that separates pending-work flow from lower-frequency settings
+- keep detailed pages when they still own meaningful form or state flow
+
+**Observed behavior**
+
+- The extracted skill stays on top-level navigation ownership and does not drift into card-level button design.
+- The output contract is operational:
+  - current navigation problem
+  - proposed hub structure
+  - page ownership and migration map
+  - migration order
+- No source-repo route names, storage keys, or absolute paths were kept in the public skill body or references.
+
+**Gaps / follow-up**
+
+- This is routing-backed draft evidence, not yet a cross-repo forward-test.
+- A future pass should validate the same workflow on a second miniapp repository with a different tab shape.
+
+## 2026-04-14 - `miniapp-review-queue-actions` routing-backed draft extraction
+
+**Prompt used**
+
+```text
+This pending queue makes users open a detail page for every item just to approve, ignore, or import it. Redesign the queue cards so common actions happen in place and refresh safely afterward.
+```
+
+**Expected behavior**
+
+- keep the work on queue states, inline actions, and refresh chains
+- preserve detail-page navigation as a secondary path instead of the only path
+- expose a reusable mutation-and-reload sequence
+
+**Observed behavior**
+
+- The extracted skill stays on actionable queue design and does not widen into a full navigation rewrite.
+- The public contract stays reusable across approval, import, and review queues rather than one product's exact data model.
+- The references keep the state matrix, card contract, and side-effect chain separate from any app-specific terminology.
+
+**Gaps / follow-up**
+
+- This is routing-backed draft evidence, not yet a second-repo implementation sample.
+- A future pass should validate the pattern on a queue that is not task-import specific.
+
+## 2026-04-14 - `miniapp-user-facing-copy-trim` routing-backed draft extraction
+
+**Prompt used**
+
+```text
+The miniapp pages read like internal documentation. Trim the on-page text, keep only action-first labels and short status summaries, and move implementation-heavy explanation out of the main surfaces.
+```
+
+**Expected behavior**
+
+- keep the task on wording and surface density rather than broader architecture change
+- separate what stays on-page from what should move to help or detail surfaces
+- keep bilingual guidance reusable instead of repo-bound
+
+**Observed behavior**
+
+- The extracted skill stays on copy trimming and does not pretend to solve deeper navigation drift by itself.
+- The output contract remains operational:
+  - high-friction copy to cut
+  - replacement labels and summaries
+  - what to move out of the page
+  - copy validation pass
+- The public references keep proper nouns and bilingual usage as generic guidance instead of one app's vocabulary list.
+
+**Gaps / follow-up**
+
+- This is routing-backed draft evidence, not yet a cross-repo forward-test.
+- A future pass should validate the skill on a second miniapp with more bilingual or integration-heavy copy.
 
 ## 2026-04-13 - `miniapp-devtools-cli-repair` external public-repo auth/session blocker
 

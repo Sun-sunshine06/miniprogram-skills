@@ -82,6 +82,13 @@ If `open` or `preview` times out:
 
 ## Auto-Fix Decision Table
 
+Before changing files, classify the failure into one of four buckets:
+
+1. repo-scoped preview or compile failure
+2. host, login, AppID, or DevTools session blocker
+3. GUI-only runtime issue after a route opens
+4. local service dependency outside preview scope
+
 ### Preview Exposes A Repo Syntax Or Compile Error
 
 Action:
@@ -112,6 +119,22 @@ Action:
 
 - say the CLI path was exhausted
 - ask for the exact screenshot or GUI evidence that still blocks diagnosis
+
+### Preview Is Green But The Page Still Fails At Runtime
+
+Action:
+
+- stop the CLI-only loop
+- classify the remaining blocker as GUI-only runtime evidence
+- hand off to `miniapp-devtools-gui-check` or the repo's service-debug path
+
+### Route Fails Because A Local Service Is Unavailable
+
+Action:
+
+- do not misclassify the issue as a preview compile failure
+- keep the CLI result as "compile path healthy"
+- ask for the service contract, local backend status, or GUI/runtime evidence that shows the failing request
 
 ## Success Criteria
 

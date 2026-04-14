@@ -1,0 +1,4 @@
+interface:
+  display_name: "Miniapp User Facing Copy Trim"
+  short_description: "Shorten verbose miniapp copy into clearer action-first labels and summaries."
+  default_prompt: "Use $miniapp-user-facing-copy-trim to simplify a miniapp's on-page text, remove implementation-heavy wording, and replace it with shorter user-facing labels and status summaries."

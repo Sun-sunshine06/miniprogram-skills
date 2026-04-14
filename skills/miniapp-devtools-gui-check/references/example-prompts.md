@@ -15,7 +15,7 @@ Use these prompts to validate whether the skill is triggered only after CLI evid
 1. which route or flow was checked
 2. whether automation really connected to DevTools
 3. what runtime evidence was collected from the report
-4. whether the failure belongs to repo code, DevTools session state, or still needs manual visual confirmation
+4. whether the failure belongs to repo code, DevTools session state, a local service dependency, or still needs manual visual confirmation
 5. the next command or user action
 
 **Evaluation notes**

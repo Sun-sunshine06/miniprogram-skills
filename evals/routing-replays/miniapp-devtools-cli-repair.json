@@ -19,7 +19,7 @@
       "content": "It is auto-fixable only if `preview` shows a narrow repo-local problem such as `project.config.json`, `app.json`, `tsconfig.json`, or a precise syntax/path mismatch; AppID, login, and GUI-only runtime failures are not safe repo auto-fixes."
     },
     {
-      "heading": "what was changed or what screenshot is still needed",
+      "heading": "what was changed or what further evidence is still needed",
       "content": "If `preview` exposes a local config or path issue, apply the smallest matching repo fix; if `preview` is already green and the failure only appears after interaction, stop here and ask for a GUI-side smoke check instead of another screenshot."
     },
     {

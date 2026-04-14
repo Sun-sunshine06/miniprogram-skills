@@ -1,6 +1,6 @@
 ---
 name: miniapp-devtools-cli-repair
-description: Diagnose WeChat DevTools failures through the official CLI instead of relying only on GUI screenshots. Use when Codex needs to run `open`, `preview`, or related commands, discover the live service port, classify whether a failure is CLI-visible, and apply or suggest safe repo-level fixes.
+description: Diagnose WeChat DevTools failures through the official CLI instead of relying only on GUI screenshots. Use when Codex needs to run `open`, `preview`, or related commands, discover the live service port, classify whether a failure is CLI-visible, host-side, or outside preview scope, and apply or suggest only safe repo-level fixes.
 ---
 
 # Miniapp Devtools Cli Repair
@@ -15,7 +15,11 @@ Use this skill when the user needs CLI-visible evidence from WeChat DevTools. Tr
 2. Confirm the official DevTools CLI exists and can print help.
 3. Use `open` to establish IDE connectivity and the live service port.
 4. Use `preview` as the primary mini program compile check.
-5. Classify the result as CLI-visible and auto-fixable, CLI-visible but not safe to auto-fix, or GUI-only.
+5. Classify the result as:
+   - CLI-visible and auto-fixable
+   - CLI-visible but not safe to auto-fix
+   - host or account blocker
+   - outside preview scope and better handled by GUI or service-level debugging
 
 ## Core Rules
 
@@ -24,7 +28,8 @@ Use this skill when the user needs CLI-visible evidence from WeChat DevTools. Tr
 - For miniapp compile diagnosis, prefer `preview` over `engine build`.
 - Use `open` first when the live service port is unknown or the current IDE session is suspect.
 - Auto-fix only repository-scoped problems such as root-path drift, page-path mismatch, or small syntax issues surfaced with exact locations.
-- Do not claim full coverage when the error exists only in GUI-only panels or compile-mode menus.
+- If `preview` is already green or the remaining blocker is a page-side `request:fail`, do not keep grinding CLI repair; move to GUI/runtime or service debugging.
+- Do not claim full coverage when the error exists only in GUI-only panels, runtime requests, or compile-mode menus.
 
 ## Auto-Fix Boundary
 
@@ -45,7 +50,7 @@ When answering, keep the result operational:
 
 1. what the CLI exposed
 2. whether the issue is auto-fixable
-3. what was changed or what screenshot is still needed
+3. what was changed or what further evidence is still needed
 4. the next command or user action
 
 ## Resources

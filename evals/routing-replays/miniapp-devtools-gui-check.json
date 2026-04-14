@@ -23,8 +23,8 @@
       "content": "Use page path, primary selector presence, console output, exception events, and the generated report as the primary signals; screenshots are best-effort only."
     },
     {
-      "heading": "whether the issue is in repo code, session state, or still needs manual visual confirmation",
-      "content": "A selector/assertion failure or runtime exception points back to repo behavior, an automation connection or session/auth problem points to DevTools state, and a screenshot-only mismatch still needs manual visual confirmation."
+      "heading": "whether the issue is in repo code, session state, a local service dependency, or still needs manual visual confirmation",
+      "content": "A selector/assertion failure or runtime exception points back to repo behavior, an automation connection problem points to DevTools state, a route-level `request:fail` points to a local service dependency, and a screenshot-only mismatch still needs manual visual confirmation."
     },
     {
       "heading": "the next command or user action",
