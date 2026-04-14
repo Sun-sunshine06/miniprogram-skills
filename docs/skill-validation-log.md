@@ -9,7 +9,6 @@ Current status:
 - `miniapp-devtools-recovery`: one host-side validation recorded, plus one wrong-root residue fixture review and one external public-repo-derived recovery sample
 - `miniapp-official-scaffold-alignment`: one local scaffold validation recorded, plus one deliberately broken scaffold fixture review and one external public-repo scaffold review
 - `miniapp-center-hub-refactor`: one routing-backed draft extraction review recorded
-- `miniapp-review-queue-actions`: one routing-backed draft extraction review recorded
 - `miniapp-user-facing-copy-trim`: one routing-backed draft extraction review recorded
 
 ## 2026-04-14 - `miniapp-center-hub-refactor` routing-backed draft extraction
@@ -40,31 +39,6 @@ This miniapp started with `home / tasks / profile`, but now pending work, integr
 
 - This is routing-backed draft evidence, not yet a cross-repo forward-test.
 - A future pass should validate the same workflow on a second miniapp repository with a different tab shape.
-
-## 2026-04-14 - `miniapp-review-queue-actions` routing-backed draft extraction
-
-**Prompt used**
-
-```text
-This pending queue makes users open a detail page for every item just to approve, ignore, or import it. Redesign the queue cards so common actions happen in place and refresh safely afterward.
-```
-
-**Expected behavior**
-
-- keep the work on queue states, inline actions, and refresh chains
-- preserve detail-page navigation as a secondary path instead of the only path
-- expose a reusable mutation-and-reload sequence
-
-**Observed behavior**
-
-- The extracted skill stays on actionable queue design and does not widen into a full navigation rewrite.
-- The public contract stays reusable across approval, import, and review queues rather than one product's exact data model.
-- The references keep the state matrix, card contract, and side-effect chain separate from any app-specific terminology.
-
-**Gaps / follow-up**
-
-- This is routing-backed draft evidence, not yet a second-repo implementation sample.
-- A future pass should validate the pattern on a queue that is not task-import specific.
 
 ## 2026-04-14 - `miniapp-user-facing-copy-trim` routing-backed draft extraction
 

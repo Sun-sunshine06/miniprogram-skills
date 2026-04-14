@@ -46,7 +46,7 @@ Users cannot tell where to process pending items versus where to change reminder
 ## Do Not Use This Skill When
 
 ```text
-The structure is fine, but every pending item still forces a detail-page detour just to approve or ignore it. Keep the navigation and redesign the queue card actions instead.
+The structure is fine, but page titles, banners, and button text still read like internal documentation. Keep the navigation and trim the on-page copy instead.
 ```
 
-Use `miniapp-review-queue-actions` instead, because the blocker is queue interaction design rather than top-level navigation.
+Use `miniapp-user-facing-copy-trim` instead, because the blocker is on-page wording rather than top-level navigation.

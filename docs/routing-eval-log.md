@@ -8,14 +8,14 @@ Evidence source preference remains:
 2. replayable eval runs where the prompt and answer are both captured
 3. curated maintainer notes when the first two are not yet available
 
-As of 2026-04-14, the repository still does not include a live installed-skill router or transcript capture flow. It now does include committed replay transcripts under `evals/routing-replays/` for all 7 positive fixtures and the 5 adjacent boundary prompts. These entries are stronger than the earlier curated notes because the prompt and answer are both captured, but they are still local replay evidence rather than live installed-skill routing.
+As of 2026-04-14, the repository still does not include a live installed-skill router or transcript capture flow. It now does include committed replay transcripts under `evals/routing-replays/` for all 6 positive fixtures and the 3 adjacent boundary prompts. These entries are stronger than the earlier curated notes because the prompt and answer are both captured, but they are still local replay evidence rather than live installed-skill routing.
 
 Current status:
 
-- positive fixtures with a replay transcript: 7 / 7
-- boundary fixtures with a replay transcript: 5 / 5
+- positive fixtures with a replay transcript: 6 / 6
+- boundary fixtures with a replay transcript: 3 / 3
 - installed-skill transcripts recorded: 0
-- replay transcripts recorded: 12
+- replay transcripts recorded: 9
 - collaborator-host routing runs recorded: 0
 
 ## 2026-04-14 - `miniapp-center-hub-refactor`
@@ -40,29 +40,6 @@ Current status:
 **Evidence source**
 
 - replay transcript captured at `evals/routing-replays/miniapp-center-hub-refactor.json`
-
-## 2026-04-14 - `miniapp-review-queue-actions`
-
-**Prompt fixture**
-
-- `evals/routing/positive/miniapp-review-queue-actions.json`
-
-**Expected routing**
-
-- use `miniapp-review-queue-actions`
-
-**Observed routing**
-
-- selected correctly
-
-**Observed answer shape**
-
-- the replay answer preserves all 4 required output sections in the expected order
-- the answer stays on queue-state actions and refresh flow instead of widening into navigation redesign
-
-**Evidence source**
-
-- replay transcript captured at `evals/routing-replays/miniapp-review-queue-actions.json`
 
 ## 2026-04-14 - `miniapp-user-facing-copy-trim`
 
@@ -228,30 +205,6 @@ Current status:
 - the strongest routing signal remains that `preview` is already green and the user explicitly asks for runtime evidence instead of another compile check
 - this is still the highest-confusion adjacent boundary and remains a strong candidate for the first live installed-skill transcript
 
-## 2026-04-14 - Boundary `miniapp-center-hub-refactor` over `miniapp-review-queue-actions`
-
-**Prompt fixture**
-
-- `evals/routing/boundaries/miniapp-center-hub-refactor-over-miniapp-review-queue-actions.json`
-
-**Expected routing**
-
-- use `miniapp-center-hub-refactor`
-- do not route to `miniapp-review-queue-actions`
-
-**Observed routing**
-
-- selected correctly
-
-**Observed answer shape**
-
-- the replay answer preserves all 4 hub-refactor sections in the expected order
-- the answer treats queue-card changes as secondary until top-level ownership is fixed
-
-**Evidence source**
-
-- replay transcript captured at `evals/routing-replays/miniapp-center-hub-refactor-over-miniapp-review-queue-actions.json`
-
 ## 2026-04-14 - Boundary `miniapp-center-hub-refactor` over `miniapp-user-facing-copy-trim`
 
 **Prompt fixture**
@@ -275,30 +228,6 @@ Current status:
 **Evidence source**
 
 - replay transcript captured at `evals/routing-replays/miniapp-center-hub-refactor-over-miniapp-user-facing-copy-trim.json`
-
-## 2026-04-14 - Boundary `miniapp-review-queue-actions` over `miniapp-user-facing-copy-trim`
-
-**Prompt fixture**
-
-- `evals/routing/boundaries/miniapp-review-queue-actions-over-miniapp-user-facing-copy-trim.json`
-
-**Expected routing**
-
-- use `miniapp-review-queue-actions`
-- do not route to `miniapp-user-facing-copy-trim`
-
-**Observed routing**
-
-- selected correctly
-
-**Observed answer shape**
-
-- the replay answer preserves all 4 queue-action sections in the expected order
-- the answer keeps the boundary on card-level action design and refresh flow rather than drifting into label-only cleanup
-
-**Evidence source**
-
-- replay transcript captured at `evals/routing-replays/miniapp-review-queue-actions-over-miniapp-user-facing-copy-trim.json`
 
 ## 2026-04-13 - Boundary `miniapp-official-scaffold-alignment` over `miniapp-devtools-recovery`
 

@@ -11,7 +11,6 @@
 | `miniapp-devtools-cli-repair` | 把官方 DevTools CLI 作为主诊断路径。 | `SKILL.md` + CLI playbook | high |
 | `miniapp-devtools-gui-check` | 捕捉 `preview` 暴露不出来的运行时和交互故障。 | `SKILL.md` + GUI playbook + public beta tool | high |
 | `miniapp-center-hub-refactor` | 把功能增长后变得分散的小程序重排成更清晰的中心 / hub 结构。 | `SKILL.md` + hub playbook | medium |
-| `miniapp-review-queue-actions` | 让待处理 / 审核队列在卡片层直接完成常用动作。 | `SKILL.md` + queue-actions playbook | medium |
 | `miniapp-user-facing-copy-trim` | 把冗长页面文案收成更短、更面向用户的标签与状态摘要。 | `SKILL.md` + copy-trim playbook | medium |
 
 ## 计划中的 Skills

@@ -11,7 +11,6 @@ English | [中文](./skill-map.zh-CN.md)
 | `miniapp-devtools-cli-repair` | Use the official DevTools CLI as the primary diagnostic path. | `SKILL.md` + CLI playbook | high |
 | `miniapp-devtools-gui-check` | Catch runtime and interaction failures that do not surface in `preview`. | `SKILL.md` + GUI playbook + public beta tool | high |
 | `miniapp-center-hub-refactor` | Reorganize a growing miniapp into a clearer hub with stable section ownership. | `SKILL.md` + hub playbook | medium |
-| `miniapp-review-queue-actions` | Make pending or review queues actionable directly from list cards. | `SKILL.md` + queue-actions playbook | medium |
 | `miniapp-user-facing-copy-trim` | Shorten verbose miniapp copy into clearer action-first UI text. | `SKILL.md` + copy-trim playbook | medium |
 
 ## Planned Skills

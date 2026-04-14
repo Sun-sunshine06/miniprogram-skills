@@ -4,8 +4,8 @@ All notable changes to this repository will be documented in this file.
 
 ## Unreleased
 
-- added three new public-draft skills: `miniapp-center-hub-refactor`, `miniapp-review-queue-actions`, and `miniapp-user-facing-copy-trim`, plus catalog entries, routing fixtures, and replay transcripts for their public boundaries
-- expanded the public skill catalog and validators so architecture, queue-interaction, and copy-simplification skills are now first-class public surfaces
+- added two new public-draft skills: `miniapp-center-hub-refactor` and `miniapp-user-facing-copy-trim`, plus catalog entries, routing fixtures, and replay transcripts for their public boundaries
+- expanded the public skill catalog and validators so architecture and copy-simplification skills are now first-class public surfaces
 - upgraded the public `wechat-gui-check` guidance and harness shape to capture `trace.log`, making launcher-stage DevTools hangs easier to classify without source-repo coupling
 - added `evals/routing-replays/` plus `scripts/validate_routing_replays.py` so every committed routing case now has a replayable prompt-and-answer transcript with section-level validation
 - updated `scripts/check.ps1`, the routing log, roadmap, conventions, review checklist, and README docs so routing replay transcripts are treated as part of the repository's maintained evidence surface
@@ -13,6 +13,7 @@ All notable changes to this repository will be documented in this file.
 - recorded initial non-GUI public-repo evidence for scaffold review, recovery cleanup on a disposable public-repo copy, and CLI auth/session blocker classification on `ecomfe/echarts-for-weixin`, and updated the skill catalog evidence flags accordingly
 - recorded a post-login CLI retest showing that public-repo `open` can succeed on a disposable copy while `preview` still requires a preview-acceptable testing AppID, narrowing the remaining success-path blocker for `miniapp-devtools-cli-repair`
 - recorded a successful host-side `open` + `preview` CLI sample on a locally owned miniapp project, proving the `miniapp-devtools-cli-repair` success branch even though the remaining public-repo success sample still needs a preview-acceptable testing AppID
+- removed `miniapp-review-queue-actions` from the public draft set after deciding its queue-specific action flow was too product-bound for general reuse
 
 ## v0.4.0 - 2026-03-31
 

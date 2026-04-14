@@ -5,8 +5,7 @@
   "capture_method": "Manual local replay against the committed routing fixture and the extracted public-draft skill contract.",
   "selected_skill": "miniapp-user-facing-copy-trim",
   "rejected_skills": [
-    "miniapp-center-hub-refactor",
-    "miniapp-review-queue-actions"
+    "miniapp-center-hub-refactor"
   ],
   "observed_output_sections": [
     {

@@ -5,8 +5,7 @@
   "capture_method": "Manual local replay against the committed boundary fixture and the extracted public-draft skill contract.",
   "selected_skill": "miniapp-center-hub-refactor",
   "rejected_skills": [
-    "miniapp-user-facing-copy-trim",
-    "miniapp-review-queue-actions"
+    "miniapp-user-facing-copy-trim"
   ],
   "observed_output_sections": [
     {

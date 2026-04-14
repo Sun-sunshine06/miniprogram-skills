@@ -104,29 +104,6 @@
         "collaborator_host_test": false
       },
       "routing_priority_over": [
-        "miniapp-review-queue-actions",
-        "miniapp-user-facing-copy-trim"
-      ]
-    },
-    {
-      "id": "miniapp-review-queue-actions",
-      "status": "public-draft",
-      "public_readiness": "medium",
-      "surface": "workflow",
-      "repo_action": "interaction-flow-refine",
-      "requires": {
-        "wechat_devtools_installation": false,
-        "official_cli": false,
-        "gui_automation": false,
-        "user_supplied_miniprogram_automator": false
-      },
-      "evidence": {
-        "validation_log": true,
-        "routing_fixture": true,
-        "external_forward_test": false,
-        "collaborator_host_test": false
-      },
-      "routing_priority_over": [
         "miniapp-user-facing-copy-trim"
       ]
     },

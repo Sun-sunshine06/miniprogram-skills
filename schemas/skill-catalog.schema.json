@@ -56,7 +56,6 @@
               "cli",
               "gui",
               "architecture",
-              "workflow",
               "copy"
             ]
           },
@@ -68,7 +67,6 @@
               "safe-repo-fix",
               "runtime-smoke-check",
               "navigation-restructure",
-              "interaction-flow-refine",
               "ui-copy-simplify"
             ]
           },

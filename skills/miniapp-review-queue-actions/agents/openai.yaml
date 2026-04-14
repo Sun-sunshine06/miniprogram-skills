@@ -1,4 +1,0 @@
-interface:
-  display_name: "Miniapp Review Queue Actions"
-  short_description: "Make pending or review queues actionable directly from list cards."
-  default_prompt: "Use $miniapp-review-queue-actions to redesign a miniapp review or pending queue so common actions happen directly on cards, with a clear state matrix and refresh chain."
