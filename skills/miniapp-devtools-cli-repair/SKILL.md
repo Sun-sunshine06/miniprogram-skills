@@ -1,6 +1,13 @@
 ---
 name: miniapp-devtools-cli-repair
 description: Diagnose WeChat DevTools failures through the official CLI instead of relying only on GUI screenshots. Use when Codex needs to run `open`, `preview`, or related commands, discover the live service port, classify whether a failure is CLI-visible, host-side, or outside preview scope, and apply or suggest only safe repo-level fixes.
+tools:
+  - Bash
+  - Read
+  - Edit
+  - Glob
+  - Grep
+slash_command: /miniapp-devtools-cli-repair
 ---
 
 # Miniapp Devtools Cli Repair
