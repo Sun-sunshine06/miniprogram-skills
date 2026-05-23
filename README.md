@@ -8,7 +8,26 @@
 
 > Reusable AI coding skills for WeChat Mini Program development, DevTools diagnosis, scaffold validation, and miniapp architecture optimization. Works with Codex and Claude Code.
 
+## What is Miniprogram Skills?
+
+**Miniprogram Skills** is an open-source AI coding skill library specifically designed for WeChat Mini Program development. It provides **6 reusable skills** that help developers diagnose DevTools issues, validate project scaffolds, optimize miniapp architecture, and improve user-facing copy.
+
+The project supports **2 AI coding platforms** (Codex and Claude Code) and includes complete **bilingual documentation** in English and Chinese.
+
+### Key Statistics
+
+| Metric | Value |
+|--------|-------|
+| Reusable Skills | 6 |
+| AI Platforms Supported | 2 (Codex, Claude Code) |
+| GitHub Topics | 13 |
+| Documentation Languages | 2 (English, Chinese) |
+| Evaluation Fixtures | 10+ |
+| Machine-Readable Catalog | 1 (JSON) |
+
 ## Why This Exists
+
+Based on [WeChat Mini Program Official Documentation](https://developers.weixin.qq.com/miniprogram/dev/framework/) and [WeChat DevTools Documentation](https://developers.weixin.qq.com/miniprogram/dev/devtools/), common issues include:
 
 - WeChat Mini Program setup and DevTools failures repeat across projects
 - CLI-visible failures and GUI-only failures need different workflows
@@ -35,6 +54,17 @@
 | `miniapp-center-hub-refactor` | Reorganize a growing miniapp into a clearer center or hub with stable ownership | public draft |
 | `miniapp-user-facing-copy-trim` | Shorten verbose miniapp copy into clearer action-first labels and summaries | public draft |
 
+## Use Case Scenarios
+
+| Scenario | Recommended Skill | Description |
+|----------|------------------|-------------|
+| DevTools shows errors | `miniapp-devtools-cli-repair` | Diagnose CLI-visible failures through official CLI |
+| Wrong root import | `miniapp-devtools-recovery` | Recover from wrong-root imports or template residue |
+| Scaffold validation | `miniapp-official-scaffold-alignment` | Validate project structure against official guidelines |
+| GUI runtime issues | `miniapp-devtools-gui-check` | Check GUI-only runtime failures |
+| Navigation reorganization | `miniapp-center-hub-refactor` | Reorganize scattered tabs into hub structure |
+| Verbose UI copy | `miniapp-user-facing-copy-trim` | Simplify user-facing text |
+
 ## Quick Start
 
 ### For Codex Users
@@ -60,31 +90,6 @@ cd miniprogram-skills
 # Run validation
 pwsh -File scripts/check.ps1
 ```
-
-## Use Cases
-
-### DevTools Diagnosis
-
-When WeChat DevTools shows errors or behaves unexpectedly:
-
-- Use `miniapp-devtools-cli-repair` for CLI-visible failures
-- Use `miniapp-devtools-gui-check` for GUI-only runtime issues
-- Use `miniapp-devtools-recovery` for wrong-root imports or template residue
-
-### Project Setup
-
-When starting a new miniapp project:
-
-- Use `miniapp-official-scaffold-alignment` to validate your scaffold
-- Ensure proper TypeScript configuration
-- Verify project structure matches official guidelines
-
-### Architecture Optimization
-
-When your miniapp grows complex:
-
-- Use `miniapp-center-hub-refactor` to reorganize navigation
-- Use `miniapp-user-facing-copy-trim` to improve user-facing text
 
 ## Repository Layout
 
@@ -130,6 +135,40 @@ Each skill can be triggered manually in Claude Code using its slash command:
 | `miniapp-devtools-gui-check` | `/miniapp-devtools-gui-check` |
 | `miniapp-center-hub-refactor` | `/miniapp-center-hub-refactor` |
 | `miniapp-user-facing-copy-trim` | `/miniapp-user-facing-copy-trim` |
+
+## Frequently Asked Questions (FAQ)
+
+### What is Miniprogram Skills used for?
+
+Miniprogram Skills is an open-source AI coding skill library for WeChat Mini Program development. It provides reusable skills for diagnosing DevTools issues, validating project scaffolds, optimizing miniapp architecture, and improving user-facing copy.
+
+### How do I use these skills with Claude Code?
+
+You can use skills in Claude Code in two ways:
+1. **Auto-trigger**: Claude Code automatically invokes skills based on the `description` field in SKILL.md
+2. **Manual trigger**: Use slash commands like `/miniapp-devtools-recovery` or `/miniapp-official-scaffold-alignment`
+
+### Which AI coding platforms are supported?
+
+Miniprogram Skills supports **2 AI coding platforms**:
+- **Codex** (OpenAI) - Uses `agents/openai.yaml` configuration
+- **Claude Code** (Anthropic) - Uses SKILL.md frontmatter with `tools` and `slash_command` fields
+
+### What types of issues can these skills diagnose?
+
+The skills can diagnose:
+- **CLI-visible failures**: Compile errors, preview issues, service port problems
+- **GUI-only runtime issues**: Page load failures, interaction problems, WebSocket issues
+- **Project structure issues**: Wrong root imports, template residue, TypeScript recognition drift
+- **Architecture problems**: Scattered navigation, verbose UI copy
+
+### Is this project actively maintained?
+
+Yes, the project is actively maintained with regular updates. The current version is `v0.4.0` with 6 public skills and comprehensive evaluation fixtures.
+
+### How do I contribute to this project?
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines. The project welcomes contributions including new skills, bug fixes, documentation improvements, and forward-testing on different miniapp repos.
 
 ## Local Validation
 

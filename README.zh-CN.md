@@ -8,7 +8,26 @@
 
 > 面向微信小程序开发、DevTools 诊断、脚手架校验与小程序架构优化的可复用 AI 编码技能集。支持 Codex 和 Claude Code。
 
+## 什么是 Miniprogram Skills？
+
+**Miniprogram Skills** 是一个专门为微信小程序开发设计的开源 AI 编码技能库。它提供 **6 个可复用技能**，帮助开发者诊断 DevTools 问题、验证项目脚手架、优化小程序架构和改进用户界面文案。
+
+该项目支持 **2 个 AI 编码平台**（Codex 和 Claude Code），并提供完整的**中英文双语文档**。
+
+### 项目数据
+
+| 指标 | 数值 |
+|------|------|
+| 可复用技能 | 6 个 |
+| 支持的 AI 平台 | 2 个（Codex、Claude Code） |
+| GitHub 标签 | 13 个 |
+| 文档语言 | 2 种（英文、中文） |
+| 评估 Fixtures | 10+ 个 |
+| 机器可读目录 | 1 个（JSON） |
+
 ## 为什么会有这个仓库
+
+基于[微信小程序官方开发文档](https://developers.weixin.qq.com/miniprogram/dev/framework/)和[微信开发者工具文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/)，常见问题包括：
 
 - 微信小程序初始化、导入和 DevTools 故障会在不同项目里重复出现
 - 只能在 CLI 里看到的问题，和只能在 GUI 里看到的问题，需要不同的处理流程
@@ -35,6 +54,17 @@
 | `miniapp-center-hub-refactor` | 把功能增长后变得分散的小程序重排成更清晰的中心 / hub 结构 | public draft |
 | `miniapp-user-facing-copy-trim` | 把冗长页面文案收成更短、更面向用户的标签与状态摘要 | public draft |
 
+## 使用场景
+
+| 场景 | 推荐技能 | 说明 |
+|------|---------|------|
+| DevTools 报错 | `miniapp-devtools-cli-repair` | 通过官方 CLI 诊断 CLI 可见的故障 |
+| 错误导入根目录 | `miniapp-devtools-recovery` | 从错误导入或模板残留中恢复 |
+| 脚手架校验 | `miniapp-official-scaffold-alignment` | 验证项目结构是否符合官方指南 |
+| GUI 运行时问题 | `miniapp-devtools-gui-check` | 检查仅 GUI 可见的运行时故障 |
+| 导航重组 | `miniapp-center-hub-refactor` | 将分散的标签重组为 hub 结构 |
+| 冗长 UI 文案 | `miniapp-user-facing-copy-trim` | 简化用户界面文案 |
+
 ## 快速开始
 
 ### Codex 用户
@@ -46,7 +76,7 @@
 技能可以通过两种方式触发：
 
 1. **自动触发**：Claude Code 根据 `description` 字段自动调用技能
-2. **手动触发**：使用斜杠命令，如 `/miniapp-devtools-recovery`
+2. **手动触发**：使用斜杠命令，如 `/miniapp-devtools-recovery` 或 `/miniapp-official-scaffold-alignment`
 
 ### 安装
 
@@ -60,31 +90,6 @@ cd miniprogram-skills
 # 运行验证
 pwsh -File scripts/check.ps1
 ```
-
-## 使用场景
-
-### DevTools 诊断
-
-当微信开发者工具显示错误或行为异常时：
-
-- 使用 `miniapp-devtools-cli-repair` 处理 CLI 可见的故障
-- 使用 `miniapp-devtools-gui-check` 处理仅 GUI 可见的运行时问题
-- 使用 `miniapp-devtools-recovery` 处理错误导入或模板残留
-
-### 项目初始化
-
-当开始新的小程序项目时：
-
-- 使用 `miniapp-official-scaffold-alignment` 验证脚手架
-- 确保正确的 TypeScript 配置
-- 验证项目结构符合官方指南
-
-### 架构优化
-
-当小程序变得复杂时：
-
-- 使用 `miniapp-center-hub-refactor` 重新组织导航
-- 使用 `miniapp-user-facing-copy-trim` 改进用户界面文案
 
 ## 仓库结构
 
@@ -130,6 +135,40 @@ pwsh -File scripts/check.ps1
 | `miniapp-devtools-gui-check` | `/miniapp-devtools-gui-check` |
 | `miniapp-center-hub-refactor` | `/miniapp-center-hub-refactor` |
 | `miniapp-user-facing-copy-trim` | `/miniapp-user-facing-copy-trim` |
+
+## 常见问题 (FAQ)
+
+### 这个仓库是做什么的？
+
+Miniprogram Skills 是一个面向微信小程序开发的开源 AI 编码技能库。它提供可复用的技能，用于诊断 DevTools 问题、验证项目脚手架、优化小程序架构和改进用户界面文案。
+
+### 如何在 Claude Code 中使用这些技能？
+
+在 Claude Code 中使用技能有两种方式：
+1. **自动触发**：Claude Code 根据 SKILL.md 中的 `description` 字段自动调用技能
+2. **手动触发**：使用斜杠命令，如 `/miniapp-devtools-recovery` 或 `/miniapp-official-scaffold-alignment`
+
+### 支持哪些 AI 编码平台？
+
+Miniprogram Skills 支持 **2 个 AI 编码平台**：
+- **Codex**（OpenAI）- 使用 `agents/openai.yaml` 配置
+- **Claude Code**（Anthropic）- 使用 SKILL.md 的 `tools` 和 `slash_command` 字段
+
+### 这些技能可以诊断哪些类型的问题？
+
+技能可以诊断：
+- **CLI 可见的故障**：编译错误、预览问题、服务端口问题
+- **仅 GUI 可见的运行时问题**：页面加载失败、交互问题、WebSocket 问题
+- **项目结构问题**：错误导入根目录、模板残留、TypeScript 识别漂移
+- **架构问题**：分散的导航、冗长的 UI 文案
+
+### 这个项目是否在积极维护？
+
+是的，该项目在积极维护并定期更新。当前版本是 `v0.4.0`，包含 6 个公开技能和全面的评估 fixtures。
+
+### 如何为这个项目做贡献？
+
+请参阅 [CONTRIBUTING.md](./CONTRIBUTING.md) 了解贡献指南。该项目欢迎各种贡献，包括新技能、错误修复、文档改进和在不同小程序仓库上的 forward-testing。
 
 ## 本地校验
 
