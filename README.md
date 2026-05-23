@@ -1,6 +1,6 @@
 # Miniprogram Skills - Reusable Codex & Claude Code Skills for WeChat Mini Program Development
 
-[![Validate](https://github.com/Sun-sunshine06/miniprogram-skills/actions/workflows/production.yml/badge.svg)](https://github.com/Sun-sunshine06/miniprogram-skills/actions/workflows/production.yml)
+[![Validate](https://github.com/Sun-sunshine06/miniprogram-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/Sun-sunshine06/miniprogram-skills/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/github/license/Sun-sunshine06/miniprogram-skills)](https://github.com/Sun-sunshine06/miniprogram-skills/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/Sun-sunshine06/miniprogram-skills?style=social)](https://github.com/Sun-sunshine06/miniprogram-skills/stargazers)
 
