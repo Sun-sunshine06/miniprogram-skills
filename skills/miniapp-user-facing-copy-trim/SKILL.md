@@ -1,6 +1,14 @@
 ---
 name: miniapp-user-facing-copy-trim
 description: Simplify on-page WeChat Mini Program copy so main surfaces become shorter, more action-first, and more user-facing. Use when Codex needs to trim verbose labels, mixed implementation detail, over-explained settings, or long empty-state and status text without changing the underlying business flow.
+tools:
+  - Bash
+  - Read
+  - Edit
+  - Glob
+  - Grep
+  - Write
+slash_command: /miniapp-user-facing-copy-trim
 ---
 
 # Miniapp User Facing Copy Trim

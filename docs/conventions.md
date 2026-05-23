@@ -18,6 +18,33 @@ skill-name/
 `-- references/
 ```
 
+## SKILL.md YAML Frontmatter
+
+All SKILL.md files use YAML frontmatter with the following fields:
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `name` | Yes | Skill identifier, lowercase with hyphens |
+| `description` | Yes | Skill description for auto-trigger detection |
+| `tools` | No | Claude Code tools available to this skill |
+| `slash_command` | No | Manual trigger command, format: `/skill-name` |
+
+Example:
+
+```yaml
+---
+name: my-skill
+description: Description of when to use this skill.
+tools:
+  - Bash
+  - Read
+  - Edit
+slash_command: /my-skill
+---
+```
+
+Codex ignores `tools` and `slash_command` fields and continues using `agents/openai.yaml`.
+
 ## Writing Rules
 
 - Keep `SKILL.md` short and procedural.

@@ -13,6 +13,26 @@
 | `miniapp-center-hub-refactor` | 把功能增长后变得分散的小程序重排成更清晰的中心 / hub 结构。 | `SKILL.md` + hub playbook | medium |
 | `miniapp-user-facing-copy-trim` | 把冗长页面文案收成更短、更面向用户的标签与状态摘要。 | `SKILL.md` + copy-trim playbook | medium |
 
+## 平台兼容性
+
+所有 Skills 同时支持 Codex 和 Claude Code：
+
+- **Codex**：从 SKILL.md 读取 `name` 和 `description`，使用 `agents/openai.yaml` 进行平台配置
+- **Claude Code**：读取 SKILL.md 的所有字段，包括可选的 `tools` 和 `slash_command`
+
+### 斜杠命令
+
+每个 Skill 在 Claude Code 中都可以通过斜杠命令手动触发：
+
+| Skill | 斜杠命令 |
+|-------|----------|
+| `miniapp-official-scaffold-alignment` | `/miniapp-official-scaffold-alignment` |
+| `miniapp-devtools-recovery` | `/miniapp-devtools-recovery` |
+| `miniapp-devtools-cli-repair` | `/miniapp-devtools-cli-repair` |
+| `miniapp-devtools-gui-check` | `/miniapp-devtools-gui-check` |
+| `miniapp-center-hub-refactor` | `/miniapp-center-hub-refactor` |
+| `miniapp-user-facing-copy-trim` | `/miniapp-user-facing-copy-trim` |
+
 ## 计划中的 Skills
 
 这些方向有价值，但当前仍然和具体产品实现绑定得更紧，所以没有进入当前公开范围：

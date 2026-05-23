@@ -71,13 +71,27 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str], str]:
     frontmatter_lines, body = split_frontmatter(text)
 
     data: dict[str, str] = {}
+    current_key: str | None = None
     for line in frontmatter_lines:
         if not line.strip():
+            continue
+        # Handle YAML list items (e.g., "  - Bash")
+        if line.strip().startswith("- "):
+            if current_key is None:
+                raise ValueError(f"invalid frontmatter line: {line}")
+            # Append to existing list value
+            existing = data.get(current_key, "")
+            item = line.strip()[2:].strip()
+            if existing:
+                data[current_key] = f"{existing}, {item}"
+            else:
+                data[current_key] = item
             continue
         if ":" not in line:
             raise ValueError(f"invalid frontmatter line: {line}")
         key, value = line.split(":", 1)
-        data[key.strip()] = value.strip()
+        current_key = key.strip()
+        data[current_key] = value.strip()
     return data, body
 
 

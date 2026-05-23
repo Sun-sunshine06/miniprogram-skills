@@ -13,6 +13,26 @@ English | [中文](./skill-map.zh-CN.md)
 | `miniapp-center-hub-refactor` | Reorganize a growing miniapp into a clearer hub with stable section ownership. | `SKILL.md` + hub playbook | medium |
 | `miniapp-user-facing-copy-trim` | Shorten verbose miniapp copy into clearer action-first UI text. | `SKILL.md` + copy-trim playbook | medium |
 
+## Platform Compatibility
+
+All skills support both Codex and Claude Code:
+
+- **Codex**: Reads `name` and `description` from SKILL.md, uses `agents/openai.yaml` for platform config
+- **Claude Code**: Reads all SKILL.md fields including optional `tools` and `slash_command`
+
+### Slash Commands
+
+Each skill can be triggered manually in Claude Code using its slash command:
+
+| Skill | Slash Command |
+|-------|---------------|
+| `miniapp-official-scaffold-alignment` | `/miniapp-official-scaffold-alignment` |
+| `miniapp-devtools-recovery` | `/miniapp-devtools-recovery` |
+| `miniapp-devtools-cli-repair` | `/miniapp-devtools-cli-repair` |
+| `miniapp-devtools-gui-check` | `/miniapp-devtools-gui-check` |
+| `miniapp-center-hub-refactor` | `/miniapp-center-hub-refactor` |
+| `miniapp-user-facing-copy-trim` | `/miniapp-user-facing-copy-trim` |
+
 ## Planned Skills
 
 These are promising, but still more product-bound than the current public batch:
