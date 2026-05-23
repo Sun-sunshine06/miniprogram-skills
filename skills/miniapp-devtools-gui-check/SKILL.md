@@ -1,6 +1,12 @@
 ---
 name: miniapp-devtools-gui-check
 description: Use host-side WeChat DevTools automation to inspect GUI-only runtime and interaction failures that do not show up in CLI `preview`. Trigger when page entry, taps, websocket-based DevTools automation, or run-directory evidence such as `report.json` and `trace.log` are needed to separate repo bugs from IDE session problems, local service blockers, or remaining visual-only issues.
+tools:
+  - Bash
+  - Read
+  - Glob
+  - Grep
+slash_command: /miniapp-devtools-gui-check
 ---
 
 # Miniapp Devtools Gui Check
