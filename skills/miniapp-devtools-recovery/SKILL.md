@@ -1,6 +1,13 @@
 ---
 name: miniapp-devtools-recovery
 description: Recover a WeChat Mini Program repository after wrong-root import, DevTools template residue, stale compile conditions, or TypeScript-recognition drift. Use when Codex needs to restore the intended repo shape, remove generated clutter, or tell the user exactly what to fix inside DevTools.
+tools:
+  - Bash
+  - Read
+  - Edit
+  - Glob
+  - Grep
+slash_command: /miniapp-devtools-recovery
 ---
 
 # Miniapp Devtools Recovery
