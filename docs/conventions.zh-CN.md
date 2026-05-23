@@ -18,6 +18,33 @@ skill-name/
 `-- references/
 ```
 
+## SKILL.md YAML 前置元数据
+
+所有 SKILL.md 文件使用 YAML 前置元数据（frontmatter），包含以下字段：
+
+| 字段 | 是否必须 | 说明 |
+|------|----------|------|
+| `name` | 是 | Skill 标识符，小写字母加连字符 |
+| `description` | 是 | Skill 描述，用于自动触发检测 |
+| `tools` | 否 | Claude Code 可用的工具列表 |
+| `slash_command` | 否 | 手动触发命令，格式：`/skill-name` |
+
+示例：
+
+```yaml
+---
+name: my-skill
+description: Description of when to use this skill.
+tools:
+  - Bash
+  - Read
+  - Edit
+slash_command: /my-skill
+---
+```
+
+Codex 会忽略 `tools` 和 `slash_command` 字段，继续使用 `agents/openai.yaml`。
+
 ## 编写规则
 
 - `SKILL.md` 保持简短、偏流程化。
