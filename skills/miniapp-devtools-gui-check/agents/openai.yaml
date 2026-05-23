@@ -1,4 +1,7 @@
 interface:
   display_name: "Miniapp DevTools GUI Check"
   short_description: "Use DevTools automation to inspect GUI-only runtime failures."
+  brand_color: "#8B5CF6"
   default_prompt: "Use $miniapp-devtools-gui-check to run host-side WeChat DevTools GUI smoke checks, inspect runtime and interaction failures, and separate repo bugs from session problems."
+policy:
+  allow_implicit_invocation: true
