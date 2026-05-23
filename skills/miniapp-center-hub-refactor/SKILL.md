@@ -1,6 +1,14 @@
 ---
 name: miniapp-center-hub-refactor
 description: Refactor a growing WeChat Mini Program whose top-level navigation has become scattered across tabs such as home, profile, inbox, integrations, or settings into a clearer hub or center structure. Use when Codex needs to regroup top-level tabs, separate high-frequency action flows from low-frequency settings, define internal hub sections, or migrate detailed pages without collapsing everything into one long page.
+tools:
+  - Bash
+  - Read
+  - Edit
+  - Glob
+  - Grep
+  - Write
+slash_command: /miniapp-center-hub-refactor
 ---
 
 # Miniapp Center Hub Refactor
