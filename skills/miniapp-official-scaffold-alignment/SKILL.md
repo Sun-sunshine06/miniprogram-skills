@@ -1,6 +1,12 @@
 ---
 name: miniapp-official-scaffold-alignment
 description: Validate or design a WeChat Mini Program scaffold, repository layout, or TypeScript setup against official platform rules. Use when Codex needs to review `project.config.json`, `app.json`, `miniprogramRoot`, page or component file sets, or the initial repo skeleton before feature work begins.
+tools:
+  - Bash
+  - Read
+  - Glob
+  - Grep
+slash_command: /miniapp-official-scaffold-alignment
 ---
 
 # Miniapp Official Scaffold Alignment
