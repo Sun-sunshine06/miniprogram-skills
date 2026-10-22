@@ -6,6 +6,14 @@
 
 **English** | [中文](./README.zh-CN.md)
 
+## Maintenance Status
+
+**Active maintenance is paused as of October 22, 2026. There is no planned date for resuming it.**
+
+The repository remains available for reference, reuse, and forks under the MIT license. Existing skills and tools reflect earlier development experience; compatibility with newer Codex, Claude Code, WeChat DevTools, or automation runtime versions is not guaranteed. Installation and platform-specific instructions may need updating before use.
+
+Issues and pull requests remain open, but responses, reviews, fixes, and releases are not guaranteed during the pause. Existing roadmap items are historical plans, not current commitments. See [Related Projects](#related-projects) for other approaches to explore.
+
 > Reusable AI coding skills for WeChat Mini Program development, DevTools diagnosis, scaffold validation, and miniapp architecture optimization. Works with Codex and Claude Code.
 
 ## What is Miniprogram Skills?
@@ -164,7 +172,7 @@ The skills can diagnose:
 
 ### Is this project actively maintained?
 
-Yes, the project is actively maintained with regular updates. The current version is `v0.4.0` with 6 public skills and comprehensive evaluation fixtures.
+Active maintenance is paused, with no scheduled restart. The existing content remains available, but newer platform versions are not routinely tested. See [Maintenance Status](#maintenance-status) for details.
 
 ### How do I contribute to this project?
 
@@ -203,3 +211,11 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 - [Public Roadmap](./docs/public-roadmap.md)
 - [Release Notes](./docs/release-v0.4.0-draft.md)
 - [Changelog](./CHANGELOG.md)
+
+## Related Projects
+
+These independently maintained projects overlap with parts of this repository. They are references to explore, not drop-in replacements or compatibility guarantees; check their current documentation and limitations before adopting them.
+
+- [Sumkor/wechat-devtools](https://github.com/Sumkor/wechat-devtools): DevTools automation, page interaction, and Console/Network diagnostics, with separate modern Electron and legacy NW.js workflows.
+- [TencentCloudBase/cloudbase-skills](https://github.com/TencentCloudBase/cloudbase-skills): broader Mini Program development, debugging, preview, and publishing guidance, with CloudBase integration when needed.
+- [Zi-Yi-Ming/miniprogram-auto-test](https://github.com/Zi-Yi-Ming/miniprogram-auto-test): AI-assisted test script generation and an automation compatibility layer. Its documented compatibility findings are version-specific, and handler invocation is not equivalent to a real UI click.

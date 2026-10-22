@@ -6,6 +6,14 @@
 
 [English](./README.md) | **中文**
 
+## 维护状态
+
+**本项目自 2026 年 10 月 22 日起暂停主动维护，恢复时间未定。**
+
+仓库继续开放，现有内容可按 MIT 许可证参考、复用或 fork。技能与工具记录了此前的开发经验，不保证兼容新版 Codex、Claude Code、微信开发者工具或自动化运行时；使用前可能需要自行更新安装步骤和平台适配说明。
+
+Issues 和 Pull Requests 保持开放，但暂停期间不保证回复、评审、修复或发布。现有路线图保留为历史计划，不代表当前维护承诺。也可以参考下方的[相关项目](#相关项目)。
+
 > 面向微信小程序开发、DevTools 诊断、脚手架校验与小程序架构优化的可复用 AI 编码技能集。支持 Codex 和 Claude Code。
 
 ## 什么是 Miniprogram Skills？
@@ -164,7 +172,7 @@ Miniprogram Skills 支持 **2 个 AI 编码平台**：
 
 ### 这个项目是否在积极维护？
 
-是的，该项目在积极维护并定期更新。当前版本是 `v0.4.0`，包含 6 个公开技能和全面的评估 fixtures。
+目前已暂停主动维护，恢复时间未定。现有内容继续开放，但不会例行测试新版平台的兼容性。详见[维护状态](#维护状态)。
 
 ### 如何为这个项目做贡献？
 
@@ -203,3 +211,11 @@ pwsh -File scripts/check.ps1
 - [公开路线图](./docs/public-roadmap.md)
 - [发布说明](./docs/release-v0.4.0-draft.md)
 - [更新日志](./CHANGELOG.md)
+
+## 相关项目
+
+以下独立维护的项目覆盖了本仓库的部分场景，可作为参考；它们并非可直接替换的方案，也不构成兼容性保证，使用前请查看各自的最新文档和限制。
+
+- [Sumkor/wechat-devtools](https://github.com/Sumkor/wechat-devtools)：DevTools 自动化、页面交互及 Console/Network 诊断，区分现代 Electron 与旧版 NW.js 工作流。
+- [TencentCloudBase/cloudbase-skills](https://github.com/TencentCloudBase/cloudbase-skills)：覆盖更广的小程序开发、调试、预览和发布流程，并按需提供 CloudBase 集成指导。
+- [Zi-Yi-Ming/miniprogram-auto-test](https://github.com/Zi-Yi-Ming/miniprogram-auto-test)：AI 辅助生成测试脚本及自动化兼容层。其兼容性结论对应特定版本，调用事件处理函数也不等同于真实界面点击。

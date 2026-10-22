@@ -2,6 +2,10 @@
 
 English | [中文](./CONTRIBUTING.zh-CN.md)
 
+## Maintenance Pause
+
+Active maintenance is paused as of October 22, 2026, with no scheduled restart. Issues and pull requests remain open, but responses, reviews, merges, and releases are not guaranteed. Before investing in a substantial contribution, consider maintaining a fork if you need timely changes. See the [README maintenance notice](./README.md#maintenance-status).
+
 ## Goal
 
 Keep this repository focused on reusable WeChat Mini Program skills and supporting tooling, not on one product repo's private implementation details.
